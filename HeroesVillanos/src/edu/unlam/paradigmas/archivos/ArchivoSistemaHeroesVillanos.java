@@ -1,6 +1,7 @@
 package edu.unlam.paradigmas.archivos;
 
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Set;
 
 import edu.unlam.paradigmas.sistema.Competidor;
@@ -22,8 +23,8 @@ public class ArchivoSistemaHeroesVillanos {
 		ArchivoPersonajes archivoPersonajes = new ArchivoPersonajes(nombreArchivoPersonajes);
 		ArchivoLigas archivoLigas = new ArchivoLigas(nombreArchivoLigas);
 
-		Set<Competidor> competidores;
-		Set<Liga> ligas;
+		Set<Competidor> competidores = new HashSet<>();;
+		Set<Liga> ligas = new HashSet<>();
 
 		SistemaHeroesVillanos sistema = null;
 
