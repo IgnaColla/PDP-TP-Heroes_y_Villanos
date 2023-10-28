@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-10-23T12:59:51.287Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="fdSwZm5FCmnAiBQXI6r0" version="22.0.6" type="device">
+<mxfile host="app.diagrams.net" modified="2023-10-28T23:44:40.908Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="CBR9K7qpSgDKQbZnqSbX" version="22.0.8" type="device">
   <diagram name="Page-1" id="vqeGl7__MS6L4NNuizfv">
-    <mxGraphModel dx="4352" dy="1988" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2873" dy="1567" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,7 +10,7 @@
         <mxCell id="stxOI4bzDLG80uCZGU0x-5" value="&lt;i&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;&lt;br&gt;UnidadCompetidor&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="210" y="-50" width="300" height="186" as="geometry" />
         </mxCell>
-        <mxCell id="AcUW_i01gj4ODNEYfbEC-1" value="# bando: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="stxOI4bzDLG80uCZGU0x-5">
+        <mxCell id="AcUW_i01gj4ODNEYfbEC-1" value="# bando: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-5" vertex="1">
           <mxGeometry y="40" width="300" height="26" as="geometry" />
         </mxCell>
         <mxCell id="llh7_zKv0ECWSXMCoc-f-8" value="# caracteristicas: Caracteristica" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-5" vertex="1">
@@ -25,7 +25,7 @@
         <mxCell id="llh7_zKv0ECWSXMCoc-f-4" value="- esMismoBando(UnidadCompetidor): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-5" vertex="1">
           <mxGeometry y="126" width="300" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AcUW_i01gj4ODNEYfbEC-2" value="- validarBando(String): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="stxOI4bzDLG80uCZGU0x-5">
+        <mxCell id="AcUW_i01gj4ODNEYfbEC-2" value="- validarBando(String): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-5" vertex="1">
           <mxGeometry y="156" width="300" height="30" as="geometry" />
         </mxCell>
         <mxCell id="stxOI4bzDLG80uCZGU0x-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;startArrow=diamondThin;startFill=0;exitX=0.443;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="stxOI4bzDLG80uCZGU0x-13" edge="1">
@@ -38,37 +38,25 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="stxOI4bzDLG80uCZGU0x-13" value="Liga" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="460" y="323" width="310" height="266" as="geometry" />
+          <mxGeometry x="460" y="323" width="310" height="162" as="geometry" />
         </mxCell>
         <mxCell id="stxOI4bzDLG80uCZGU0x-14" value="- competidores: Set &amp;lt;UnidadCompetidor&amp;gt;&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
           <mxGeometry y="26" width="310" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="stxOI4bzDLG80uCZGU0x-55" value="- poderVelocidad: int = 0" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="52" width="310" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="b7jHJYOFLMWEE6eawsv5-14" value="- poderFuerza: int = 0" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="78" width="310" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="b7jHJYOFLMWEE6eawsv5-15" value="- poderResistencia: int = 0" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="104" width="310" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="b7jHJYOFLMWEE6eawsv5-16" value="- poderDestreza: int = 0" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="130" width="310" height="26" as="geometry" />
-        </mxCell>
         <mxCell id="stxOI4bzDLG80uCZGU0x-15" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="156" width="310" height="8" as="geometry" />
+          <mxGeometry y="52" width="310" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="b7jHJYOFLMWEE6eawsv5-22" value="+ agregarCompetidor (UnidadCompetidor): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="164" width="310" height="26" as="geometry" />
+        <mxCell id="b7jHJYOFLMWEE6eawsv5-22" value="+ agregar (UnidadCompetidor): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
+          <mxGeometry y="60" width="310" height="26" as="geometry" />
         </mxCell>
         <mxCell id="6iUq0RLo29yA2gXEmjWx-31" value="+ contarCompetidores(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="190" width="310" height="24" as="geometry" />
+          <mxGeometry y="86" width="310" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="stxOI4bzDLG80uCZGU0x-54" value="+ calcularPoderGrupo(Caracteristica): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="214" width="310" height="26" as="geometry" />
+        <mxCell id="stxOI4bzDLG80uCZGU0x-54" value="+ calcularPoderGrupo(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
+          <mxGeometry y="110" width="310" height="26" as="geometry" />
         </mxCell>
         <mxCell id="stxOI4bzDLG80uCZGU0x-16" value="+ enfrentarse(UnidadCompetidor, Caracteristica): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="stxOI4bzDLG80uCZGU0x-13" vertex="1">
-          <mxGeometry y="240" width="310" height="26" as="geometry" />
+          <mxGeometry y="136" width="310" height="26" as="geometry" />
         </mxCell>
         <mxCell id="b7jHJYOFLMWEE6eawsv5-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="1" source="stxOI4bzDLG80uCZGU0x-29" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -376,7 +364,7 @@
           <mxGeometry x="-1090" y="617" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="6iUq0RLo29yA2gXEmjWx-40" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;viene de la mano con agregarCompetidor()&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="690" y="350" width="200" height="30" as="geometry" />
+          <mxGeometry x="690" y="348" width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="6iUq0RLo29yA2gXEmjWx-41" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" parent="1" vertex="1">
           <mxGeometry x="-580" y="-205" width="40" height="40" as="geometry" />
@@ -398,6 +386,57 @@
         </mxCell>
         <mxCell id="6iUq0RLo29yA2gXEmjWx-50" value="Colla: exceptions" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;" parent="1" vertex="1">
           <mxGeometry x="-1135" y="820" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-1" value="Liga" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="860" y="760" width="310" height="266" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-2" value="- competidores: Set &amp;lt;UnidadCompetidor&amp;gt;&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-3" value="- poderVelocidad: int = 0" style="text;strokeColor=none;fillColor=#FF1A12;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-4" value="- poderFuerza: int = 0" style="text;strokeColor=none;fillColor=#FF1A12;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="78" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-5" value="- poderResistencia: int = 0" style="text;strokeColor=none;fillColor=#FF1A12;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="104" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-6" value="- poderDestreza: int = 0" style="text;strokeColor=none;fillColor=#FF1A12;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="130" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="156" width="310" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-8" value="+ agregarCompetidor (UnidadCompetidor): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="164" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-9" value="+ contarCompetidores(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="190" width="310" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-10" value="+ calcularPoderGrupo(Caracteristica): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="214" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-11" value="+ enfrentarse(UnidadCompetidor, Caracteristica): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="czNb4vSy-Apc3xaNGzGD-1" vertex="1">
+          <mxGeometry y="240" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-12" value="No hace falta, puede tener Caracteristica" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="840" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-13" value="+ calcularPoderGrupo(Caracteristica): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="600" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-14" value="Esto así no porque yo ya voy a tener los competidores en el set. Tengo que calcular todos los poderes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="325" y="638" width="570" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-16" value="+ agregar (UnidadCompetidor): boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="950" y="591" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="czNb4vSy-Apc3xaNGzGD-17" value="no tenía sentido por ahora el boolean" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="950" y="633" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SNaS3OmWC-gYTTCGdnDe-1" value="Esto creo que no va" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-1080" y="260" width="130" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

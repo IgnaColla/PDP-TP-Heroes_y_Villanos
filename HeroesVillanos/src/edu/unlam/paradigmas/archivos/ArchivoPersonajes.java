@@ -13,14 +13,16 @@ import edu.unlam.paradigmas.sistema.Competidor;
 
 public class ArchivoPersonajes {
 
-	private String nombre;
+	private String nombreArchivoEntrada;
+	private String nombreArchivoSalida;
 
-	public ArchivoPersonajes(String nombre) {
-		this.nombre = nombre;
+	public ArchivoPersonajes(String nombreArchivoEntrada,String nombreArchivoSalida) {
+		this.nombreArchivoEntrada = nombreArchivoEntrada;
+		this.nombreArchivoSalida = nombreArchivoSalida;
 	}
 
 	public Set<Competidor> leer() throws FileNotFoundException {
-		File archivo = new File(this.nombre + ".in");
+		File archivo = new File(this.nombreArchivoEntrada + ".in");
 
 		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Set<Competidor> personajes = new HashSet<>();
@@ -52,6 +54,15 @@ public class ArchivoPersonajes {
 
 			return personajes;
 		}
+	}
+	
+	
+	public boolean escribir(String nombreArchivoSalida) {
+		
+		
+		
+		
+		return true;
 	}
 
 }

@@ -21,8 +21,29 @@ public class Caracteristica {
 		if (valor < 0) {
 			throw new CaracteristicaExcepcion(mensaje);
 		}
-
 		return valor;
 	}
 
+	public int getVelocidad() {
+		return this.velocidad;
+	}
+
+	public int getFuerza() {
+		return this.fuerza;
+	}
+
+	public int getResistencia() {
+		return this.resistencia;
+	}
+
+	public int getDestreza() {
+		return this.destreza;
+	}
+
+	public void aumentarPoder(Caracteristica caracteristicas) {
+		this.velocidad += caracteristicas.getVelocidad();
+		this.fuerza += caracteristicas.getFuerza();
+		this.resistencia += caracteristicas.getResistencia();
+		this.destreza += caracteristicas.getDestreza();
+	}
 }

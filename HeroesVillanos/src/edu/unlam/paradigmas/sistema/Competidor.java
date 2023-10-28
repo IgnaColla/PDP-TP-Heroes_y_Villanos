@@ -9,4 +9,10 @@ public class Competidor extends UnidadCompetidor {
 		this.nombreReal = nombreReal;
 		this.nombrePersonaje = nombrePersonaje;
 	}
+
+	@Override
+	public int enfrentarse(UnidadCompetidor unidad, Caracteristica c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
