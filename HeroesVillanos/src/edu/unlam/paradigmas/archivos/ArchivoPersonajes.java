@@ -18,13 +18,14 @@ public class ArchivoPersonajes {
 
 	public ArchivoPersonajes(String nombreArchivoEntrada,String nombreArchivoSalida) {
 		this.nombreArchivoEntrada = nombreArchivoEntrada;
-		this.nombreArchivoSalida = nombreArchivoSalida;
+		this.nombreArchivoSalida = nombreArchivoSalida; //supongo que el archivo de salida es para filtrar datos redundantes
 	}
 
 	public Set<Competidor> leer() throws FileNotFoundException {
-		File archivo = new File(this.nombreArchivoEntrada + ".in");
+		File archivoEntrada = new File(this.nombreArchivoEntrada + ".in");
+		//File archivoSalida = new File(this.nombreArchivoSalida + ".out"); esto se tiene que hacer?
 
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Set<Competidor> personajes = new HashSet<>();
 			String tipoPersonaje;
 			String nombreReal;

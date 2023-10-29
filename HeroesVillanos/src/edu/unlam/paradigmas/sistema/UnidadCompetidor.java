@@ -13,9 +13,13 @@ public abstract class UnidadCompetidor {
 		this.caracteristicas = caracteristicas;
 	}
 
-	private String validarBando(String bando2) {
-		// TODO Auto-generated method stub
-		return null;
+	private String validarBando(String bando) {
+	    for (Bandos valorBando : Bandos.values()) {
+	        if (valorBando.name().equalsIgnoreCase(bando)) {
+	            return bando;
+	        }
+	    }
+	    throw new IllegalArgumentException("El bando " + bando + "no es valido");
 	}
 
 	public String getBando() {

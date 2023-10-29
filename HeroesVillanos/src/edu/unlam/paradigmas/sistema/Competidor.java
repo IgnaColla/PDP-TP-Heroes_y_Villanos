@@ -15,4 +15,8 @@ public class Competidor extends UnidadCompetidor {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public String getNombrePersonaje() {
+		return this.nombrePersonaje;
+	}
 }
