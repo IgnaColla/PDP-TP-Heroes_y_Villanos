@@ -12,7 +12,7 @@ public class Competidor extends UnidadCompetidor {
 
 	@Override
 	public int enfrentarse(UnidadCompetidor unidad, Caracteristica c) {
-		// TODO Auto-generated method stub
+		// TODO Enfrentar competidores
 		return 0;
 	}
 
