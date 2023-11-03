@@ -20,32 +20,8 @@ public class Personaje extends Unidad{
 	
 	// Metodos
 	
-	public String getBando() {
-		return this.bando;
-	}
-	
-	public String getNombreReal() {
-		return this.nombreReal;
-	}
-	
 	public String getNombreFicticio() {
 		return this.nombreFicticio;
-	}
-	
-	public int getVelocidad() {
-		return this.velocidad;
-	}
-	
-	public int getFuerza() {
-		return this.fuerza;
-	}
-	
-	public int getResistencia() {
-		return this.resistencia;
-	}
-	
-	public int getDestreza() {
-		return this.destreza;
 	}
 	
 	@Override

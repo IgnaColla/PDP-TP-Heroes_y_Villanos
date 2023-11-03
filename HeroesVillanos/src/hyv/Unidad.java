@@ -8,12 +8,29 @@ public abstract class Unidad {
 	protected int resistencia;
 	protected int destreza;
 	
-//	public Unidad(String bando, String nombreReal, int velocidad, int fuerza, int resistencia, int destreza) {
-//		this.bando = bando;
-//		this.nombreReal = nombreReal;
-//		this.velocidad = velocidad;
-//		this.fuerza = fuerza;
-//		this.resistencia = resistencia;
-//		this.destreza = destreza;
-//	}
+	/// Metodos
+	
+	public String getBando() {
+		return this.bando;
+	}
+	
+	public String getNombreReal() {
+		return this.nombreReal;
+	}
+	
+	public int getVelocidad() {
+		return this.velocidad;
+	}
+	
+	public int getFuerza() {
+		return this.fuerza;
+	}
+	
+	public int getResistencia() {
+		return this.resistencia;
+	}
+	
+	public int getDestreza() {
+		return this.destreza;
+	}
 }
