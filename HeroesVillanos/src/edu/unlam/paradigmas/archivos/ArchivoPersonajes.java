@@ -13,16 +13,14 @@ import edu.unlam.paradigmas.sistema.Competidor;
 
 public class ArchivoPersonajes {
 
-	private String nombreArchivoEntrada;
-	private String nombreArchivoSalida;
+	private String nombre;
 
-	public ArchivoPersonajes(String nombreArchivoEntrada,String nombreArchivoSalida) {
-		this.nombreArchivoEntrada = nombreArchivoEntrada;
-		this.nombreArchivoSalida = nombreArchivoSalida; //supongo que el archivo de salida es para filtrar datos redundantes
+	public ArchivoPersonajes(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Set<Competidor> leer() throws FileNotFoundException {
-		File archivoEntrada = new File(this.nombreArchivoEntrada + ".in");
+		File archivoEntrada = new File(this.nombre + ".in");
 		//File archivoSalida = new File(this.nombreArchivoSalida + ".out"); esto se tiene que hacer?
 
 		try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
@@ -59,10 +57,6 @@ public class ArchivoPersonajes {
 	
 	
 	public boolean escribir(String nombreArchivoSalida) {
-		
-		
-		
-		
 		return true;
 	}
 

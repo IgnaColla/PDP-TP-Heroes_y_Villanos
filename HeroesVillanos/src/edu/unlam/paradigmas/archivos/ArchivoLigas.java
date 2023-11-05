@@ -14,47 +14,28 @@ import edu.unlam.paradigmas.sistema.UnidadCompetidor;
 
 public class ArchivoLigas {
 	private String nombre;
-
+	
 	public ArchivoLigas(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public Set<Liga> leer() throws FileNotFoundException {
+	
+	public Set<String> leer() throws FileNotFoundException { //a mi nada más me va a interesar los nombres de los personajes, no tengo que crear las instancias de ligas ahora. En el combate se verá el agrupamiento y búsqueda Características.
 		File archivoEntradaLigas = new File(this.nombre + ".in");
-		//File archivoEntradaLigas = new File(this.nombre + ".in");
 
 		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
-			Set<Liga> ligas = new HashSet<>();
-			Set<Competidor> competidoresDisponibles = new HashSet<>();
-
+			Set<String> ligas = new HashSet<>();
 			String linea;
-			String[] nombresPersonajes;
-
+			
 			while (lector.hasNextLine()) {
 				linea = lector.next();
-				nombresPersonajes = linea.split(", ");
-
-				for (String nombre : nombresPersonajes) {
-
-					// buscar en el set de ArchivoCompetidor -> esto tiene que ser por personaje
-					// si existe tengo que crear la liga, sino tengo que arrojar una exception
-					// Liga liga = new Liga(bando, caracteristicaLiga, null);
-					// ligas.agregar(liga); //armo los paquetes
-				}
+				ligas.add(linea);
 			}
 
 			return ligas;
 		}
 	}
-
-//	public Competidor obtenerCompetidor(String nombrePersonaje) {
-//		// Buscar en el conjunto de competidores disponibles
-//		for (Competidor competidor : competidoresDisponibles) {
-//			if (competidor.getNombrePersonaje().equals(nombrePersonaje)) {
-//				return competidor; // Devuelve la instancia de Competidor
-//			}
-//
-//			throw new CompetidorExcepcion("El competidor buscado, no existe: " + nombrePersonaje);
-//		}
-//	}
+	
+	public boolean escribir(String nombreArchivoSalida) {
+		return true;
+	}
 }

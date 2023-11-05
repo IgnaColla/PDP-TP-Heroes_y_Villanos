@@ -1,6 +1,9 @@
 package edu.unlam.paradigmas.sistema;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import edu.unlam.paradigmas.sistema.Acciones.*;;
+
+import edu.unlam.paradigmas.sistema.Acciones.Acciones;;
 
 public class Menu {
 
@@ -8,6 +11,8 @@ public class Menu {
 		Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 
+		List<UnidadCompetidor> listaUnidades = new ArrayList<UnidadCompetidor>();
+		
 		while (continuar) {
 			System.out.println("Menú Principal:");
 			System.out.println("1. Administrar de Personajes");
@@ -22,7 +27,7 @@ public class Menu {
 			switch (opcion) {
 				case 1:
 					//Lógica para la administración de personajes (carga, creación, listado, guardar en archivo).
-					Acciones.administrarPersonajes();
+					Acciones.administrarPersonajes(); //Esto hay que cambiar enfoque para no violar encapsulamiento.
 					break;
 				case 2:
 					//Lógica para la administración de ligas (carga, creación, listado, guardar en archivo).
@@ -50,6 +55,5 @@ public class Menu {
         Menu menu = new Menu();
         menu.menuPrincipal(args);
     }
-	
 }
 
