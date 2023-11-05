@@ -18,10 +18,9 @@ public class ArchivoPersonajes {
 	public ArchivoPersonajes(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
 	public Set<Competidor> leer() throws FileNotFoundException {
 		File archivoEntrada = new File(this.nombre + ".in");
-		//File archivoSalida = new File(this.nombreArchivoSalida + ".out"); esto se tiene que hacer?
 
 		try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Set<Competidor> personajes = new HashSet<>();
@@ -43,19 +42,17 @@ public class ArchivoPersonajes {
 				destreza = lector.nextInt();
 				try {
 					Caracteristica c = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-					personajes.add(new Competidor(nombreReal, nombrePersonaje,tipoPersonaje, c));
+					personajes.add(new Competidor(nombreReal, nombrePersonaje, tipoPersonaje, c));
 				} catch (CaracteristicaExcepcion e) {
 					e.printStackTrace();
 					System.out.println(e.getMessage());
 				}
-
 			}
 
 			return personajes;
 		}
 	}
-	
-	
+
 	public boolean escribir(String nombreArchivoSalida) {
 		return true;
 	}
