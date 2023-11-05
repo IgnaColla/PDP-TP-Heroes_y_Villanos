@@ -14,18 +14,23 @@ import edu.unlam.paradigmas.sistema.UnidadCompetidor;
 
 public class ArchivoLigas {
 	private String nombre;
-	
+
 	public ArchivoLigas(String nombre) {
 		this.nombre = nombre;
 	}
+
+	// a mi nada más me va a interesar los nombres de los
+	// personajes, no tengo que crear las instancias de
+	// ligas ahora. En el combate se verá el agrupamiento y
+	// búsqueda Características:
 	
-	public Set<String> leer() throws FileNotFoundException { //a mi nada más me va a interesar los nombres de los personajes, no tengo que crear las instancias de ligas ahora. En el combate se verá el agrupamiento y búsqueda Características.
+	public Set<String> leer() throws FileNotFoundException { 	
 		File archivoEntradaLigas = new File(this.nombre + ".in");
 
 		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Set<String> ligas = new HashSet<>();
 			String linea;
-			
+
 			while (lector.hasNextLine()) {
 				linea = lector.next();
 				ligas.add(linea);
@@ -34,7 +39,7 @@ public class ArchivoLigas {
 			return ligas;
 		}
 	}
-	
+
 	public boolean escribir(String nombreArchivoSalida) {
 		return true;
 	}
