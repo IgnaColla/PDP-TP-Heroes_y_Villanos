@@ -8,8 +8,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
 import edu.unlam.paradigmas.sistema.Competidor;
+
 
 public class ArchivoPersonajes {
 
@@ -20,10 +22,12 @@ public class ArchivoPersonajes {
 	}
 	
 	public Set<Competidor> leer() throws FileNotFoundException {
-		File archivoEntrada = new File(this.nombre + ".in");
+		String path = "./archivos/in/" + this.nombre + ".in";
+		File archivoEntrada = new File(path);
 
 		try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Set<Competidor> personajes = new HashSet<>();
+			String[] linea;
 			String tipoPersonaje;
 			String nombreReal;
 			String nombrePersonaje;
@@ -33,16 +37,17 @@ public class ArchivoPersonajes {
 			int destreza;
 
 			while (lector.hasNextLine()) {
-				tipoPersonaje = lector.next();
-				nombreReal = lector.next();
-				nombrePersonaje = lector.next();
-				velocidad = lector.nextInt();
-				fuerza = lector.nextInt();
-				resistencia = lector.nextInt();
-				destreza = lector.nextInt();
+				linea = lector.next().split("[,\n]");
+				tipoPersonaje = linea[0].trim();
+				nombreReal = linea[1].trim();
+				nombrePersonaje = linea[2].trim();
+				velocidad = Integer.parseInt(linea[3].trim());
+				fuerza = Integer.parseInt(linea[4].trim());
+				resistencia = Integer.parseInt(linea[5].trim());
+				destreza = Integer.parseInt(linea[6].trim());
 				try {
 					Caracteristica c = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-					personajes.add(new Competidor(nombreReal, nombrePersonaje, tipoPersonaje, c));
+					personajes.add(new Competidor(nombreReal, nombrePersonaje, Bandos.valueOf(tipoPersonaje), c));
 				} catch (CaracteristicaExcepcion e) {
 					e.printStackTrace();
 					System.out.println(e.getMessage());

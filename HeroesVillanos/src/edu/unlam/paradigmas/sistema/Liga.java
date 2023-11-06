@@ -9,7 +9,7 @@ public class Liga extends UnidadCompetidor {
 
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
 
-	public Liga(String bando, Caracteristica caracteristicas, Set<UnidadCompetidor> competidores) {
+	public Liga(Bandos bando, Caracteristica caracteristicas, Set<UnidadCompetidor> competidores) {
 		super(bando, caracteristicas);
 		competidores.addAll(competidores);
 	}

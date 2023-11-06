@@ -4,7 +4,7 @@ public class Competidor extends UnidadCompetidor {
 	private String nombreReal;
 	private String nombrePersonaje;
 
-	public Competidor(String nombreReal, String nombrePersonaje, String bando, Caracteristica caracteristicas) {
+	public Competidor(String nombreReal, String nombrePersonaje, Bandos bando, Caracteristica caracteristicas) {
 		super(bando, caracteristicas);
 		this.nombreReal = nombreReal;
 		this.nombrePersonaje = nombrePersonaje;
@@ -19,4 +19,12 @@ public class Competidor extends UnidadCompetidor {
 	public String getNombrePersonaje() {
 		return this.nombrePersonaje;
 	}
+
+	@Override
+	public String toString() {
+		return "Competidor [nombreReal=" + nombreReal + ", nombrePersonaje=" + nombrePersonaje + ", Bando="
+				+ getBando() + ", Caracteristicas=" + getCaracteristicas() + "]";
+	}
+
+	
 }

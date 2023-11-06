@@ -24,10 +24,11 @@ public class ArchivoLigas {
 	// ligas ahora. En el combate se verá el agrupamiento y
 	// búsqueda Características:
 	
-	public Set<String> leer() throws FileNotFoundException { 	
-		File archivoEntradaLigas = new File(this.nombre + ".in");
+	public Set<String> leer() throws FileNotFoundException {
+		String path = "./archivos/in/" + this.nombre + ".in";
+		File archivoEntradaLigas = new File(path);
 
-		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\0").useLocale(Locale.US)) {
 			Set<String> ligas = new HashSet<>();
 			String linea;
 

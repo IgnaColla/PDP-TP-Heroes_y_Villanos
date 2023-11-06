@@ -1,28 +1,26 @@
 package edu.unlam.paradigmas.sistema;
 
 public abstract class UnidadCompetidor {
-	protected String bando;
+	protected Bandos bando;
 	protected Caracteristica caracteristicas;
 
-	enum Bandos {
-		Villano, Héroe;
-	}
-
-	public UnidadCompetidor(String bando, Caracteristica caracteristicas) {
-		this.bando = validarBando(bando); // hay que validarlo con el enum
+	public UnidadCompetidor(Bandos bando, Caracteristica caracteristicas) { 
+		//this.bando = validarBando(bando); // hay que validarlo con el enum
+		this.bando = bando;
 		this.caracteristicas = caracteristicas;
 	}
 
-	private String validarBando(String bando) {
+	//revisar por cambio de tipo de BANDO
+	/*private Bandos validarBando(Bandos bando) {
 	    for (Bandos valorBando : Bandos.values()) {
-	        if (valorBando.name().equalsIgnoreCase(bando)) {
+	        if (valorBando.equals(bando)) {
 	            return bando;
 	        }
 	    }
 	    throw new IllegalArgumentException("El bando " + bando + "no es valido");
-	}
+	}*/
 
-	public String getBando() {
+	public Bandos getBando() {
 		return this.bando;
 	}
 	
