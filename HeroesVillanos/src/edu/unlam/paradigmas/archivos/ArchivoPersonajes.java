@@ -71,24 +71,11 @@ public class ArchivoPersonajes {
 				printerWriter = new PrintWriter(file);
 				
 				for(Competidor clooper : ch) {
-					/*printerWriter.print(clooper.getBando());
-					printerWriter.print(", ");
-					printerWriter.print(clooper.getNombreReal());
-					printerWriter.print(", ");
-					printerWriter.print(clooper.getNombrePersonaje());
-					printerWriter.print(", ");
-					printerWriter.println(clooper.getCaracteristicaArch());*/
 					printerWriter.println(clooper.toStringArch());
 				}
 				
 				for(Competidor clooper : cv) {
-					printerWriter.print(clooper.getBando());
-					printerWriter.print(", ");
-					printerWriter.print(clooper.getNombreReal());
-					printerWriter.print(", ");
-					printerWriter.print(clooper.getNombrePersonaje());
-					printerWriter.print(", ");
-					printerWriter.println(clooper.getCaracteristicaArch());
+					printerWriter.println(clooper.toStringArch());
 				}
 		} catch (Exception e) {
 			e.printStackTrace();

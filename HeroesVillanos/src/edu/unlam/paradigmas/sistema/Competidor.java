@@ -35,4 +35,19 @@ public class Competidor extends UnidadCompetidor {
 				+ this.getCaracteristicaArch();
 	}
 	
+	//Sobreescribo equals y hashCode para que los Set los puedan filtrar
+	 @Override
+	    public boolean equals(Object obj) {
+	        if (obj != null && obj instanceof Competidor) {
+	        	Competidor otro = (Competidor) obj;
+	            return this.nombreReal.hashCode() == otro.nombreReal.hashCode();
+	        } else {
+	            return false;
+	        }
+	    }
+	 
+	    public int hashCode() {
+	        return this.nombreReal.hashCode();
+	    }
+	
 }

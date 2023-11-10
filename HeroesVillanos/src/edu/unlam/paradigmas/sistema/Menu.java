@@ -241,6 +241,10 @@ Scanner scanner = new Scanner(System.in);
 public static void cargarLigaDesdeArchivo() throws FileNotFoundException{
 	ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 	Set<String> ligas = ligasFile.leer();
+	
+	//separar liga de heroes y de villanos
+	
+	System.out.println("\nLas ligas se han cargado correctamente!\n");
 }
 
 public static void crearLiga(){
