@@ -27,6 +27,10 @@ public abstract class UnidadCompetidor {
 	public Caracteristica getCaracteristicas() {
 		return this.caracteristicas;
 	}
+	
+	public String getCaracteristicaArch() {
+		return this.caracteristicas.toStringArch();
+	}
 
 	public boolean esMismoBando(UnidadCompetidor unidad) {
 		return this.bando.equals(unidad.getBando());

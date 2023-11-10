@@ -15,6 +15,10 @@ public class Competidor extends UnidadCompetidor {
 		// TODO Enfrentar competidores
 		return 0;
 	}
+	
+	public String getNombreReal() {
+		return this.nombreReal;
+	}
 
 	public String getNombrePersonaje() {
 		return this.nombrePersonaje;
@@ -26,5 +30,9 @@ public class Competidor extends UnidadCompetidor {
 				+ getBando() + ", Caracteristicas=" + getCaracteristicas() + "]";
 	}
 
+	public String toStringArch() {
+		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " 
+				+ this.getCaracteristicaArch();
+	}
 	
 }

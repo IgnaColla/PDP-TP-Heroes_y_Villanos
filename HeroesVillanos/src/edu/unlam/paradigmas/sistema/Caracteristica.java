@@ -52,4 +52,8 @@ public class Caracteristica {
 		return "Caracteristica [velocidad=" + velocidad + ", fuerza=" + fuerza + ", resistencia=" + resistencia
 				+ ", destreza=" + destreza + "]";
 	}
+	
+	public String toStringArch() {
+		return velocidad+", "+fuerza+", "+resistencia+", "+destreza;
+	}
 }

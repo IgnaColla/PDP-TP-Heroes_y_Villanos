@@ -1,5 +1,6 @@
 package edu.unlam.paradigmas.sistema;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class Menu {
 	private Set<Competidor> competidoresVillanos = new HashSet<>();
 	private Set<Liga> ligasVillanos = new HashSet<>();
 
-	public void menuPrincipal(String[] args) throws FileNotFoundException, CaracteristicaExcepcion{
+	public void menuPrincipal(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
 		Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		
@@ -88,7 +89,7 @@ private Bandos seleccionarBando() {
 	return bando;
 }
 	
-private void administrarPersonajes() throws FileNotFoundException, CaracteristicaExcepcion{
+private void administrarPersonajes() throws CaracteristicaExcepcion, IOException{
 	Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		while (continuar) {
@@ -130,7 +131,7 @@ public void cargarDesdeArchivo()throws FileNotFoundException{
 	Set<Competidor> personajes = personajesFile.leer();
 	
 	for(Competidor c : personajes) {
-		if (c.getBando().equals("Villano")) {
+		if (c.getBando() == Bandos.Villano) {
 			competidoresVillanos.add(c);
 		}else {
 			competidoresHeroes.add(c);
@@ -175,15 +176,24 @@ public void crearPersonaje() throws CaracteristicaExcepcion{
 }
 
 public void ListarPersonajes(){
-	System.out.println("Listado de Heroes");
-	System.out.println(competidoresHeroes);
-	System.out.println("*****************************");
-	System.out.println("Listado de Villanos");
-	System.out.println(competidoresVillanos);
+	System.out.println("Listado de Personajes");
+	System.out.println("Bando, Nombre Real, Nombre de Personaje, Velocidad, Fuerza, Resistencia, Destreza");
+	System.out.println("---------------------------------------------------------------------------------");
+	for(Competidor c: competidoresHeroes) {
+		System.out.println(c.toStringArch());
 	}
+	for(Competidor c: competidoresVillanos) {
+		System.out.println(c.toStringArch());
+	}
+	System.out.println();
+}
 
-public static void guardarEnArchivoPersonajes(){
-
+public void guardarEnArchivoPersonajes()throws IOException{
+		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
+		if(!personajesFile.escribir(this.competidoresHeroes, this.competidoresVillanos)) {
+			throw new RuntimeException("Error al intentar guardar los personajes");
+		}
+		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
 
@@ -341,7 +351,7 @@ public static void PersonajesOrdenados(){
 
 
 //*****************************************************************************MAIN*****************************************************************************************
-public static void main(String[] args) throws FileNotFoundException, CaracteristicaExcepcion{
+public static void main(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
 	Menu menu = new Menu();
 	menu.menuPrincipal(args);
 	

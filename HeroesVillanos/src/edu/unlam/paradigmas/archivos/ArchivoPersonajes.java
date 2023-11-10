@@ -2,6 +2,9 @@ package edu.unlam.paradigmas.archivos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Scanner;
@@ -58,7 +61,46 @@ public class ArchivoPersonajes {
 		}
 	}
 
-	public boolean escribir(String nombreArchivoSalida) {
+	public boolean escribir(Set<Competidor> ch, Set<Competidor> cv)throws IOException {
+		String path = "./archivos/out/" + this.nombre + ".out";
+		FileWriter file = null;
+		PrintWriter printerWriter = null;
+		
+		try {
+				file = new FileWriter(path);
+				printerWriter = new PrintWriter(file);
+				
+				for(Competidor clooper : ch) {
+					/*printerWriter.print(clooper.getBando());
+					printerWriter.print(", ");
+					printerWriter.print(clooper.getNombreReal());
+					printerWriter.print(", ");
+					printerWriter.print(clooper.getNombrePersonaje());
+					printerWriter.print(", ");
+					printerWriter.println(clooper.getCaracteristicaArch());*/
+					printerWriter.println(clooper.toStringArch());
+				}
+				
+				for(Competidor clooper : cv) {
+					printerWriter.print(clooper.getBando());
+					printerWriter.print(", ");
+					printerWriter.print(clooper.getNombreReal());
+					printerWriter.print(", ");
+					printerWriter.print(clooper.getNombrePersonaje());
+					printerWriter.print(", ");
+					printerWriter.println(clooper.getCaracteristicaArch());
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (file != null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return true;
 	}
 
