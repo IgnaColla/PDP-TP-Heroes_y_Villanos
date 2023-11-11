@@ -1,5 +1,8 @@
 package edu.unlam.paradigmas.sistema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Competidor extends UnidadCompetidor {
 	private String nombreReal;
 	private String nombrePersonaje;
@@ -22,6 +25,16 @@ public class Competidor extends UnidadCompetidor {
 
 	public String getNombrePersonaje() {
 		return this.nombrePersonaje;
+	}
+	
+	@Override
+	protected List<Integer> getCaracteristicas() {
+		List<Integer> caracteristicas = new ArrayList<Integer>();
+		caracteristicas.add(this.caracteristicas.getVelocidad());
+		caracteristicas.add(this.caracteristicas.getFuerza());
+		caracteristicas.add(this.caracteristicas.getResistencia());
+		caracteristicas.add(this.caracteristicas.getDestreza());
+		return caracteristicas;
 	}
 
 	@Override

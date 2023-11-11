@@ -13,8 +13,8 @@ import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 public class SistemaHeroesVillanos {
 
 	private Set<Competidor> competidores = new HashSet<>();
-	private Set<Liga> ligas = new HashSet<>();
-	private boolean leyoArchivo = false;
+	private Liga liga;
+	private boolean archivoPersonajeExiste = false;
 
 	public SistemaHeroesVillanos() {}
 	
@@ -36,6 +36,7 @@ public class SistemaHeroesVillanos {
 			this.setCompetidor(competidor);
 		}
 		
+		this.archivoPersonajeExiste = true;
 		System.out.println("\nLos personajes se han cargado correctamente!\n");
 	}
 	
@@ -116,6 +117,22 @@ public class SistemaHeroesVillanos {
 	}
 	
 	//2. Administracion de Ligas
+	public void cargarArchivoLigas() throws FileNotFoundException{
+		if(!this.archivoPersonajeExiste) {
+			System.out.println("Se cargará primero el archivo correspondiente a los personajes.");
+			this.cargarArchivoPersonaje();
+		}
+		
+		ArchivoLigas ligasFile = new ArchivoLigas("ligas");
+		Set<Liga> personajes = ligasFile.leer(competidores);
+		
+		for(Competidor competidor : personajes) {
+			this.setCompetidor(competidor);
+		}
+		
+		System.out.println("\nLos personajes se han cargado correctamente!\n");
+		
+	}
 	//3. Realizar combate
 	public void personajeVsLiga() {
 		

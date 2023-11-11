@@ -1,5 +1,7 @@
 package edu.unlam.paradigmas.sistema;
 
+import java.util.*;
+
 public abstract class UnidadCompetidor {
 	protected Bandos bando;
 	protected Caracteristica caracteristicas;
@@ -20,13 +22,11 @@ public abstract class UnidadCompetidor {
 	    throw new IllegalArgumentException("El bando " + bando + "no es valido");
 	}*/
 
-	public Bandos getBando() {
+	protected Bandos getBando() {
 		return this.bando;
 	}
 	
-	public Caracteristica getCaracteristicas() {
-		return this.caracteristicas;
-	}
+	protected abstract List<Integer> getCaracteristicas();
 	
 	public String getCaracteristicaArch() {
 		return this.caracteristicas.toStringArch();

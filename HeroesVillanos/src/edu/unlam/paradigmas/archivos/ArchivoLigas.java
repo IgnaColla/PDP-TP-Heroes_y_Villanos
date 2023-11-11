@@ -19,24 +19,32 @@ public class ArchivoLigas {
 		this.nombre = nombre;
 	}
 
-	// a mi nada más me va a interesar los nombres de los
-	// personajes, no tengo que crear las instancias de
-	// ligas ahora. En el combate se verá el agrupamiento y
-	// búsqueda Características:
-	
-	public Set<String> leer() throws FileNotFoundException {
+	private static Competidor buscarCompetidorPorNombre(Set<Competidor> competidores, String nombre) {
+		for (Competidor competidor : competidores) {
+			if (competidor.getNombrePersonaje().equals(nombre)) {
+				return competidor;
+			}
+		}
+		return null; // No se encontró el competidor con el nombre especificado
+	}
+
+	public Liga leer(Set<Competidor> competidores) throws FileNotFoundException {
 		String path = "./archivos/in/" + this.nombre + ".in";
 		File archivoEntradaLigas = new File(path);
 
 		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\0").useLocale(Locale.US)) {
-			Set<String> ligas = new HashSet<>();
-			String linea;
+			Liga ligas;
+			Liga competidoresCargados = new Liga();
+			String[] linea;
 
 			while (lector.hasNextLine()) {
-				linea = lector.next();
-				ligas.add(linea);
+				linea = lector.next().split("[,\n]");
+				for (String nombrePersonaje : linea) {
+					competidoresCargados.agregarCompetidor(buscarCompetidorPorNombre(competidores, nombrePersonaje));
+				}
+				//calcularcaracteristicas
+				ligas.add(competidoresCargados);
 			}
-
 			return ligas;
 		}
 	}
