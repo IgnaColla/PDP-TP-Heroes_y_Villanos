@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 //
-import edu.unlam.paradigmas.archivos.*;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class Menu {
@@ -58,34 +57,7 @@ public class Menu {
 
 //****************************************************************************Administrar Personajes***********************************************************************/
 
-private Bandos seleccionarBando() {
-	Scanner scannerBando = new Scanner(System.in);
-	Bandos bando = null;
-	boolean continuar = true;
-	while (continuar) {
-		System.out.println("Bandos:");
-		System.out.println("1. Heroe");
-		System.out.println("2. Villano");
-		System.out.print("Seleccione una opcion: ");
 
-		int opcion = scannerBando.nextInt();
-
-		switch (opcion) {
-			case 1:
-				bando = Bandos.Heroe;
-				continuar = false;
-				break;
-			case 2:
-				bando = Bandos.Villano;
-				continuar = false;
-				break;
-			default:
-				System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
-		}
-	}
-	//scannerBando.close();
-	return bando;
-}
 	
 private void administrarPersonajes() throws CaracteristicaExcepcion, IOException{
 	Scanner scanner = new Scanner(System.in);
@@ -103,7 +75,7 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 
 			switch (opcion) {
 				case 1:
-					cargarDesdeArchivo();
+					opcionCargarArchivoPersonaje();
 					break;
 				case 2:
 					opcionCrearPersonaje();
@@ -112,7 +84,7 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 					opcionListarPersonajes();
 					break;
 				case 4:
-					guardarEnArchivoPersonajes();
+					opcionGuardarArchivoPersonajes();
 					break;
 				case 5:
 					continuar = false;
@@ -124,58 +96,21 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 		}
 }
 
-public void cargarDesdeArchivo()throws FileNotFoundException{
-	ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
-	Set<Competidor> personajes = personajesFile.leer();
-	
-	for(Competidor competidor : personajes) {
-		sistema.setCompetidor(competidor);
-	}
-	
-	System.out.println("\nLos personajes se han cargado correctamente!\n");
+public void opcionCargarArchivoPersonaje()throws FileNotFoundException{
+	sistema.cargarArchivoPersonaje();
 }
 
 public void opcionCrearPersonaje() throws CaracteristicaExcepcion{
-	Scanner scanner = new Scanner(System.in);
-	System.out.println("Seleccione bando: ");
-	Bandos bando = seleccionarBando();
-	System.out.println("Ingrese el nombre real del personaje: ");
-	String nombreReal = scanner.nextLine();
-	System.out.println("Ingrese el nombre del personaje: ");
-	String nombrePersonaje = scanner.nextLine();
-	System.out.println("Ingrese Velocidad: ");
-	int velocidad = scanner.nextInt();
-	System.out.println("Ingrese Fuerza: ");
-	int fuerza = scanner.nextInt();
-	System.out.println("Ingrese Destreza: ");
-	int destreza = scanner.nextInt();
-	System.out.println("Ingrese Resistencia: ");
-	int resistencia = scanner.nextInt();
-	
-	System.out.println("Esta a punto de crear un nuevo personaje. ¿Desea continuar?\n1.Si\n2.No");
-	int respuesta = scanner.nextInt();
-	
-	if(respuesta == 1) {
-		sistema.setCompetidor(new Competidor(nombreReal, nombrePersonaje, bando, new Caracteristica(velocidad, fuerza, resistencia, destreza)));
-		System.out.println("\nPersonaje creado correctamente!");
-	}else {
-		System.out.println("\nSe cancela la creación de personaje!");
-	}
-	
-	//scanner.close();
+	sistema.crearPersonaje();
 }
 
 public void opcionListarPersonajes(){
 	sistema.listarCompetidores();
 }
 
-public void guardarEnArchivoPersonajes()throws IOException{
-		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-		if(!personajesFile.escribir(sistema.getCompetidoresSet())) {
-			throw new RuntimeException("Error al intentar guardar los personajes");
-		}
-		System.out.println("\nLos personajes se han guardado correctamente!\n");
-	}
+public void opcionGuardarArchivoPersonajes()throws IOException{
+	sistema.guardarArchivoPersonaje();
+}
 
 
 
@@ -220,12 +155,12 @@ Scanner scanner = new Scanner(System.in);
 }
 
 public static void cargarLigaDesdeArchivo() throws FileNotFoundException{
-	ArchivoLigas ligasFile = new ArchivoLigas("ligas");
+	/*ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 	Set<String> ligas = ligasFile.leer();
 	
 	//separar liga de heroes y de villanos
 	
-	System.out.println("\nLas ligas se han cargado correctamente!\n");
+	System.out.println("\nLas ligas se han cargado correctamente!\n");*/
 }
 
 public static void crearLiga(){
@@ -326,22 +261,7 @@ public static void VencedorAPersonaje(){
 public static void PersonajesOrdenados(){
 
 }
-
-
-//*************************************************************************************************************************************************************************
-
-
-
-
-
-
-//*****************************************************************************MAIN*****************************************************************************************
-public static void main(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
-	Menu menu = new Menu();
-	menu.menuPrincipal();
-	
 }
-	
-}
+
 //*************************************************************************************************************************************************************************
 
