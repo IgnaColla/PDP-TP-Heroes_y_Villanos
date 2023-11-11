@@ -61,7 +61,7 @@ public class ArchivoPersonajes {
 		}
 	}
 
-	public boolean escribir(Set<Competidor> ch, Set<Competidor> cv)throws IOException {
+	public boolean escribir(Set<Competidor> competidores)throws IOException {
 		String path = "./archivos/out/" + this.nombre + ".out";
 		FileWriter file = null;
 		PrintWriter printerWriter = null;
@@ -70,11 +70,7 @@ public class ArchivoPersonajes {
 				file = new FileWriter(path);
 				printerWriter = new PrintWriter(file);
 				
-				for(Competidor clooper : ch) {
-					printerWriter.println(clooper.toStringArch());
-				}
-				
-				for(Competidor clooper : cv) {
+				for(Competidor clooper : competidores) {
 					printerWriter.println(clooper.toStringArch());
 				}
 		} catch (Exception e) {

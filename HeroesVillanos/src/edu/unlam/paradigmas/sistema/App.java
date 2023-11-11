@@ -1,5 +1,5 @@
 package edu.unlam.paradigmas.sistema;
 
-public enum Bandos {
-	Villano, Heroe;
+public class App {
+	
 }

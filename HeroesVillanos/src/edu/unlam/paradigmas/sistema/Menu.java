@@ -11,12 +11,10 @@ import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class Menu {
 	
-	private Set<Competidor> competidoresHeroes = new HashSet<>();
-	private Set<Liga> ligasHeroes = new HashSet<>();
-	private Set<Competidor> competidoresVillanos = new HashSet<>();
-	private Set<Liga> ligasVillanos = new HashSet<>();
+	SistemaHeroesVillanos sistema = new SistemaHeroesVillanos();
+	
 
-	public void menuPrincipal(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
+	public void menuPrincipal() throws FileNotFoundException, CaracteristicaExcepcion, IOException{
 		Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		
@@ -53,7 +51,7 @@ public class Menu {
 					System.out.println("¡Gracias por jugar!");
 					break;
 				default:
-					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+					System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
 			}
 		}
 	}
@@ -68,13 +66,13 @@ private Bandos seleccionarBando() {
 		System.out.println("Bandos:");
 		System.out.println("1. Heroe");
 		System.out.println("2. Villano");
-		System.out.print("Seleccione una opción: ");
+		System.out.print("Seleccione una opcion: ");
 
 		int opcion = scannerBando.nextInt();
 
 		switch (opcion) {
 			case 1:
-				bando = Bandos.Héroe;
+				bando = Bandos.Heroe;
 				continuar = false;
 				break;
 			case 2:
@@ -82,7 +80,7 @@ private Bandos seleccionarBando() {
 				continuar = false;
 				break;
 			default:
-				System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+				System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
 		}
 	}
 	//scannerBando.close();
@@ -99,7 +97,7 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 			System.out.println("3. Listar");
 			System.out.println("4. Guardar en archivo personajes");
 			System.out.println("5. Volver al menu principal");
-			System.out.print("Seleccione una opción: ");
+			System.out.print("Seleccione una opcion: ");
 
 			int opcion = scanner.nextInt();
 
@@ -108,10 +106,10 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 					cargarDesdeArchivo();
 					break;
 				case 2:
-					crearPersonaje();
+					opcionCrearPersonaje();
 					break;
 				case 3:
-					ListarPersonajes();
+					opcionListarPersonajes();
 					break;
 				case 4:
 					guardarEnArchivoPersonajes();
@@ -121,7 +119,7 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 					System.out.println("¡Volviendo al menu principal...!");
 					break;
 				default:
-					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+					System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
 			}
 		}
 }
@@ -130,18 +128,14 @@ public void cargarDesdeArchivo()throws FileNotFoundException{
 	ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 	Set<Competidor> personajes = personajesFile.leer();
 	
-	for(Competidor c : personajes) {
-		if (c.getBando() == Bandos.Villano) {
-			competidoresVillanos.add(c);
-		}else {
-			competidoresHeroes.add(c);
-		}
+	for(Competidor competidor : personajes) {
+		sistema.setCompetidor(competidor);
 	}
 	
 	System.out.println("\nLos personajes se han cargado correctamente!\n");
 }
 
-public void crearPersonaje() throws CaracteristicaExcepcion{
+public void opcionCrearPersonaje() throws CaracteristicaExcepcion{
 	Scanner scanner = new Scanner(System.in);
 	System.out.println("Seleccione bando: ");
 	Bandos bando = seleccionarBando();
@@ -162,11 +156,7 @@ public void crearPersonaje() throws CaracteristicaExcepcion{
 	int respuesta = scanner.nextInt();
 	
 	if(respuesta == 1) {
-		if(bando == Bandos.Héroe) {
-			competidoresHeroes.add(new Competidor(nombreReal, nombrePersonaje, bando, new Caracteristica(velocidad, fuerza, resistencia, destreza)));
-		}else {
-			competidoresVillanos.add(new Competidor(nombreReal, nombrePersonaje, bando, new Caracteristica(velocidad, fuerza, resistencia, destreza)));
-		}
+		sistema.setCompetidor(new Competidor(nombreReal, nombrePersonaje, bando, new Caracteristica(velocidad, fuerza, resistencia, destreza)));
 		System.out.println("\nPersonaje creado correctamente!");
 	}else {
 		System.out.println("\nSe cancela la creación de personaje!");
@@ -175,22 +165,13 @@ public void crearPersonaje() throws CaracteristicaExcepcion{
 	//scanner.close();
 }
 
-public void ListarPersonajes(){
-	System.out.println("Listado de Personajes");
-	System.out.println("Bando, Nombre Real, Nombre de Personaje, Velocidad, Fuerza, Resistencia, Destreza");
-	System.out.println("---------------------------------------------------------------------------------");
-	for(Competidor c: competidoresHeroes) {
-		System.out.println(c.toStringArch());
-	}
-	for(Competidor c: competidoresVillanos) {
-		System.out.println(c.toStringArch());
-	}
-	System.out.println();
+public void opcionListarPersonajes(){
+	sistema.listarCompetidores();
 }
 
 public void guardarEnArchivoPersonajes()throws IOException{
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-		if(!personajesFile.escribir(this.competidoresHeroes, this.competidoresVillanos)) {
+		if(!personajesFile.escribir(sistema.getCompetidoresSet())) {
 			throw new RuntimeException("Error al intentar guardar los personajes");
 		}
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
@@ -357,7 +338,7 @@ public static void PersonajesOrdenados(){
 //*****************************************************************************MAIN*****************************************************************************************
 public static void main(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
 	Menu menu = new Menu();
-	menu.menuPrincipal(args);
+	menu.menuPrincipal();
 	
 }
 	
