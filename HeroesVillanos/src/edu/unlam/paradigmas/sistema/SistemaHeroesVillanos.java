@@ -14,6 +14,7 @@ public class SistemaHeroesVillanos {
 
 	private Set<Competidor> competidores = new HashSet<>();
 	private Set<Liga> ligas = new HashSet<>();
+	private boolean leyoArchivo = false;
 
 	public SistemaHeroesVillanos() {}
 	
@@ -26,6 +27,7 @@ public class SistemaHeroesVillanos {
 		return competidores;
 	}
 	
+	//1. Administracion de Personajes
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 		Set<Competidor> personajes = personajesFile.leer();
@@ -112,5 +114,14 @@ public class SistemaHeroesVillanos {
 		}
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
+	
+	//2. Administracion de Ligas
+	//3. Realizar combate
+	public void personajeVsLiga() {
+		
+	}
+	//4. Reportes
+	
+	
 
 }

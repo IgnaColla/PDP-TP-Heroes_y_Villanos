@@ -194,7 +194,7 @@ Scanner scanner = new Scanner(System.in);
 			switch (opcion) {
 				case 1:
                 //Logica de Personaje vs Personaje
-					PersonajeVsLiga();
+					personajeVsLiga();
 					break;
 				case 2:
                 //logica de Liga vs Liga
@@ -210,8 +210,15 @@ Scanner scanner = new Scanner(System.in);
 		}
 }
 
-public static void PersonajeVsLiga(){
-        
+public static void personajeVsLiga(){
+	/*
+	 * Seleccionar personaje
+	 * Seleccionar bando
+	 * Seleccionar Liga
+	 * bandoRestando !Bandos.elegido
+	 * Seleccionar Caracteristica a enfrentar
+	 * llamarmetodo(Unidad Competidor Unidad1, Unidad Competidor Unidad2, Caracteristica)
+	 * */
 }
 
 public static void LigaVsLiga(){
@@ -230,8 +237,8 @@ private void generarReporte(){
 		boolean continuar = true;
 		while (continuar) {
 			System.out.println("Generar reporte:");
-			System.out.println("1. Personaje vs Liga");
-			System.out.println("2. Liga vs Liga");
+			System.out.println("1. Personaje o Liga que vence a un Personaje seleccionado por caracteristica");
+			System.out.println("2. Listar Personajes por caracteristica");
 			System.out.println("3. Volver al menu anterior");
 			System.out.print("Seleccione una opción: ");
 
