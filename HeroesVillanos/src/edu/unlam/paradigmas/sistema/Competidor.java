@@ -42,7 +42,7 @@ public class Competidor extends UnidadCompetidor {
 	}
 
 	public String toStringArch() {
-		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristica();
+		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaToString();
 	}
 
 	// Sobreescribo equals y hashCode para que los Set los puedan filtrar

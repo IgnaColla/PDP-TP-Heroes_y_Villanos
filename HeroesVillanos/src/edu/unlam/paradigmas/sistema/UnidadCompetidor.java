@@ -17,7 +17,12 @@ public abstract class UnidadCompetidor {
 	
 	protected abstract List<Integer> getCaracteristicas();
 	
-	public String getCaracteristica() {
+	public String getCaracteristicaToString() {
 		return this.caracteristicas.toString();
 	}
+	
+	public Caracteristica getCaracteristica() {
+		return this.caracteristicas;
+	}
+	
 }

@@ -11,8 +11,10 @@ import java.util.Scanner;
 
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
+import edu.unlam.paradigmas.compadores.ComparadorPorCaracteristica;
 //import edu.unlam.paradigmas.compadores.ComparadorCompetidores;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class SistemaHeroesVillanos {
 
@@ -119,12 +121,45 @@ public class SistemaHeroesVillanos {
 				continuar = false;
 				break;
 			default:
-				System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
+				System.out.println("Opcion no valida. Por favor, seleccione un bando valido.");
 			}
 		}
 
 		scanner.nextLine(); // Para leer el \n que sobra luego de un nextInt, y se pueda leer el nombre
 		return bando;
+	}
+
+	private TipoCaracteristica seleccionarCaracteristica(Scanner scanner) {
+		TipoCaracteristica caracteristica = null;
+		boolean continuar = true;
+		while (continuar) {
+
+			int opcion = scanner.nextInt();
+
+			switch (opcion) {
+			case 1:
+				caracteristica = TipoCaracteristica.VELOCIDAD;
+				continuar = false;
+				break;
+			case 2:
+				caracteristica = TipoCaracteristica.FUERZA;
+				continuar = false;
+				break;
+			case 3:
+				caracteristica = TipoCaracteristica.RESISTENCIA;
+				continuar = false;
+				break;
+			case 4:
+				caracteristica = TipoCaracteristica.DESTREZA;
+				continuar = false;
+				break;
+			default:
+				System.out.println("Opcion no valida. Por favor, seleccione una característica valida.");
+			}
+		}
+
+		scanner.nextLine(); // Para leer el \n que sobra luego de un nextInt, y se pueda leer el nombre
+		return caracteristica;
 	}
 
 	public void crearPersonaje(Scanner scanner) throws CaracteristicaExcepcion {
@@ -266,7 +301,6 @@ public class SistemaHeroesVillanos {
 			listarPersonajes();
 			Competidor personajeSeleccionado = new Competidor();
 			System.out.println("+ ¿Qué personaje quiere agregar?");
-			// seleccion personaje
 			int seleccionPersonaje = scanner.nextInt();
 			// competidorNuevo = competidores.getOrDefault(seleccionPersonaje,null);
 			System.out.println("\nEsta a punto de incluir a ... al personaje...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
@@ -284,8 +318,9 @@ public class SistemaHeroesVillanos {
 //	}
 
 	public void listarLigas() {
-//		System.out.println("\nListado de Ligas");
-//		System.out.println("\n---------------------------------------------------------------------------------");
+		System.out.println("\nListado de Ligas");
+		System.out.println("\n---------------------------------------------------------------------------------");
+
 //		for (UnidadCompetidor competidor : this.ligas) {
 //			System.out.println(competidor.toStringArch());
 //		}
@@ -305,5 +340,43 @@ public class SistemaHeroesVillanos {
 
 	}
 	// 4. Reportes
+
+	public void ordenarPersonajesPorCaracteristica(Scanner scanner) throws FileNotFoundException {
+		System.out.println("\n[Ordenar personajes por caracteristicas]");
+		System.out.println(
+				"+ Seleccione las caracteristicas para ordenar:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
+		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
+
+		listarPersonajes(caracteristicaSeleccionada);
+	}
+
+	public void listarPersonajes(TipoCaracteristica caracteristicaOrden) throws FileNotFoundException {
+
+		if (this.competidores.isEmpty()) {
+			ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
+			this.competidores = personajesFile.leer();
+		}
+
+		List<Competidor> competidoresOrdenados = new ArrayList<>(this.competidores.keySet());
+
+		// Crear una instancia de PersonajeComparator con la característica seleccionada
+		ComparadorPorCaracteristica comparator = new ComparadorPorCaracteristica(caracteristicaOrden);
+
+		// Ordenar la lista de personajes utilizando el comparador
+		competidoresOrdenados.sort(comparator);
+
+		System.out.println("\n+----- Listado de personajes -----+\n"
+				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
+				+ "--------------------------------------------------------------------------------------------");
+
+		int nroPersonaje = 1;
+		for (Competidor competidor : competidoresOrdenados) {
+			System.out.println(nroPersonaje + ". " + competidor.toStringArch());
+			nroPersonaje++;
+		}
+
+		System.out.println();
+
+	}
 
 }

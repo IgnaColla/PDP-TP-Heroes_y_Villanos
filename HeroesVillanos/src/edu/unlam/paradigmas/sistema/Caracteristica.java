@@ -8,6 +8,10 @@ public class Caracteristica {
 	private int fuerza;
 	private int resistencia;
 	private int destreza;
+	
+	  public enum TipoCaracteristica {
+	        VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA
+	    }
 
 	public Caracteristica(int velocidad, int fuerza, int resistencia, int destreza) throws CaracteristicaExcepcion {
 		this.velocidad = validarCaractesticas(velocidad, "La velocidad del personaje es menor a 0, por favor reviselo");
