@@ -13,12 +13,6 @@ public class Competidor extends UnidadCompetidor {
 		this.nombrePersonaje = nombrePersonaje;
 	}
 
-	@Override
-	public int enfrentarse(UnidadCompetidor unidad, Caracteristica c) {
-		// TODO Enfrentar competidores
-		return 0;
-	}
-
 	public String getNombreReal() {
 		return this.nombreReal;
 	}

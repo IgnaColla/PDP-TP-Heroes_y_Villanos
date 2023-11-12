@@ -13,33 +13,43 @@ import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 public class SistemaHeroesVillanos {
 
 	private Set<Competidor> competidores = new HashSet<>();
-	private Liga liga;
+	private Liga liga = new Liga();
 	private boolean archivoPersonajeExiste = false;
 
-	public SistemaHeroesVillanos() {}
-	
-	//metodos
+	public SistemaHeroesVillanos() {
+	}
+
+	// metodos
 	public void setCompetidor(Competidor competidor) {
 		this.competidores.add(competidor);
 	}
-	
-	public Set<Competidor> getCompetidoresSet(){
+
+	public Set<Competidor> getCompetidoresSet() {
 		return competidores;
 	}
 	
-	//1. Administracion de Personajes
+	private static Competidor buscarCompetidorPorNombre(Set<Competidor> competidores, String nombre) {
+		for (Competidor competidor : competidores) {
+			if (competidor.getNombrePersonaje().equals(nombre)) {
+				return competidor;
+			}
+		}
+		return null; // No se encontró el competidor con el nombre especificado
+	}
+
+	// 1. Administracion de Personajes
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 		Set<Competidor> personajes = personajesFile.leer();
-		
-		for(Competidor competidor : personajes) {
+
+		for (Competidor competidor : personajes) {
 			this.setCompetidor(competidor);
 		}
-		
+
 		this.archivoPersonajeExiste = true;
 		System.out.println("\nLos personajes se han cargado correctamente!\n");
 	}
-	
+
 	private Bandos seleccionarBando() {
 		Scanner scannerBando = new Scanner(System.in);
 		Bandos bando = null;
@@ -53,23 +63,23 @@ public class SistemaHeroesVillanos {
 			int opcion = scannerBando.nextInt();
 
 			switch (opcion) {
-				case 1:
-					bando = Bandos.Heroe;
-					continuar = false;
-					break;
-				case 2:
-					bando = Bandos.Villano;
-					continuar = false;
-					break;
-				default:
-					System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
+			case 1:
+				bando = Bandos.Heroe;
+				continuar = false;
+				break;
+			case 2:
+				bando = Bandos.Villano;
+				continuar = false;
+				break;
+			default:
+				System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
 			}
 		}
-		//scannerBando.close();
+		// scannerBando.close();
 		return bando;
 	}
-	
-	public void crearPersonaje()throws CaracteristicaExcepcion {
+
+	public void crearPersonaje() throws CaracteristicaExcepcion {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Seleccione bando: ");
 		Bandos bando = seleccionarBando();
@@ -85,60 +95,83 @@ public class SistemaHeroesVillanos {
 		int destreza = scanner.nextInt();
 		System.out.println("Ingrese Resistencia: ");
 		int resistencia = scanner.nextInt();
-		
+
 		System.out.println("Esta a punto de crear un nuevo personaje. ¿Desea continuar?\n1.Si\n2.No");
 		int respuesta = scanner.nextInt();
-		
-		if(respuesta == 1) {
-			this.setCompetidor(new Competidor(nombreReal, nombrePersonaje, bando, new Caracteristica(velocidad, fuerza, resistencia, destreza)));
+
+		if (respuesta == 1) {
+			this.setCompetidor(new Competidor(nombreReal, nombrePersonaje, bando,
+					new Caracteristica(velocidad, fuerza, resistencia, destreza)));
 			System.out.println("\nPersonaje creado correctamente!");
-		}else {
+		} else {
 			System.out.println("\nSe cancela la creación de personaje!");
 		}
-		//scanner.close();
+		// scanner.close();
 	}
-	
+
 	public void listarCompetidores() {
 		System.out.println("Listado de Personajes");
 		System.out.println("Bando, Nombre Real, Nombre de Personaje, Velocidad, Fuerza, Resistencia, Destreza");
 		System.out.println("---------------------------------------------------------------------------------");
-		for(Competidor competidor: competidores) {
+		for (Competidor competidor : competidores) {
 			System.out.println(competidor.toStringArch());
 		}
 		System.out.println();
 	}
-	
-	public void guardarArchivoPersonaje() throws IOException{
+
+	public void guardarArchivoPersonaje() throws IOException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-		if(!personajesFile.escribir(this.competidores)) {
+		if (!personajesFile.escribir(this.competidores)) {
 			throw new RuntimeException("Error al intentar guardar los personajes");
 		}
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
-	
-	//2. Administracion de Ligas
-	public void cargarArchivoLigas() throws FileNotFoundException{
-		if(!this.archivoPersonajeExiste) {
+
+	// 2. Administracion de Ligas
+
+	public void cargarArchivoLigas() throws FileNotFoundException, CaracteristicaExcepcion {
+		if (this.archivoPersonajeExiste == false) {
 			System.out.println("Se cargará primero el archivo correspondiente a los personajes.");
 			this.cargarArchivoPersonaje();
 		}
-		
+
 		ArchivoLigas ligasFile = new ArchivoLigas("ligas");
-		Set<Liga> personajes = ligasFile.leer(competidores);
-		
-		for(Competidor competidor : personajes) {
-			this.setCompetidor(competidor);
+		Set<String> lineasLigas = ligasFile.leer();
+		Liga competidoresCargados = new Liga();
+
+		String[] linea;
+
+		for (String liga : lineasLigas) {
+
+			linea = liga.split("[,\n]");
+
+			for (String personaje : linea) {
+				competidoresCargados.agregarCompetidor(buscarCompetidorPorNombre(competidores, personaje.trim()));
+			}
+			this.liga.agregarLiga(competidoresCargados);
 		}
-		
+//
+//        for(Competidor competidor : personajes) {
+//            this.setCompetidor(competidor);
+//        }
+
 		System.out.println("\nLos personajes se han cargado correctamente!\n");
-		
+
 	}
-	//3. Realizar combate
+	
+	public void listarCompetidores() {
+		System.out.println("Listado de Ligas");
+		System.out.println("---------------------------------------------------------------------------------");
+		for (Competidor competidor : competidores) {
+			System.out.println(competidor.toStringArch());
+		}
+		System.out.println();
+	}
+
+	// 3. Realizar combate
 	public void personajeVsLiga() {
-		
+
 	}
-	//4. Reportes
-	
-	
+	// 4. Reportes
 
 }

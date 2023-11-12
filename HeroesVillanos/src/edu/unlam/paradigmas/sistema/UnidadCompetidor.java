@@ -35,6 +35,4 @@ public abstract class UnidadCompetidor {
 	public boolean esMismoBando(UnidadCompetidor unidad) {
 		return this.bando.equals(unidad.getBando());
 	}
-
-	public abstract int enfrentarse(UnidadCompetidor unidad, Caracteristica c);
 }

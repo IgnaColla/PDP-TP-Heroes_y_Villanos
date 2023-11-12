@@ -11,55 +11,71 @@ public class Liga extends UnidadCompetidor {
 
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
 
+	// Constructores
+	public Liga() {
+		super(null, null);
+		this.competidores = null;
+	}
+
 	public Liga(Bandos bando, Caracteristica caracteristicas, UnidadCompetidor competidores) {
 		super(bando, caracteristicas);
 		this.competidores.add(competidores);
 	}
-	
-	public Liga(Bandos bando, Caracteristica caracteristicas, Set<UnidadCompetidor> competidores) {
+
+	public Liga(Bandos bando, Caracteristica caracteristicas, Liga ligas) {
 		super(bando, caracteristicas);
 		this.competidores.addAll(competidores);
 	}
-	
-	public void agregarCompetidor(Competidor competidor) {
-		this.competidores.add(new Liga(competidor.bando, competidor.caracteristicas, competidor));
+
+	public Bandos getBando() {
+		this.competidores.
 	}
 	
-	public void agregarCompetidor(Liga liga) {
-		this.competidores.add(new Liga(liga.bando, liga.calcularCaracteristica, liga));
+	public void agregarCompetidor(Competidor competidor) throws CaracteristicaExcepcion{
+		List<Integer> lc = competidor.getCaracteristicas();
+		int velocidad = lc.get(0);
+		int fuerza = lc.get(1); 
+		int resistencia = lc.get(2); 
+		int destreza = lc.get(3);
+		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
+		this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
 	}
 
-	
-	
-	protected List<Integer> getCaracteristica() {
-		List<Integer> caracteristicas = new ArrayList<Integer>();
-		
-		for (UnidadCompetidor unidad : this.competidores) {
-			caracteristicas.in
-			+= unidad.caracteristicas.getVelocidad();
-			caracteristicas[1] += unidad.caracteristicas.getFuerza();
-			caracteristicas[2] += unidad.caracteristicas.getVelocidad();
-			caracteristicas[3] += unidad.caracteristicas.getVelocidad();
-		}
-		
-		return new Caracteristica(velocidad, fuerza, resistencia, destreza);
+	public void agregarLiga(Liga liga) throws CaracteristicaExcepcion {
+		List<Integer> lc = liga.getCaracteristicas();
+		int velocidad = lc.get(0);
+		int fuerza = lc.get(1); 
+		int resistencia = lc.get(2); 
+		int destreza = lc.get(3);
+		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
+		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
 	}
-	
-	/*public void agregar(Set<UnidadCompetidor> liga) {
-		if(!this.competidores.equals(liga)) {
-			this.competidores.addAll(liga);
-		}
-	}*/
-	
+
 	@Override
-	public int enfrentarse(UnidadCompetidor unidad, Caracteristica c) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected List<Integer> getCaracteristicas() {
+		List<Integer> caracteristicas = new ArrayList<Integer>();
+		int velocidad = 0, fuerza = 0, resistencia = 0, destreza = 0;
+
+		for (UnidadCompetidor unidad : this.competidores) {
+			velocidad += unidad.caracteristicas.getVelocidad();
+			fuerza += unidad.caracteristicas.getFuerza();
+			resistencia += unidad.caracteristicas.getResistencia();
+			destreza += unidad.caracteristicas.getDestreza();
+		}
+
+		caracteristicas.add(velocidad);
+		caracteristicas.add(fuerza);
+		caracteristicas.add(resistencia);
+		caracteristicas.add(destreza);
+
+		return caracteristicas;
 	}
 
+	/*
+	 * public void agregar(Set<UnidadCompetidor> liga) {
+	 * if(!this.competidores.equals(liga)) { this.competidores.addAll(liga); } }
+	 */
 //	public Caracteristica calcularPoderGrupo() { por cada personaje que haya, hacer la sumatoria de cada caracteristica
 
 //}
 }
-
-
