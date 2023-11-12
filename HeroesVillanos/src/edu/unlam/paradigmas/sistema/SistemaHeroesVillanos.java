@@ -38,6 +38,7 @@ public class SistemaHeroesVillanos {
 	}
 
 	// 1. Administracion de Personajes
+	
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 		Set<Competidor> personajes = personajesFile.leer();
@@ -112,7 +113,7 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
-	public void listarCompetidores1() {
+	public void listarPersonajes() {
 		System.out.println("\n+----- Listado de personajes -----+\n"
 				+ "Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
 				+ "--------------------------------------------------------------------------------------------");
@@ -150,9 +151,9 @@ public class SistemaHeroesVillanos {
 			linea = liga.split("[,\n]");
 
 			for (String personaje : linea) {
-				competidoresCargados.agregarCompetidor(buscarCompetidorPorNombre(competidores, personaje.trim()));
+				competidoresCargados.agregarCompetidorALiga(buscarCompetidorPorNombre(competidores, personaje.trim()));
 			}
-			this.liga.agregarLiga(competidoresCargados);
+			this.liga.agregarLigaALiga(competidoresCargados);
 		}
 //
 //        for(Competidor competidor : personajes) {
@@ -163,7 +164,33 @@ public class SistemaHeroesVillanos {
 
 	}
 	
-	public void listarCompetidores2() {
+	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion {
+		
+		System.out.println("\n[Crear Liga]");
+		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
+		Bandos bando = seleccionarBando(scanner);
+		System.out.println("+ [Selección y administración de liga] +");
+		System.out.println("+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
+
+		System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No"); //continuar logica si es opcion 1 o 2
+		System.out.println("\nEsta a punto de incluir a ... al personaje...  ¿Desea continuar?\n1.Si\n2.No"); //continuar logica si es opcion 1 o 2
+
+		int respuesta = scanner.nextInt();
+
+//		if (respuesta == 1) {
+//			this.setCompetidor(new L(nombreReal, nombrePersonaje, bando,
+//					new Caracteristica(velocidad, fuerza, resistencia, destreza)));
+//			System.out.println("\n¡Personaje creado correctamente!\n");
+//		} else if(respuesta == 2) {
+//			this.liga
+//		}
+//		else {
+//			System.out.println("\nSe cancela la asignación.\n");
+//
+//		}
+	}
+	
+	public void listarLigas() {
 		System.out.println("\nListado de Ligas");
 		System.out.println("\n---------------------------------------------------------------------------------");
 		for (Competidor competidor : competidores) {
@@ -171,6 +198,16 @@ public class SistemaHeroesVillanos {
 		}
 		System.out.println();
 	}
+	
+	public void guardarArchivoLigas() throws IOException {
+//		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
+//		if (!personajesFile.escribir(this.competidores)) {
+//			throw new RuntimeException("\nError al intentar guardar los personajes");
+//		}
+//		System.out.println("\nLos personajes se han guardado correctamente!\n");
+	}
+	
+	
 
 	// 3. Realizar combate
 	public void personajeVsLiga() {

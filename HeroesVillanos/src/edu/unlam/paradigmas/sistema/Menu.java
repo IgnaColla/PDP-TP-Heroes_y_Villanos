@@ -29,19 +29,19 @@ public class Menu {
 			switch (opcion) {
 				case 1:
 					//Lógica para la administración de personajes (carga, creación, listado, guardar en archivo).
-					administrarPersonajes(scanner);
+					opcionAdministrarPersonajes(scanner);
 					break;
 				case 2:
 					//Lógica para la administración de ligas (carga, creación, listado, guardar en archivo).
-					administrarLigas();
+					opcionAdministrarLigas();
 					break;
 				case 3:
 					//Logica para la realización de combates (personaje contra liga, liga contra liga).
-					realizarCombate();
+					opcionRealizarCombate();
 					break;
 				case 4:
 					//Lógica para generar reportes.
-					generarReporte();
+					opcionGenerarReporte();
 					break;
 				case 5:
 					continuar = false;
@@ -58,7 +58,7 @@ public class Menu {
 
 
 	
-private void administrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException{
+private void opcionAdministrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException{
 		boolean continuar = true;
 		while (continuar) {
 			System.out.println("[Administrar Personajes]\n"
@@ -73,16 +73,16 @@ private void administrarPersonajes(Scanner scanner) throws CaracteristicaExcepci
 
 			switch (opcion) {
 				case 1:
-					opcionCargarArchivoPersonaje();
+					subOpcionCargarArchivoPersonaje();
 					break;
 				case 2:
-					opcionCrearPersonaje(scanner);
+					subOpcionCrearPersonaje(scanner);
 					break;
 				case 3:
-					opcionListarPersonajes();
+					subOpcionListarPersonajes();
 					break;
 				case 4:
-					opcionGuardarArchivoPersonajes();
+					subOpcionGuardarArchivoPersonajes();
 					break;
 				case 5:
 					continuar = false;
@@ -94,19 +94,19 @@ private void administrarPersonajes(Scanner scanner) throws CaracteristicaExcepci
 		}
 }
 
-public void opcionCargarArchivoPersonaje()throws FileNotFoundException{
+private void subOpcionCargarArchivoPersonaje()throws FileNotFoundException{
 	sistema.cargarArchivoPersonaje();
 }
 
-public void opcionCrearPersonaje(Scanner scanner) throws CaracteristicaExcepcion{
+private void subOpcionCrearPersonaje(Scanner scanner) throws CaracteristicaExcepcion{
 	sistema.crearPersonaje(scanner);
 }
 
-public void opcionListarPersonajes(){
-	sistema.listarCompetidores1();
+private void subOpcionListarPersonajes(){
+	sistema.listarPersonajes();
 }
 
-public void opcionGuardarArchivoPersonajes()throws IOException{
+private void subOpcionGuardarArchivoPersonajes()throws IOException{
 	sistema.guardarArchivoPersonaje();
 }
 
@@ -115,7 +115,7 @@ public void opcionGuardarArchivoPersonajes()throws IOException{
 //****************************************************************************Administrar Ligas***************************************************************************/
 
 
-private void administrarLigas() throws FileNotFoundException{
+private void opcionAdministrarLigas() throws CaracteristicaExcepcion, IOException{
 Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		while (continuar) {
@@ -128,19 +128,19 @@ Scanner scanner = new Scanner(System.in);
 			System.out.print("Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
-
+			
 			switch (opcion) {
 				case 1:
-					cargarLigaDesdeArchivo();
+					subOpcionCargarLigaDesdeArchivo();
 					break;
 				case 2:
-					crearLiga();
+					subOpcionCrearLiga(scanner);
 					break;
 				case 3:
-					ListarLigas();
+					subOcionListarLigas();
 					break;
 				case 4:
-					guardarEnArchivoLigas();
+					subOpcionGuardarEnArchivoLigas();
 					break;
 				case 5:
 					continuar = false;
@@ -154,7 +154,10 @@ Scanner scanner = new Scanner(System.in);
 		scanner.close();
 }
 
-public static void cargarLigaDesdeArchivo() throws FileNotFoundException{
+private void subOpcionCargarLigaDesdeArchivo() throws FileNotFoundException, CaracteristicaExcepcion{
+	
+	sistema.cargarArchivoLigas();
+	
 	/*ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 	Set<String> ligas = ligasFile.leer();
 	
@@ -163,23 +166,22 @@ public static void cargarLigaDesdeArchivo() throws FileNotFoundException{
 	System.out.println("\nLas ligas se han cargado correctamente!\n");*/
 }
 
-public static void crearLiga(){
-
+private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion{
+	sistema.crearLiga(scanner);
 }
 
-public static void ListarLigas(){
+private void subOcionListarLigas(){
+	sistema.listarLigas();
 }
 
-public static void guardarEnArchivoLigas(){
-
+private void subOpcionGuardarEnArchivoLigas() throws IOException{
+	sistema.guardarArchivoLigas();
 }
 //*************************************************************************************************************************************************************************
 
 
-
-
 //****************************************************************************Realizar Combate*****************************************************************************/
-private void realizarCombate(){
+private void opcionRealizarCombate(){
 Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		while (continuar) {
@@ -194,11 +196,11 @@ Scanner scanner = new Scanner(System.in);
 			switch (opcion) {
 				case 1:
                 //Logica de Personaje vs Personaje
-					personajeVsLiga();
+					subOpcionPersonajeVsLiga();
 					break;
 				case 2:
                 //logica de Liga vs Liga
-					LigaVsLiga();
+					subOpcionLigaVsLiga();
 					break;
 				case 3:
 					continuar = false;
@@ -212,7 +214,7 @@ Scanner scanner = new Scanner(System.in);
 		scanner.close();
 }
 
-public static void personajeVsLiga(){
+private static void subOpcionPersonajeVsLiga(){ //llamar método que invoca a la lucha en el sistema 
 	/*
 	 * Seleccionar personaje
 	 * Seleccionar bando
@@ -223,7 +225,7 @@ public static void personajeVsLiga(){
 	 * */
 }
 
-public static void LigaVsLiga(){
+private static void subOpcionLigaVsLiga(){
 
 }
 
@@ -234,7 +236,7 @@ public static void LigaVsLiga(){
 
 //****************************************************************************Generar Reporte****************************************************************************/
 
-private void generarReporte(){
+private void opcionGenerarReporte(){
 	Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 		while (continuar) {
@@ -265,11 +267,11 @@ private void generarReporte(){
 		scanner.close();
 }
 
-public static void VencedorAPersonaje(){
+private static void VencedorAPersonaje(){
         
 }
 
-public static void PersonajesOrdenados(){
+private static void PersonajesOrdenados(){
 
 }
 }
