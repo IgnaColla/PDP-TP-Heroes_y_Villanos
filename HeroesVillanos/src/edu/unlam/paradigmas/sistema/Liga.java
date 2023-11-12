@@ -16,10 +16,12 @@ public class Liga extends UnidadCompetidor {
 		super(null, null);
 	}
 
-	public Liga(Bandos bando, Caracteristica caracteristicas, UnidadCompetidor competidores) {
-		super(bando, caracteristicas);
-		this.competidores.add(competidores);
-	}
+//	public Liga(Bandos bando, UnidadCompetidor competidores) {
+//		super(bando);
+//		Caracteristica caracteristicas = new Caracteristicas();
+//		
+//		this.competidores.add(competidores);
+//	}
 
 	public Liga(Bandos bando, Caracteristica caracteristicas, Liga ligas) {
 		super(bando, caracteristicas);
@@ -34,7 +36,7 @@ public class Liga extends UnidadCompetidor {
 		int resistencia = lc.get(2);
 		int destreza = lc.get(3);
 		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-		this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
+		//this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
 
 	}
 

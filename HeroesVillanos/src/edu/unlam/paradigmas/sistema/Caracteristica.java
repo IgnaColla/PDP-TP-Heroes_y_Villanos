@@ -46,14 +46,9 @@ public class Caracteristica {
 		this.resistencia += caracteristicas.getResistencia();
 		this.destreza += caracteristicas.getDestreza();
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Caracteristica [velocidad=" + velocidad + ", fuerza=" + fuerza + ", resistencia=" + resistencia
-				+ ", destreza=" + destreza + "]";
-	}
-	
-	public String toStringArch() {
 		return velocidad+", "+fuerza+", "+resistencia+", "+destreza;
 	}
 }

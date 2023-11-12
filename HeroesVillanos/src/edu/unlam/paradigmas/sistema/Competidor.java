@@ -7,11 +7,10 @@ public class Competidor extends UnidadCompetidor {
 	private String nombreReal;
 	private String nombrePersonaje;
 
-	
 	public Competidor() {
 		super(null, null);
 	}
-	
+
 	public Competidor(String nombreReal, String nombrePersonaje, Bandos bando, Caracteristica caracteristicas) {
 		super(bando, caracteristicas);
 		this.nombreReal = nombreReal;
@@ -43,7 +42,7 @@ public class Competidor extends UnidadCompetidor {
 	}
 
 	public String toStringArch() {
-		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaArch();
+		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristica();
 	}
 
 	// Sobreescribo equals y hashCode para que los Set los puedan filtrar

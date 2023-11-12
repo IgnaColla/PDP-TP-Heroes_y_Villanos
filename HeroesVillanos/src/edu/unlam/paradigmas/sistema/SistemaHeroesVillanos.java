@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
-import edu.unlam.paradigmas.compadores.ComparadorCompetidores;
+//import edu.unlam.paradigmas.compadores.ComparadorCompetidores;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class SistemaHeroesVillanos {
@@ -75,29 +75,29 @@ public class SistemaHeroesVillanos {
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 
-		if (this.competidores.isEmpty()) {
-			this.competidores = personajesFile.leer();
-		} else {
-			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
-
-			// Obtener el último valor asignado a los competidores existentes
-			int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
-
-			// Agregar los nuevos personajes al mapa, generando nuevos valores
-			for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
-				Competidor nuevoCompetidor = entry.getKey();
-
-				// Verificar si el competidor ya existe
-				if (this.competidores.containsKey(nuevoCompetidor)) {
-					// Generar un nuevo valor para el número de personaje
-					ultimoValor++;
-					this.competidores.put(nuevoCompetidor, ultimoValor);
-				} else {
-					// Agregar el competidor con su valor existente
-					this.competidores.put(nuevoCompetidor, entry.getValue());
-				}
-			}
-		}
+//		if (this.competidores.isEmpty()) {
+//			this.competidores = personajesFile.leer();
+//		} else {
+//			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
+//
+//			// Obtener el último valor asignado a los competidores existentes
+//			int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
+//
+//			// Agregar los nuevos personajes al mapa, generando nuevos valores
+//			for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
+//				Competidor nuevoCompetidor = entry.getKey();
+//
+//				// Verificar si el competidor ya existe
+//				if (this.competidores.containsKey(nuevoCompetidor)) {
+//					// Generar un nuevo valor para el número de personaje
+//					ultimoValor++;
+//					this.competidores.put(nuevoCompetidor, ultimoValor);
+//				} else {
+//					// Agregar el competidor con su valor existente
+//					this.competidores.put(nuevoCompetidor, entry.getValue());
+//				}
+//			}
+//		}
 
 		this.archivoPersonajeExiste = true;
 		System.out.println("\n¡Los personajes se han cargado correctamente!\n");
@@ -188,7 +188,7 @@ public class SistemaHeroesVillanos {
 
 	public void listarPersonajes() {
 		List<Competidor> competidoresOrdenados = new ArrayList<>(competidores.keySet());
-		Collections.sort(competidoresOrdenados, new ComparadorCompetidores());
+		//Collections.sort(competidoresOrdenados, new ComparadorCompetidores());
 
 		System.out.println("\n+----- Listado de personajes -----+\n"
 				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
@@ -205,9 +205,9 @@ public class SistemaHeroesVillanos {
 
 	public void guardarArchivoPersonaje() throws IOException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-		if (!personajesFile.escribir(this.competidores)) {
-			throw new RuntimeException("\nError al intentar guardar los personajes");
-		}
+//		if (!personajesFile.escribir(this.competidores)) {
+//			throw new RuntimeException("\nError al intentar guardar los personajes");
+//		}
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
@@ -289,6 +289,10 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
+//	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
+//		return .equals(unidad.getBando());
+//	}
+	
 	public void listarLigas() {
 //		System.out.println("\nListado de Ligas");
 //		System.out.println("\n---------------------------------------------------------------------------------");
@@ -312,4 +316,5 @@ public class SistemaHeroesVillanos {
 	}
 	// 4. Reportes
 
+	
 }
