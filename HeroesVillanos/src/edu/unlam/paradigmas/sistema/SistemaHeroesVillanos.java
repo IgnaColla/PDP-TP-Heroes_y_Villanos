@@ -215,9 +215,7 @@ public class SistemaHeroesVillanos {
 
 	public void listarPersonajes() {
 		List<Competidor> competidoresOrdenados = new ArrayList<>(competidores.keySet());
-		System.out.println("\n+----- Listado de personajes -----+\n"
-				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
-				+ "--------------------------------------------------------------------------------------------");
+		mensajeListadoPersonajes();
 
 		int nroPersonaje = 1;
 		for (Competidor competidor : competidoresOrdenados) {
@@ -365,11 +363,8 @@ public class SistemaHeroesVillanos {
 		// Ordenar la lista de personajes utilizando el comparador
 		competidoresOrdenados.sort(comparator);
 
-		System.out.println("\n+----- Listado de personajes -----+\n"
-				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
-				+ "--------------------------------------------------------------------------------------------");
-
 		int nroPersonaje = 1;
+		mensajeListadoPersonajes();
 		for (Competidor competidor : competidoresOrdenados) {
 			System.out.println(nroPersonaje + ". " + competidor.toStringArch());
 			nroPersonaje++;
@@ -377,6 +372,12 @@ public class SistemaHeroesVillanos {
 
 		System.out.println();
 
+	}
+
+	private void mensajeListadoPersonajes() {
+		System.out.println("\n+----- Listado de personajes -----+\n"
+				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
+				+ "--------------------------------------------------------------------------------------------");
 	}
 
 }
