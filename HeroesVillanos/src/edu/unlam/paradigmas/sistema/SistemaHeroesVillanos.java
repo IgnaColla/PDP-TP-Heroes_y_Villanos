@@ -132,7 +132,7 @@ public class SistemaHeroesVillanos {
 			}
 		}
 
-		// scannerBando.close();
+		scanner.nextLine(); // Para leer el \n que sobra luego de un nextInt, y se pueda leer el nombre
 		return bando;
 	}
 
