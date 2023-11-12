@@ -1,10 +1,7 @@
 package edu.unlam.paradigmas.sistema;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-
 //
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
@@ -18,20 +15,21 @@ public class Menu {
 		boolean continuar = true;
 		
 		while (continuar) {
-			System.out.println("Menú Principal:");
-			System.out.println("1. Administrar de Personajes");
-			System.out.println("2. Administrar de Ligas");
-			System.out.println("3. Realizar Combates");
-			System.out.println("4. Descargar reportes");
-			System.out.println("5. Salir");
-			System.out.print("Seleccione una opción: ");
+			
+			System.out.println("\n[Menu Principal]\n"
+					+ "1. Administrar Personajes\n"
+					+ "2. Administrar Ligas\n"
+					+ "3. Realizar combates\n"
+					+ "4. Descargar reportes\n"
+					+ "5. Salir\n"
+					+ "+----- Seleccione una opcion -----+\n");
 
 			int opcion = scanner.nextInt();
 
 			switch (opcion) {
 				case 1:
 					//Lógica para la administración de personajes (carga, creación, listado, guardar en archivo).
-					administrarPersonajes();
+					administrarPersonajes(scanner);
 					break;
 				case 2:
 					//Lógica para la administración de ligas (carga, creación, listado, guardar en archivo).
@@ -47,6 +45,7 @@ public class Menu {
 					break;
 				case 5:
 					continuar = false;
+					scanner.close();
 					System.out.println("¡Gracias por jugar!");
 					break;
 				default:
@@ -59,17 +58,16 @@ public class Menu {
 
 
 	
-private void administrarPersonajes() throws CaracteristicaExcepcion, IOException{
-	Scanner scanner = new Scanner(System.in);
+private void administrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException{
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Administracion de personajes:");
-			System.out.println("1. Cargar desde archivo");
-			System.out.println("2. Crear personaje");
-			System.out.println("3. Listar");
-			System.out.println("4. Guardar en archivo personajes");
-			System.out.println("5. Volver al menu principal");
-			System.out.print("Seleccione una opcion: ");
+			System.out.println("[Administrar Personajes]\n"
+					+ "1. Cargar desde archivo\n"
+					+ "2. Crear personaje\n"
+					+ "3. Listar personajes\n"
+					+ "4. Guardar personajes en archivo\n"
+					+ "5. Volver al menu principal\n"
+					+ "+----- Seleccione una opcion -----+\n");
 
 			int opcion = scanner.nextInt();
 
@@ -78,7 +76,7 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 					opcionCargarArchivoPersonaje();
 					break;
 				case 2:
-					opcionCrearPersonaje();
+					opcionCrearPersonaje(scanner);
 					break;
 				case 3:
 					opcionListarPersonajes();
@@ -88,10 +86,10 @@ private void administrarPersonajes() throws CaracteristicaExcepcion, IOException
 					break;
 				case 5:
 					continuar = false;
-					System.out.println("¡Volviendo al menu principal...!");
+					System.out.println("\n¡Volviendo al menu principal...!");
 					break;
 				default:
-					System.out.println("Opcion no valida. Por favor, seleccione una opción valida.");
+					System.out.println("\nOpcion no valida. Por favor, seleccione una opción valida.");
 			}
 		}
 }
@@ -100,12 +98,12 @@ public void opcionCargarArchivoPersonaje()throws FileNotFoundException{
 	sistema.cargarArchivoPersonaje();
 }
 
-public void opcionCrearPersonaje() throws CaracteristicaExcepcion{
-	sistema.crearPersonaje();
+public void opcionCrearPersonaje(Scanner scanner) throws CaracteristicaExcepcion{
+	sistema.crearPersonaje(scanner);
 }
 
 public void opcionListarPersonajes(){
-	sistema.listarCompetidores();
+	sistema.listarCompetidores1();
 }
 
 public void opcionGuardarArchivoPersonajes()throws IOException{
@@ -152,6 +150,8 @@ Scanner scanner = new Scanner(System.in);
 					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
+		
+		scanner.close();
 }
 
 public static void cargarLigaDesdeArchivo() throws FileNotFoundException{
@@ -208,6 +208,8 @@ Scanner scanner = new Scanner(System.in);
 					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
+		
+		scanner.close();
 }
 
 public static void personajeVsLiga(){
@@ -259,6 +261,8 @@ private void generarReporte(){
 					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
+		
+		scanner.close();
 }
 
 public static void VencedorAPersonaje(){

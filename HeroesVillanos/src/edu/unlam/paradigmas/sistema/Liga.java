@@ -27,9 +27,9 @@ public class Liga extends UnidadCompetidor {
 		this.competidores.addAll(competidores);
 	}
 
-	public Bandos getBando() {
-		this.competidores.
-	}
+//	public Bandos getBando() {
+//		this.competidores.
+//	}
 	
 	public void agregarCompetidor(Competidor competidor) throws CaracteristicaExcepcion{
 		List<Integer> lc = competidor.getCaracteristicas();

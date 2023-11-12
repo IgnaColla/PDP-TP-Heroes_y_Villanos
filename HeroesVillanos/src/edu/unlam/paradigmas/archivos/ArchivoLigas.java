@@ -7,11 +7,6 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 
-import edu.unlam.paradigmas.excepciones.CompetidorExcepcion;
-import edu.unlam.paradigmas.sistema.Competidor;
-import edu.unlam.paradigmas.sistema.Liga;
-import edu.unlam.paradigmas.sistema.UnidadCompetidor;
-
 public class ArchivoLigas {
 	private String nombre;
 

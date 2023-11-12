@@ -18,7 +18,7 @@ public class Main {
 		liga_villanos.add(Richard);
 		
 //		Liga lh = new Liga("Justicia", liga_heroes);
-		Liga lv = new Liga("Maldad", liga_villanos);
+//		Liga lv = new Liga("Maldad", liga_villanos);
 
 //		System.out.println(Adam);
 //		System.out.println(Rocky);
@@ -27,7 +27,7 @@ public class Main {
 //		System.out.println(lh);
 //		System.out.println(lv);
 
-		enfrentar(lv, Rocky);
+//		enfrentar(lv, Rocky);
 	}
 
 	public static int comparar(Unidad u1, Unidad u2) {

@@ -9,6 +9,5 @@ public class App {
 	public static void main(String[] args) throws FileNotFoundException, CaracteristicaExcepcion, IOException{
 		Menu menu = new Menu();
 		menu.menuPrincipal();
-		
 	}
 }
