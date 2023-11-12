@@ -7,6 +7,11 @@ public class Competidor extends UnidadCompetidor {
 	private String nombreReal;
 	private String nombrePersonaje;
 
+	
+	public Competidor() {
+		super(null, null);
+	}
+	
 	public Competidor(String nombreReal, String nombrePersonaje, Bandos bando, Caracteristica caracteristicas) {
 		super(bando, caracteristicas);
 		this.nombreReal = nombreReal;

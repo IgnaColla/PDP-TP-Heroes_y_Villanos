@@ -129,50 +129,50 @@ Scanner scanner = new Scanner(System.in);
 
 			int opcion = scanner.nextInt();
 			
-			switch (opcion) {
-				case 1:
-					subOpcionCargarLigaDesdeArchivo();
-					break;
-				case 2:
-					subOpcionCrearLiga(scanner);
-					break;
-				case 3:
-					subOcionListarLigas();
-					break;
-				case 4:
-					subOpcionGuardarEnArchivoLigas();
-					break;
-				case 5:
-					continuar = false;
-					System.out.println("¡Volviendo al menu anterior...!");
-					break;
-				default:
-					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
-			}
+//			switch (opcion) {
+//				case 1:
+//					subOpcionCargarLigaDesdeArchivo();
+//					break;
+//				case 2:
+//					subOpcionCrearLiga(scanner);
+//					break;
+//				case 3:
+//					subOcionListarLigas();
+//					break;
+//				case 4:
+//					subOpcionGuardarEnArchivoLigas();
+//					break;
+//				case 5:
+//					continuar = false;
+//					System.out.println("¡Volviendo al menu anterior...!");
+//					break;
+//				default:
+//					System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+//			}
 		}
 		
 		scanner.close();
 }
 
-private void subOpcionCargarLigaDesdeArchivo() throws FileNotFoundException, CaracteristicaExcepcion{
-	
-	sistema.cargarArchivoLigas();
-	
-	/*ArchivoLigas ligasFile = new ArchivoLigas("ligas");
-	Set<String> ligas = ligasFile.leer();
-	
-	//separar liga de heroes y de villanos
-	
-	System.out.println("\nLas ligas se han cargado correctamente!\n");*/
-}
+//private void subOpcionCargarLigaDesdeArchivo() throws FileNotFoundException, CaracteristicaExcepcion{
+//	
+//	sistema.cargarArchivoLigas();
+//	
+//	/*ArchivoLigas ligasFile = new ArchivoLigas("ligas");
+//	Set<String> ligas = ligasFile.leer();
+//	
+//	//separar liga de heroes y de villanos
+//	
+//	System.out.println("\nLas ligas se han cargado correctamente!\n");*/
+//}
 
-private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion{
-	sistema.crearLiga(scanner);
-}
-
-private void subOcionListarLigas(){
-	sistema.listarLigas();
-}
+//private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion{
+//	sistema.crearLiga(scanner);
+//}
+//
+//private void subOcionListarLigas(){
+//	sistema.listarLigas();
+//}
 
 private void subOpcionGuardarEnArchivoLigas() throws IOException{
 	sistema.guardarArchivoLigas();

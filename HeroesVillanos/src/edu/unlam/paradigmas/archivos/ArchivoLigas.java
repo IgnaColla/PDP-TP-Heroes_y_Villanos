@@ -2,10 +2,9 @@ package edu.unlam.paradigmas.archivos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class ArchivoLigas {
 	private String nombre;
@@ -14,22 +13,23 @@ public class ArchivoLigas {
 		this.nombre = nombre;
 	}
 	
-	public Set<String> leer() throws FileNotFoundException {
-        String path = "./archivos/in/" + this.nombre + ".in";
-        File archivoEntradaLigas = new File(path);
-        Set<String> personajesDeLiga = new HashSet<String>();
+	public Map<Integer, String> leer() throws FileNotFoundException {
+	    String path = "./archivos/in/" + this.nombre + ".in";
+	    File archivoEntradaLigas = new File(path);
+	    Map<Integer, String> ligasNumeradas = new HashMap<>();
 
-        try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8").useDelimiter("\0").useLocale(Locale.US)) {
-            String linea;
+	    try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8")) {
+	        int numeroLiga = 1;
 
-            while (lector.hasNextLine()) {
-                linea = lector.next();
-                personajesDeLiga.add(linea);
+	        while (lector.hasNextLine()) {
+	            String linea = lector.nextLine();
+	            ligasNumeradas.put(numeroLiga, linea);
+	            numeroLiga++;
+	        }
+	    }
 
-            }
-        }
-        return personajesDeLiga;
-    }
+	    return ligasNumeradas;
+	}
 
 	public boolean escribir(String nombreArchivoSalida) {
 		return true;

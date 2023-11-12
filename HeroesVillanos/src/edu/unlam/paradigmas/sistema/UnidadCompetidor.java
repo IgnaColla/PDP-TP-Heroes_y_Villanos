@@ -22,7 +22,7 @@ public abstract class UnidadCompetidor {
 	    throw new IllegalArgumentException("El bando " + bando + "no es valido");
 	}*/
 
-	protected Bandos getBando() {
+	public Bandos getBando() {
 		return this.bando;
 	}
 	

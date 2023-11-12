@@ -14,7 +14,6 @@ public class Liga extends UnidadCompetidor {
 	// Constructores
 	public Liga() {
 		super(null, null);
-		this.competidores = null;
 	}
 
 	public Liga(Bandos bando, Caracteristica caracteristicas, UnidadCompetidor competidores) {
@@ -26,22 +25,24 @@ public class Liga extends UnidadCompetidor {
 		super(bando, caracteristicas);
 		this.competidores.addAll(competidores);
 	}
-	
-	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion{
+
+	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion {
+
 		List<Integer> lc = competidor.getCaracteristicas();
 		int velocidad = lc.get(0);
-		int fuerza = lc.get(1); 
-		int resistencia = lc.get(2); 
+		int fuerza = lc.get(1);
+		int resistencia = lc.get(2);
 		int destreza = lc.get(3);
 		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
 		this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
+
 	}
 
 	public void agregarLigaALiga(Liga liga) throws CaracteristicaExcepcion {
 		List<Integer> lc = liga.getCaracteristicas();
 		int velocidad = lc.get(0);
-		int fuerza = lc.get(1); 
-		int resistencia = lc.get(2); 
+		int fuerza = lc.get(1);
+		int resistencia = lc.get(2);
 		int destreza = lc.get(3);
 		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
 		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
@@ -65,6 +66,14 @@ public class Liga extends UnidadCompetidor {
 		caracteristicas.add(destreza);
 
 		return caracteristicas;
+	}
+
+	public Set<UnidadCompetidor> getCompetidores() {
+		return this.competidores;
+	}
+
+	public boolean ligaContieneDatos() {
+		return !this.competidores.isEmpty();
 	}
 
 	/*
