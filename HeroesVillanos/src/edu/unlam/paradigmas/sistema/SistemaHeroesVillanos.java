@@ -148,13 +148,13 @@ public class SistemaHeroesVillanos {
 	        System.out.println("+ Ingrese el nombre del personaje: ");
 	        String nombrePersonaje = scanner.nextLine();
 
-	        int velocidad = obtenerNumero(scanner, "+ Ingrese Velocidad: ");
-	        int fuerza = obtenerNumero(scanner, "+ Ingrese Fuerza: ");
-	        int destreza = obtenerNumero(scanner, "+ Ingrese Destreza: ");
-	        int resistencia = obtenerNumero(scanner, "+ Ingrese Resistencia: ");
+	        int velocidad = validarObtencionNumero(scanner, "+ Ingrese Velocidad: ");
+	        int fuerza = validarObtencionNumero(scanner, "+ Ingrese Fuerza: ");
+	        int destreza = validarObtencionNumero(scanner, "+ Ingrese Destreza: ");
+	        int resistencia = validarObtencionNumero(scanner, "+ Ingrese Resistencia: ");
 
 	        System.out.println("\nEsta a punto de crear un nuevo personaje. ¿Desea continuar?\n1.Si\n2.No");
-	        int respuesta = obtenerNumero(scanner, "Respuesta: ");
+	        int respuesta = validarObtencionNumero(scanner, "Respuesta: ");
 
 	        if (respuesta == 1) {
 	            Competidor nuevoCompetidor = new Competidor(nombreReal, nombrePersonaje, bando,
@@ -173,7 +173,7 @@ public class SistemaHeroesVillanos {
 	    }
 	}
 
-	private int obtenerNumero(Scanner scanner, String mensaje) {
+	private int validarObtencionNumero(Scanner scanner, String mensaje) {
 	    while (true) {
 	        try {
 	            System.out.println(mensaje);
@@ -269,15 +269,15 @@ public class SistemaHeroesVillanos {
 		
 		if(opcionLigaPersonaje == 1) {
 			listarLigas();
-			Liga ligaNueva = new Liga();
+			Liga ligaSeleccionada = new Liga();
 			System.out.println("¿Qué liga quiere agregar?");
 			int seleccionLiga = scanner.nextInt();
 			System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
-			//ligaNueva = liga
+			//ligaNueva = liga.obtenerLiga();
 			
 		}else {
 			listarPersonajes();
-			Competidor competidorNuevo = new Competidor();
+			Competidor personajeSeleccionado = new Competidor();
 			System.out.println("+ ¿Qué personaje quiere agregar?");
 			//seleccion personaje
 			int seleccionPersonaje = scanner.nextInt();
@@ -286,7 +286,7 @@ public class SistemaHeroesVillanos {
 			
 			int respuesta = scanner.nextInt();
 			if (respuesta == 1) {
-				competidores.put(competidorNuevo, null);
+				competidores.put(personajeSeleccionado, null);
 				System.out.println("\n¡Liga creada y asignada correctamente!\n");
 			}
 		}
