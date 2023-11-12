@@ -3,7 +3,6 @@ package edu.unlam.paradigmas.sistema;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -75,46 +74,39 @@ public class SistemaHeroesVillanos {
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 
-//		if (this.competidores.isEmpty()) {
-//			this.competidores = personajesFile.leer();
-//		} else {
-//			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
-//
-//			// Obtener el último valor asignado a los competidores existentes
-//			int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
-//
-//			// Agregar los nuevos personajes al mapa, generando nuevos valores
-//			for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
-//				Competidor nuevoCompetidor = entry.getKey();
-//
-//				// Verificar si el competidor ya existe
-//				if (this.competidores.containsKey(nuevoCompetidor)) {
-//					// Generar un nuevo valor para el número de personaje
-//					ultimoValor++;
-//					this.competidores.put(nuevoCompetidor, ultimoValor);
-//				} else {
-//					// Agregar el competidor con su valor existente
-//					this.competidores.put(nuevoCompetidor, entry.getValue());
-//				}
-//			}
-//		}
+		if (this.competidores.isEmpty()) {
+			this.competidores = personajesFile.leer();
+		} else {
+			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
+
+			// Obtener el último valor asignado a los competidores existentes
+			int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
+
+			// Agregar los nuevos personajes al mapa, generando nuevos valores
+			for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
+				Competidor nuevoCompetidor = entry.getKey();
+
+				// Verificar si el competidor ya existe
+				if (this.competidores.containsKey(nuevoCompetidor)) {
+					// Generar un nuevo valor para el número de personaje
+					ultimoValor++;
+					this.competidores.put(nuevoCompetidor, ultimoValor);
+				} else {
+					// Agregar el competidor con su valor existente
+					this.competidores.put(nuevoCompetidor, entry.getValue());
+				}
+			}
+		}
 
 		this.archivoPersonajeExiste = true;
 		System.out.println("\n¡Los personajes se han cargado correctamente!\n");
 	}
 
 	private Bandos seleccionarBando(Scanner scanner) {
-		// Scanner scannerBando = new Scanner(System.in);
 		Bandos bando = null;
 		boolean continuar = true;
 		while (continuar) {
-//			System.out.println("Bandos:");
-//			System.out.println("1. Heroe");
-//			System.out.println("2. Villano");
-//			System.out.print("Seleccione una opcion: ");
 
-			// int opcion = Integer.parseInt(scanner.nextLine());
-			// int opcion = scannerBando.nextInt();
 			int opcion = scanner.nextInt();
 
 			switch (opcion) {
@@ -188,8 +180,6 @@ public class SistemaHeroesVillanos {
 
 	public void listarPersonajes() {
 		List<Competidor> competidoresOrdenados = new ArrayList<>(competidores.keySet());
-		//Collections.sort(competidoresOrdenados, new ComparadorCompetidores());
-
 		System.out.println("\n+----- Listado de personajes -----+\n"
 				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
 				+ "--------------------------------------------------------------------------------------------");
@@ -205,9 +195,9 @@ public class SistemaHeroesVillanos {
 
 	public void guardarArchivoPersonaje() throws IOException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-//		if (!personajesFile.escribir(this.competidores)) {
-//			throw new RuntimeException("\nError al intentar guardar los personajes");
-//		}
+		if (!personajesFile.escribir(this.competidores)) {
+			throw new RuntimeException("\nError al intentar guardar los personajes");
+		}
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
@@ -292,7 +282,7 @@ public class SistemaHeroesVillanos {
 //	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
 //		return .equals(unidad.getBando());
 //	}
-	
+
 	public void listarLigas() {
 //		System.out.println("\nListado de Ligas");
 //		System.out.println("\n---------------------------------------------------------------------------------");
@@ -316,5 +306,4 @@ public class SistemaHeroesVillanos {
 	}
 	// 4. Reportes
 
-	
 }
