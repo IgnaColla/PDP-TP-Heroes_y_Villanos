@@ -24,5 +24,4 @@ public abstract class UnidadCompetidor {
     public Caracteristica getCaracteristica() {
         return this.caracteristicas;
     }
-
 }

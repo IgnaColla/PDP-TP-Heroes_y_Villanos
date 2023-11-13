@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Competidor extends UnidadCompetidor {
-	private String nombreReal;
 	private String nombrePersonaje;
+	private String nombreReal;
 
 	public Competidor() {
 		super(null, null);
@@ -36,15 +36,14 @@ public class Competidor extends UnidadCompetidor {
 	}
 
 	@Override
+//	public String toString() {
+//		return this.nombrePersonaje;
+//	}
+	
 	public String toString() {
-		return "Competidor [nombreReal=" + nombreReal + ", nombrePersonaje=" + nombrePersonaje + ", Bando=" + getBando()
-				+ ", Caracteristicas=" + getCaracteristicas() + "]";
-	}
-
-	public String toStringArch() {
 		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaToString();
 	}
-
+	
 	// Sobreescribo equals y hashCode para que los Set los puedan filtrar
 	@Override
 	public boolean equals(Object obj) {

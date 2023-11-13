@@ -31,16 +31,16 @@ public class Menu {
 			case 2:
 				// Lógica para la administración de ligas (carga, creación, listado, guardar en
 				// archivo).
-				opcionAdministrarLigas();
+				opcionAdministrarLigas(scanner);
 				break;
 			case 3:
 				// Logica para la realización de combates (personaje contra liga, liga contra
 				// liga).
-				opcionRealizarCombate();
+				opcionRealizarCombate(scanner);
 				break;
 			case 4:
 				// Lógica para generar reportes.
-				opcionGenerarReporte();
+				opcionGenerarReporte(scanner);
 				break;
 			case 5:
 				continuar = false;
@@ -58,8 +58,12 @@ public class Menu {
 	private void opcionAdministrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("[Administrar Personajes]\n" + "1. Cargar desde archivo\n" + "2. Crear personaje\n"
-					+ "3. Listar personajes\n" + "4. Guardar personajes en archivo\n" + "5. Volver al menu principal\n"
+			System.out.println("[Administrar Personajes]\n"
+					+ "1. Cargar desde archivo\n"
+					+ "2. Crear personaje\n"
+					+ "3. Listar personajes\n"
+					+ "4. Guardar personajes en archivo\n"
+					+ "5. Volver al menu principal\n"
 					+ "+----- Seleccione una opcion -----+\n");
 
 			int opcion = scanner.nextInt();
@@ -105,17 +109,16 @@ public class Menu {
 
 //****************************************************************************Administrar Ligas***************************************************************************/
 
-	private void opcionAdministrarLigas() throws CaracteristicaExcepcion, IOException {
-		Scanner scanner = new Scanner(System.in);
+	private void opcionAdministrarLigas(Scanner scanner) throws CaracteristicaExcepcion, IOException {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Administracion de ligas:");
-			System.out.println("1. Cargar desde archivo");
-			System.out.println("2. Crear liga");
-			System.out.println("3. Listar ligas");
-			System.out.println("4. Guardar en archivo ligas");
-			System.out.println("5. Volver al menu anterior");
-			System.out.print("Seleccione una opción: ");
+			System.out.println("Administracion de ligas:\n"
+					+ "1. Cargar desde archivo\n"
+					+ "2. Crear liga\n"
+					+ "3. Listar ligas\n"
+					+ "4. Guardar en archivo ligas\n"
+					+ "5. Volver al menu anterior\n"
+					+ "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
 
@@ -140,22 +143,10 @@ public class Menu {
 				System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
-
-		scanner.close();
 	}
 
 	private void subOpcionCargarLigaDesdeArchivo() throws FileNotFoundException, CaracteristicaExcepcion {
-
 		sistema.cargarArchivoLigas();
-
-		/*
-		 * ArchivoLigas ligasFile = new ArchivoLigas("ligas"); Set<String> ligas =
-		 * ligasFile.leer();
-		 * 
-		 * //separar liga de heroes y de villanos
-		 * 
-		 * System.out.println("\nLas ligas se han cargado correctamente!\n");
-		 */
 	}
 
 	private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -169,31 +160,35 @@ public class Menu {
 	private void subOpcionGuardarEnArchivoLigas() throws IOException {
 		sistema.guardarArchivoLigas();
 	}
+
 //*************************************************************************************************************************************************************************
 
 //****************************************************************************Realizar Combate*****************************************************************************/
-	private void opcionRealizarCombate() {
-		Scanner scanner = new Scanner(System.in);
+	private void opcionRealizarCombate(Scanner scanner) {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Realizar Combate:");
-			System.out.println("1. Personaje vs Liga");
-			System.out.println("2. Liga vs Liga");
-			System.out.println("3. Volver al menu anterior");
-			System.out.print("Seleccione una opción: ");
+			System.out.println("Realizar Combate:\n"
+					+ "1. Personaje vs Personaje\n"
+					+ "2. Personaje vs Liga\n"
+					+ "3. Liga vs Liga\n"
+					+ "4. Volver al menu anterior\n"
+					+ "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
 
 			switch (opcion) {
 			case 1:
+				subOpcionPersonajeVsPersonaje();
+				break;
+			case 2:
 				// Logica de Personaje vs Personaje
 				subOpcionPersonajeVsLiga();
 				break;
-			case 2:
+			case 3:
 				// logica de Liga vs Liga
 				subOpcionLigaVsLiga();
 				break;
-			case 3:
+			case 4:
 				continuar = false;
 				System.out.println("¡Volviendo al menu anterior...!");
 				break;
@@ -201,10 +196,12 @@ public class Menu {
 				System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
-
-		scanner.close();
 	}
 
+	private static void subOpcionPersonajeVsPersonaje() {
+		
+	}
+	
 	private static void subOpcionPersonajeVsLiga() { // llamar método que invoca a la lucha en el sistema
 		/*
 		 * Seleccionar personaje Seleccionar bando Seleccionar Liga bandoRestando
@@ -221,15 +218,14 @@ public class Menu {
 
 //****************************************************************************Generar Reporte****************************************************************************/
 
-	private void opcionGenerarReporte() throws FileNotFoundException {
-		Scanner scanner = new Scanner(System.in);
+	private void opcionGenerarReporte(Scanner scanner) throws FileNotFoundException {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Generar reporte:");
-			System.out.println("1. Personaje o Liga que vence a un Personaje seleccionado por caracteristica");
-			System.out.println("2. Listar Personajes por caracteristica");
-			System.out.println("3. Volver al menu anterior");
-			System.out.print("Seleccione una opción: ");
+			System.out.println("Generar reporte:"
+					+ "1. Personaje o Liga que vence a un Personaje seleccionado por caracteristica\n"
+					+ "2. Listar Personajes por caracteristica\n"
+					+ "3. Volver al menu anterior\n"
+					+ "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
 
@@ -248,8 +244,6 @@ public class Menu {
 				System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
 			}
 		}
-
-		scanner.close();
 	}
 
 	private static void subOpcionReportarVencedorAPersonaje() {

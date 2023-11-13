@@ -10,18 +10,19 @@ import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 public class Liga extends UnidadCompetidor {
 
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
+	private String nombreLiga;
 
 	// Constructores
 	public Liga() {
 		super(null, null);
 	}
 
-//	public Liga(Bandos bando, UnidadCompetidor competidores) {
-//		super(bando);
-//		Caracteristica caracteristicas = new Caracteristicas();
-//		
-//		this.competidores.add(competidores);
-//	}
+	public Liga(String nombreLiga, Bandos bando, Caracteristica caracteristicas, List<UnidadCompetidor> competidores) {
+		super(bando, caracteristicas);
+		
+		this.nombreLiga = nombreLiga;
+		this.competidores.addAll(competidores);
+	}
 
 	public Liga(Bandos bando, Caracteristica caracteristicas, Liga ligas) {
 		super(bando, caracteristicas);
@@ -78,11 +79,12 @@ public class Liga extends UnidadCompetidor {
 		return !this.competidores.isEmpty();
 	}
 
-	/*
-	 * public void agregar(Set<UnidadCompetidor> liga) {
-	 * if(!this.competidores.equals(liga)) { this.competidores.addAll(liga); } }
-	 */
-//	public Caracteristica calcularPoderGrupo() { por cada personaje que haya, hacer la sumatoria de cada caracteristica
-
-//}
+	@Override
+	public String toString() {
+		return this.nombreLiga + ": " + this.bando + ", " + this.getCaracteristicaToString();
+	}
+	
+	public String toStringFile(String linea) {
+		return this.nombreLiga + ": " + this.bando + " - " + linea;
+	}
 }

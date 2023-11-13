@@ -17,11 +17,8 @@ import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class SistemaHeroesVillanos {
 
-	// private Set<Competidor> competidores = new HashSet<>();
 	private Map<Competidor, Integer> competidores = new HashMap<Competidor, Integer>();
-	//private Liga ligas = new Liga();
-	private Map<UnidadCompetidor, Integer> ligas = new HashMap<UnidadCompetidor, Integer>();
-
+	private Map<Integer, Liga> ligas = new HashMap<>();
 	private boolean archivoPersonajeExiste = false;
 
 	public SistemaHeroesVillanos() {
@@ -44,35 +41,8 @@ public class SistemaHeroesVillanos {
 		return null; // No se encontró el competidor con el nombre especificado
 	}
 
-//	private Liga buscarLigaPorCompetidor(Liga liga, Competidor competidor) {
-//
-//		for (Competidor ligas : liga) {
-//			// Verificar si la liga actual contiene un competidor con el nombre
-//			Competidor competidor = buscarCompetidorPorNombre(liga.getCompetidores(), nombre);
-//
-//			if (competidor != null) {
-//				return liga;
-//			}
-//
-//			// Verificar si la liga actual contiene otra liga con el competidor
-//			Liga subLiga = buscarLigaPorCompetidor(liga.getCompetidores(), nombre);
-//			if (subLiga != null) {
-//				return subLiga;
-//			}
-//		}
-//		return null; // No se encontró la liga con el nombre especificado
-//	}
 
-	/*
-	 * private static Liga buscarCompetidorPorNombreEnLiga(Set<Liga> competidores,
-	 * String nombre) { for (Liga liga : competidores) {
-	 * 
-	 * if (liga.getCompetidores().contains(nombre)) { return liga; }
-	 * 
-	 * } return null; // No se encontró la liga con el nombre especificado }
-	 */
-
-	// 1. Administracion de Personajes
+//------------------------------ 1. Administracion de Personajes ------------------------------
 
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
@@ -187,7 +157,7 @@ public class SistemaHeroesVillanos {
 
 		int nroPersonaje = 1;
 		for (Competidor competidor : competidoresOrdenados) {
-			System.out.println(nroPersonaje + ". " + competidor.toStringArch());
+			System.out.println(nroPersonaje + ". " + competidor.toString());
 			nroPersonaje++;
 		}
 
@@ -202,7 +172,9 @@ public class SistemaHeroesVillanos {
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
-	// 2. Administracion de Ligas
+
+
+//------------------------------ 2. Administracion de Ligas ------------------------------
 
 	public void cargarArchivoLigas() throws FileNotFoundException, CaracteristicaExcepcion {
 		if (this.archivoPersonajeExiste == false) {
@@ -212,38 +184,48 @@ public class SistemaHeroesVillanos {
 
 		ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 		Map<Integer, String> lineasLigas = ligasFile.leer();
-		Liga competidoresCargados = new Liga();
-		Competidor competidorAux;
-		Liga ligaAux;
-
 		String[] linea;
+		List<UnidadCompetidor> miembros = new ArrayList<>();
+		Competidor competidor = new Competidor();
+		
+		int velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga, cantMiembros, numeroLiga = 1;
 
-		for (String liga : lineasLigas.values()) {
-
-			linea = liga.split("[,\n]");
+		for (String ligas : lineasLigas.values()) {
+			linea = ligas.split(",\\s*");
+			cantMiembros = 0;
+			velocidadLiga = 0;
+			fuerzaLiga = 0;
+			resistenciaLiga = 0;
+			destrezaLiga = 0;
 
 			for (String personaje : linea) {
-				// encontrar ese personaje -> filtrar: bando
-				competidorAux = buscarCompetidorPorNombre(this.competidores, personaje.trim());
-				// buscar si ese personaje esta en otra liga
-
-				if (competidoresCargados.ligaContieneDatos()) {
-					// ligaAux =
-					// buscarLigaPorCompetidor(competidoresCargados.getCompetidores(),competidorAux);
-					// Si está-> hay que agrupar las ligas existentes -> respetando el bando
-					// competidoresCargados.agregarLigaALiga(ligaAux);
-
-				} else {
-					// no está -> hay que agregar la liga a otro bloque (liga separada)
-					competidoresCargados.agregarCompetidorALiga(competidorAux);
-
+				competidor = buscarCompetidorPorNombre(competidores, personaje);
+				if(competidor == null) {
+					continue;
 				}
-				//this.ligas.agregarLigaALiga(competidoresCargados);
+				
+				miembros.add(competidor);
+				velocidadLiga += competidor.getCaracteristica().getVelocidad();
+				fuerzaLiga += competidor.getCaracteristica().getFuerza();
+				resistenciaLiga += competidor.getCaracteristica().getResistencia();
+				destrezaLiga += competidor.getCaracteristica().getDestreza();
+				cantMiembros++;
 			}
 
+			Bandos bandoLiga = miembros.get(0).bando;
+			velocidadLiga /= cantMiembros;
+			fuerzaLiga /= cantMiembros;
+			resistenciaLiga /= cantMiembros;
+			destrezaLiga /= cantMiembros;
+
+			Caracteristica caracteristicas = new Caracteristica(velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga);
+			Liga liga = new Liga("Liga " + numeroLiga, bandoLiga, caracteristicas, miembros);
+			this.ligas.put(numeroLiga, liga);
+
+			numeroLiga++;
 		}
 
-		System.out.println("\nLas Ligas se han cargado correctamente!\n");
+		System.out.println("\n¡Las Ligas se han cargado correctamente!\n");
 	}
 
 	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -280,32 +262,41 @@ public class SistemaHeroesVillanos {
 	}
 
 	public void listarLigas() {
-		System.out.println("\nListado de Ligas");
-		System.out.println("\n---------------------------------------------------------------------------------");
-
-//		for (Liga competidor : this.ligas) {
-//			System.out.println(competidor.toStringArch());
-//		}
+		System.out.println("\nListado de Ligas"
+				+ "\"Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
+				+ "---------------------------------------------------------------------------------");
+		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+			int numeroLiga = entry.getKey();
+			Liga liga = entry.getValue();
+			System.out.println(numeroLiga + ". " + liga.toString());
+		}
 		System.out.println();
 	}
 
 	public void guardarArchivoLigas() throws IOException {
-//		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
-//		if (!personajesFile.escribir(this.competidores)) {
-//			throw new RuntimeException("\nError al intentar guardar los personajes");
-//		}
-//		System.out.println("\nLos personajes se han guardado correctamente!\n");
+		ArchivoLigas ligasFile = new ArchivoLigas("Ligas");
+		if (!ligasFile.escribir(this.ligas)) {
+			throw new RuntimeException("\nError al intentar guardar las ligas.");
+		}
+		System.out.println("\n¡Las ligas se han guardado correctamente!\n");
 	}
 
-	// 3. Realizar combate
-	public void personajeVsLiga() {
+	
 
+// ------------------------------ 3. Realizar combate ------------------------------
+	
+	public void enfrentar(UnidadCompetidor u1, UnidadCompetidor u2) {
+		
 	}
+	
 //	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
 //	return .equals(unidad.getBando());
 //}
 	
-	// 4. Reportes
+
+	
+	
+//------------------------------ 4. Reportes ------------------------------
 	
 	
 	//○ Todos los personajes o ligas que venzan a un personaje dado para cierta
@@ -372,7 +363,7 @@ public class SistemaHeroesVillanos {
 		int nroPersonaje = 1;
 		mensajeListadoPersonajes();
 		for (Competidor competidor : competidoresOrdenados) {
-			System.out.println(nroPersonaje + ". " + competidor.toStringArch());
+			System.out.println(nroPersonaje + ". " + competidor.toString());
 			nroPersonaje++;
 		}
 

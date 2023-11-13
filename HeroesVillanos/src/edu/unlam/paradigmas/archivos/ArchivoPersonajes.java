@@ -95,7 +95,7 @@ public class ArchivoPersonajes {
 
 	        for (Map.Entry<Competidor, Integer> entry : competidores.entrySet()) {
 	            Competidor competidor = entry.getKey();
-	            printerWriter.println(competidor.toStringArch());
+	            printerWriter.println(competidor.toString());
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
