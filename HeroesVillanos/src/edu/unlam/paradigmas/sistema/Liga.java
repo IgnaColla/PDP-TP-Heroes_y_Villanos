@@ -25,7 +25,7 @@ public class Liga extends UnidadCompetidor {
 		this.nombreLiga = nombreLiga;
 		this.competidores.addAll(competidores);
 	}
-
+	
 	public Liga(Bandos bando, Caracteristica caracteristicas, Liga ligas) {
 		super(bando, caracteristicas);
 		this.competidores.addAll(competidores);
