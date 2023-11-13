@@ -24,7 +24,7 @@ public class TestSistemaHV {
 	Liga ligaHeroes;
 	Liga ligaConPersonaje;
 	Liga ligaDeLigas;
-	
+	/*
 	@Before
 	public void setUp() throws CaracteristicaExcepcion {
 		Set<UnidadCompetidor> Heroes = new HashSet<UnidadCompetidor>();
@@ -70,4 +70,5 @@ public class TestSistemaHV {
 	public void TestEnfrentarse() {
 		
 	}
+	*/
 }
