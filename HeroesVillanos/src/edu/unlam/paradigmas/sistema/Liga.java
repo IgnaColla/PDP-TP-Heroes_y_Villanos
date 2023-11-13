@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+// import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class Liga extends UnidadCompetidor {
 
@@ -29,27 +29,27 @@ public class Liga extends UnidadCompetidor {
 		this.competidores.addAll(competidores);
 	}
 
-	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion {
+//	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion {
+//
+//		List<Integer> lc = competidor.getCaracteristicas();
+//		int velocidad = lc.get(0);
+//		int fuerza = lc.get(1);
+//		int resistencia = lc.get(2);
+//		int destreza = lc.get(3);
+//		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
+//		//this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
+//
+//	}
 
-		List<Integer> lc = competidor.getCaracteristicas();
-		int velocidad = lc.get(0);
-		int fuerza = lc.get(1);
-		int resistencia = lc.get(2);
-		int destreza = lc.get(3);
-		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-		//this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
-
-	}
-
-	public void agregarLigaALiga(Liga liga) throws CaracteristicaExcepcion {
-		List<Integer> lc = liga.getCaracteristicas();
-		int velocidad = lc.get(0);
-		int fuerza = lc.get(1);
-		int resistencia = lc.get(2);
-		int destreza = lc.get(3);
-		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
-	}
+//	public void agregarLigaALiga(Liga liga) throws CaracteristicaExcepcion {
+//		List<Integer> lc = liga.getCaracteristicas();
+//		int velocidad = lc.get(0);
+//		int fuerza = lc.get(1);
+//		int resistencia = lc.get(2);
+//		int destreza = lc.get(3);
+//		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
+//		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
+//	}
 
 	@Override
 	protected List<Integer> getCaracteristicas() {
