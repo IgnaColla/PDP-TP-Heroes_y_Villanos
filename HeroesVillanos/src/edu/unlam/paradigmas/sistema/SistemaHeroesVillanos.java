@@ -12,7 +12,6 @@ import java.util.Scanner;
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
 import edu.unlam.paradigmas.compadores.ComparadorPorCaracteristica;
-//import edu.unlam.paradigmas.compadores.ComparadorCompetidores;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
@@ -20,7 +19,9 @@ public class SistemaHeroesVillanos {
 
 	// private Set<Competidor> competidores = new HashSet<>();
 	private Map<Competidor, Integer> competidores = new HashMap<Competidor, Integer>();
-	private Liga ligas = new Liga();
+	//private Liga ligas = new Liga();
+	private Map<UnidadCompetidor, Integer> ligas = new HashMap<UnidadCompetidor, Integer>();
+
 	private boolean archivoPersonajeExiste = false;
 
 	public SistemaHeroesVillanos() {
@@ -129,39 +130,6 @@ public class SistemaHeroesVillanos {
 		return bando;
 	}
 
-	private TipoCaracteristica seleccionarCaracteristica(Scanner scanner) {
-		TipoCaracteristica caracteristica = null;
-		boolean continuar = true;
-		while (continuar) {
-
-			int opcion = scanner.nextInt();
-
-			switch (opcion) {
-			case 1:
-				caracteristica = TipoCaracteristica.VELOCIDAD;
-				continuar = false;
-				break;
-			case 2:
-				caracteristica = TipoCaracteristica.FUERZA;
-				continuar = false;
-				break;
-			case 3:
-				caracteristica = TipoCaracteristica.RESISTENCIA;
-				continuar = false;
-				break;
-			case 4:
-				caracteristica = TipoCaracteristica.DESTREZA;
-				continuar = false;
-				break;
-			default:
-				System.out.println("Opcion no valida. Por favor, seleccione una característica valida.");
-			}
-		}
-
-		scanner.nextLine(); // Para leer el \n que sobra luego de un nextInt, y se pueda leer el nombre
-		return caracteristica;
-	}
-
 	public void crearPersonaje(Scanner scanner) throws CaracteristicaExcepcion {
 		try {
 			System.out.println("\n[Crear personaje]");
@@ -261,16 +229,16 @@ public class SistemaHeroesVillanos {
 
 				if (competidoresCargados.ligaContieneDatos()) {
 					// ligaAux =
-					// buscarCompetidorPorNombreEnLiga(competidoresCargados.getCompetidores(),competidorAux);
+					// buscarLigaPorCompetidor(competidoresCargados.getCompetidores(),competidorAux);
 					// Si está-> hay que agrupar las ligas existentes -> respetando el bando
 					// competidoresCargados.agregarLigaALiga(ligaAux);
 
 				} else {
 					// no está -> hay que agregar la liga a otro bloque (liga separada)
-					// competidoresCargados.agregarCompetidorALiga());
+					competidoresCargados.agregarCompetidorALiga(competidorAux);
 
 				}
-				this.ligas.agregarLigaALiga(competidoresCargados);
+				//this.ligas.agregarLigaALiga(competidoresCargados);
 			}
 
 		}
@@ -311,15 +279,11 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
-//	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
-//		return .equals(unidad.getBando());
-//	}
-
 	public void listarLigas() {
 		System.out.println("\nListado de Ligas");
 		System.out.println("\n---------------------------------------------------------------------------------");
 
-//		for (UnidadCompetidor competidor : this.ligas) {
+//		for (Liga competidor : this.ligas) {
 //			System.out.println(competidor.toStringArch());
 //		}
 		System.out.println();
@@ -337,7 +301,16 @@ public class SistemaHeroesVillanos {
 	public void personajeVsLiga() {
 
 	}
+//	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
+//	return .equals(unidad.getBando());
+//}
+	
 	// 4. Reportes
+	
+	
+	//○ Todos los personajes o ligas que venzan a un personaje dado para cierta
+	// característica
+	
 
 	public void ordenarPersonajesPorCaracteristica(Scanner scanner) throws FileNotFoundException {
 		System.out.println("\n[Ordenar personajes por caracteristicas]");
@@ -346,6 +319,39 @@ public class SistemaHeroesVillanos {
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
 		listarPersonajes(caracteristicaSeleccionada);
+	}
+	
+	private TipoCaracteristica seleccionarCaracteristica(Scanner scanner) {
+		TipoCaracteristica caracteristica = null;
+		boolean continuar = true;
+		while (continuar) {
+
+			int opcion = scanner.nextInt();
+
+			switch (opcion) {
+			case 1:
+				caracteristica = TipoCaracteristica.VELOCIDAD;
+				continuar = false;
+				break;
+			case 2:
+				caracteristica = TipoCaracteristica.FUERZA;
+				continuar = false;
+				break;
+			case 3:
+				caracteristica = TipoCaracteristica.RESISTENCIA;
+				continuar = false;
+				break;
+			case 4:
+				caracteristica = TipoCaracteristica.DESTREZA;
+				continuar = false;
+				break;
+			default:
+				System.out.println("Opcion no valida. Por favor, seleccione una característica valida.");
+			}
+		}
+
+		scanner.nextLine(); // Para leer el \n que sobra luego de un nextInt, y se pueda leer el nombre
+		return caracteristica;
 	}
 
 	public void listarPersonajes(TipoCaracteristica caracteristicaOrden) throws FileNotFoundException {
