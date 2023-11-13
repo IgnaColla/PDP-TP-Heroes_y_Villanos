@@ -230,21 +230,27 @@ public class SistemaHeroesVillanos {
 
 	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion {
 
-		System.out.println("\n[Crear Liga]");
+		Liga liga = new Liga();
+		System.out.println("\n[Crear Liga]\n"
+				+ "Ingrese nombre de la Liga: ");
+		String nombreLiga = scanner.nextLine(); 
+		
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
 		Bandos bando = seleccionarBando(scanner);
-		System.out.println("+ [Selección y administración de liga] +");
+		
 		System.out.println("+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
 		int opcionLigaPersonaje = scanner.nextInt();
+		
+		System.out.println("[Selección de liga]\n");
 
 		if (opcionLigaPersonaje == 1) {
 			listarLigas();
-			Liga ligaSeleccionada = new Liga();
-			System.out.println("¿Qué liga quiere agregar?");
+			System.out.println("¿Qué liga quiere agregar?\n");
 			int seleccionLiga = scanner.nextInt();
-			System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
-			// ligaNueva = liga.obtenerLiga();
-
+			//System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No");
+			
+			
+			
 		} else {
 			listarPersonajes();
 			Competidor personajeSeleccionado = new Competidor();
@@ -262,8 +268,8 @@ public class SistemaHeroesVillanos {
 	}
 
 	public void listarLigas() {
-		System.out.println("\nListado de Ligas"
-				+ "\"Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
+		System.out.println("\nListado de Ligas\n"
+				+ "Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
 				+ "---------------------------------------------------------------------------------");
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			int numeroLiga = entry.getKey();

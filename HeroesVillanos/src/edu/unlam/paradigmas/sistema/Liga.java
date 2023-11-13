@@ -15,6 +15,8 @@ public class Liga extends UnidadCompetidor {
 	// Constructores
 	public Liga() {
 		super(null, null);
+//		this.nombreLiga = "";
+//		this.competidores = null;
 	}
 
 	public Liga(String nombreLiga, Bandos bando, Caracteristica caracteristicas, List<UnidadCompetidor> competidores) {
