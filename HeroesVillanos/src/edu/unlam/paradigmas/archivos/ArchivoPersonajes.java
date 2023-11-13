@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import edu.unlam.paradigmas.compadores.ComparadorPorBando;
+import edu.unlam.paradigmas.comparadores.ComparadorPorBando;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
@@ -103,7 +103,4 @@ public class ArchivoPersonajes {
 	    }
 	    return true;
 	}
-
-
-
 }

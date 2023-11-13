@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
-import edu.unlam.paradigmas.compadores.ComparadorPorCaracteristica;
+import edu.unlam.paradigmas.comparadores.ComparadorPorCaracteristica;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 

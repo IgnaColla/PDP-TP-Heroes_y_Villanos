@@ -7,31 +7,31 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ArchivoLigas {
-	private String nombre;
+    private String nombre;
 
-	public ArchivoLigas(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public Map<Integer, String> leer() throws FileNotFoundException {
-	    String path = "./archivos/in/" + this.nombre + ".in";
-	    File archivoEntradaLigas = new File(path);
-	    Map<Integer, String> ligasNumeradas = new HashMap<>();
+    public ArchivoLigas(String nombre) {
+        this.nombre = nombre;
+    }
 
-	    try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8")) {
-	        int numeroLiga = 1;
+    public Map<Integer, String> leer() throws FileNotFoundException {
+        String path = "./archivos/in/" + this.nombre + ".in";
+        File archivoEntradaLigas = new File(path);
+        Map<Integer, String> ligasNumeradas = new HashMap<>();
 
-	        while (lector.hasNextLine()) {
-	            String linea = lector.nextLine();
-	            ligasNumeradas.put(numeroLiga, linea);
-	            numeroLiga++;
-	        }
-	    }
+        try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8")) {
+            int numeroLiga = 1;
 
-	    return ligasNumeradas;
-	}
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                ligasNumeradas.put(numeroLiga, linea);
+                numeroLiga++;
+            }
+        }
 
-	public boolean escribir(String nombreArchivoSalida) {
-		return true;
-	}
+        return ligasNumeradas;
+    }
+
+    public boolean escribir(String nombreArchivoSalida) {
+        return true;
+    }
 }

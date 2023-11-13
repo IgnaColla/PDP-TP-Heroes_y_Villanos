@@ -3,7 +3,7 @@ package edu.unlam.paradigmas.sistema;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-//
+
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class Menu {
@@ -238,7 +238,7 @@ public class Menu {
 				subOpcionReportarVencedorAPersonaje();
 				break;
 			case 2:
-				subOpcionOrdenadarPersonajes(scanner);
+				subOpcionOrdenarPersonajes(scanner);
 				break;
 			case 3:
 				continuar = false;
@@ -256,7 +256,7 @@ public class Menu {
 
 	}
 
-	private void subOpcionOrdenadarPersonajes(Scanner scanner) throws FileNotFoundException {
+	private void subOpcionOrdenarPersonajes(Scanner scanner) throws FileNotFoundException {
 		sistema.ordenarPersonajesPorCaracteristica(scanner);
 	}
 }
