@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import edu.unlam.paradigmas.sistema.Competidor;
 import edu.unlam.paradigmas.sistema.Liga;
 import edu.unlam.paradigmas.sistema.UnidadCompetidor;
 
@@ -46,7 +45,7 @@ public class ArchivoLigas {
 				Liga liga = entry.getValue();
 
 				for (UnidadCompetidor competidor : liga.getCompetidores()) {
-			        linea += ((Competidor) competidor).getNombrePersonaje() + ", ";
+			        linea += competidor.getNombrePersonaje() + ", ";
 			    }
 				
 				linea = linea.substring(0, linea.length() - 2);

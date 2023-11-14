@@ -50,7 +50,7 @@ public class Liga extends UnidadCompetidor {
 
 	public Liga(Bandos bando, Caracteristica caracteristicas, List<Competidor> miembros) {
 		super(bando, caracteristicas);
-		this.competidores.addAll(competidores);
+		this.competidores.addAll(miembros);
 	}
 
 	@Override
@@ -91,11 +91,12 @@ public class Liga extends UnidadCompetidor {
 	}
 
 	@Override
-	protected String getNombrePersonaje() {
+	public String getNombrePersonaje() {
 		String linea = "";
 		for(UnidadCompetidor unidad: this.competidores) {
-			linea += unidad.getNombrePersonaje();
+			linea += unidad.getNombrePersonaje() + ", ";
 		}
+		linea = linea.substring(0, linea.length() - 2);
 		return linea;
 	}
 	

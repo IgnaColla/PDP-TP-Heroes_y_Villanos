@@ -25,5 +25,5 @@ public abstract class UnidadCompetidor {
         return this.caracteristicas;
     }
 
-	protected abstract String getNombrePersonaje();
+	public abstract String getNombrePersonaje();
 }

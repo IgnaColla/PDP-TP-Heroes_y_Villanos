@@ -138,19 +138,24 @@ public class SistemaHeroesVillanos {
 	}
 
 	private int validarObtencionNumero(Scanner scanner, String mensaje) {
-		while (true) {
-			try {
-				System.out.println(mensaje);
-				int numero = scanner.nextInt();
-				scanner.nextLine(); // Consumir el carácter de nueva línea
-				return numero;
-			} catch (InputMismatchException e) {
-				System.out.println("Error: Ingrese un número válido.");
-				scanner.nextLine(); // Limpiar el buffer del scanner
-			}
-		}
-	}
+	    while (true) {
+	        try {
+	            System.out.println(mensaje);
+	            int numero = scanner.nextInt();
 
+	            if (numero >= 0) {
+	                scanner.nextLine(); // Consumir el carácter de nueva línea
+	                return numero;
+	            } else {
+	                System.out.println("Error: Ingrese un número mayor o igual a 0.");
+	            }
+	        } catch (InputMismatchException e) {
+	            System.out.println("Error: Ingrese un número válido.");
+	            scanner.nextLine(); // Limpiar el buffer del scanner
+	        }
+	    }
+	}
+	
 	public void listarPersonajes() {
 		List<Competidor> competidoresOrdenados = new ArrayList<>(competidores.keySet());
 		mensajeListadoPersonajes();
@@ -188,11 +193,10 @@ public class SistemaHeroesVillanos {
 		List<Competidor> miembros = new ArrayList<>();
 		Competidor competidor = new Competidor();
 		
-		int velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga, cantMiembros, numeroLiga = 1;
+		int velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga, numeroLiga = 1;
 
 		for (String ligas : lineasLigas.values()) {
 			linea = ligas.split(",\\s*");
-			cantMiembros = 0;
 			velocidadLiga = 0;
 			fuerzaLiga = 0;
 			resistenciaLiga = 0;
@@ -209,15 +213,13 @@ public class SistemaHeroesVillanos {
 				fuerzaLiga += competidor.getCaracteristica().getFuerza();
 				resistenciaLiga += competidor.getCaracteristica().getResistencia();
 				destrezaLiga += competidor.getCaracteristica().getDestreza();
-				cantMiembros++;
 			}
-
+			
 			Bandos bando = miembros.get(0).bando;
-
 			Caracteristica caracteristicas = new Caracteristica(velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga);
 			Liga liga = new Liga(bando, caracteristicas, miembros);
 			this.ligas.put(numeroLiga, liga);
-
+			miembros.clear();
 			numeroLiga++;
 		}
 
@@ -229,18 +231,27 @@ public class SistemaHeroesVillanos {
 		System.out.println("\n[Crear Liga]\n"
 				+ "Ingrese nombre de la Liga: ");
 		String nombreLiga = scanner.nextLine();
-		
+
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
 		Bandos bando = seleccionarBando(scanner);
 		
-		System.out.println("+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
-		int opcionLigaPersonaje = scanner.nextInt();
+		int opcionLigaPersonaje = validarObtencionNumero(scanner, "+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
 
 		if (opcionLigaPersonaje == 1) {
-//			System.out.println("[Selección de liga]\n");
-//			listarLigas();
-//			System.out.println("¿Qué liga quiere agregar?\n");
-//			int seleccionLiga = scanner.nextInt();
+			System.out.println("[Selección de liga]\n");
+			List<Integer> listaLigas = new ArrayList<>(); 
+			listarLigas(bando, listaLigas);
+			int seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n"
+					+ "----- Ingrese 0 para finalizar -----");
+			
+			while(seleccionLiga != 0 && !validarSeleccionLigas(bando, listaLigas)) {
+				
+				listarLigas(bando, listaLigas);
+				seleccionLiga = validarObtencionNumero(scanner, "");
+			}
+			
+			
+			
 //			//System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No");
 //			
 //			for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
@@ -301,16 +312,43 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
+	private boolean validarSeleccionLigas(Bandos bando, List<Integer> listaLigas) {
+		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+			Liga liga = entry.getValue();
+			if(liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
+				int numeroLiga = entry.getKey();
+				System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+			}
+		}
+		
+		return false;
+	}
+
 	public void listarLigas() {
-		System.out.println("\nListado de Ligas\n"
-				+ "Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
-				+ "---------------------------------------------------------------------------------");
+		mensajeParaListarLigas();
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			int numeroLiga = entry.getKey();
 			Liga liga = entry.getValue();
-			System.out.println(numeroLiga + ". " + liga.toString());
+			System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
 		}
 		System.out.println();
+	}
+	
+	public void listarLigas(Bandos bando, List<Integer> listaLigas) {
+		mensajeParaListarLigas();
+		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+			Liga liga = entry.getValue();
+			if(liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
+				int numeroLiga = entry.getKey();
+				System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+			}
+		}
+	}
+
+	private void mensajeParaListarLigas() {
+		System.out.println("\nListado de Ligas\n"
+				+ "Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
+				+ "---------------------------------------------------------------------------------");
 	}
 
 	public void guardarArchivoLigas() throws IOException {
