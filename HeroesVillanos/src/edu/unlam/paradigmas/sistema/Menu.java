@@ -59,12 +59,8 @@ public class Menu {
 	private void opcionAdministrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("[Administrar Personajes]\n"
-					+ "1. Cargar desde archivo\n"
-					+ "2. Crear personaje\n"
-					+ "3. Listar personajes\n"
-					+ "4. Guardar personajes en archivo\n"
-					+ "5. Volver al menu principal\n"
+			System.out.println("[Administrar Personajes]\n" + "1. Cargar desde archivo\n" + "2. Crear personaje\n"
+					+ "3. Listar personajes\n" + "4. Guardar personajes en archivo\n" + "5. Volver al menu principal\n"
 					+ "+----- Seleccione una opcion -----+\n");
 
 			int opcion = scanner.nextInt();
@@ -113,12 +109,8 @@ public class Menu {
 	private void opcionAdministrarLigas(Scanner scanner) throws CaracteristicaExcepcion, IOException, SistemaExcepcion {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Administracion de ligas:\n"
-					+ "1. Cargar desde archivo\n"
-					+ "2. Crear liga\n"
-					+ "3. Listar ligas\n"
-					+ "4. Guardar en archivo ligas\n"
-					+ "5. Volver al menu anterior\n"
+			System.out.println("Administracion de ligas:\n" + "1. Cargar desde archivo\n" + "2. Crear liga\n"
+					+ "3. Listar ligas\n" + "4. Guardar en archivo ligas\n" + "5. Volver al menu anterior\n"
 					+ "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
@@ -168,12 +160,8 @@ public class Menu {
 	private void opcionRealizarCombate(Scanner scanner) throws CaracteristicaExcepcion {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Realizar Combate:\n"
-					+ "1. Personaje vs Personaje\n"
-					+ "2. Personaje vs Liga\n"
-					+ "3. Liga vs Liga\n"
-					+ "4. Volver al menu anterior\n"
-					+ "Seleccione una opción: ");
+			System.out.println("Realizar Combate:\n" + "1. Personaje vs Personaje\n" + "2. Personaje vs Liga\n"
+					+ "3. Liga vs Liga\n" + "4. Volver al menu anterior\n" + "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();
 
@@ -202,8 +190,8 @@ public class Menu {
 	private void subOpcionPersonajeVsPersonaje(Scanner scanner) {
 		sistema.personajeVsPersonaje(scanner);
 	}
-	
-	private void subOpcionPersonajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion  { 
+
+	private void subOpcionPersonajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
 		sistema.personajeVsLiga(scanner);
 	}
 
@@ -220,8 +208,7 @@ public class Menu {
 		while (continuar) {
 			System.out.println("Generar reporte:\n"
 					+ "1. Personaje o Liga que vence a un Personaje seleccionado por caracteristica\n"
-					+ "2. Listar Personajes por caracteristica\n"
-					+ "3. Volver al menu anterior\n"
+					+ "2. Listar Personajes por caracteristica\n" + "3. Volver al menu anterior\n"
 					+ "Seleccione una opción: ");
 
 			int opcion = scanner.nextInt();

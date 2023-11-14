@@ -26,7 +26,7 @@ public class Competidor extends UnidadCompetidor {
 	public String getNombrePersonaje() {
 		return this.nombrePersonaje;
 	}
-	
+
 	@Override
 	protected List<Integer> getCaracteristicas() {
 		List<Integer> caracteristicas = new ArrayList<Integer>();
@@ -36,15 +36,15 @@ public class Competidor extends UnidadCompetidor {
 		caracteristicas.add(this.caracteristicas.getDestreza());
 		return caracteristicas;
 	}
-	
+
 	protected boolean mismoUnidadCompetidor(UnidadCompetidor unidad) {
 		return this.equals(unidad);
 	}
-	
+
 	protected int contarIntegrantes() {
 		return 1;
 	}
-	
+
 	public boolean personajePierdeContraUnidad(UnidadCompetidor u2, TipoCaracteristica caracteristica) {
 
 		int resultado = this.getValorCaracteristica(caracteristica) / this.contarIntegrantes()
@@ -56,12 +56,13 @@ public class Competidor extends UnidadCompetidor {
 
 		return false;
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaToString();
+		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", "
+				+ this.getCaracteristicaToString();
 	}
-	
+
 	// Sobreescribo equals y hashCode para que los Set los puedan filtrar
 	@Override
 	public boolean equals(Object obj) {

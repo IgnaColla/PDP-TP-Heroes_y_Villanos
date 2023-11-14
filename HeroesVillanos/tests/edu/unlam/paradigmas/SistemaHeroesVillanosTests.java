@@ -10,23 +10,18 @@ import org.junit.Test;
 
 import edu.unlam.paradigmas.sistema.Competidor;
 import edu.unlam.paradigmas.sistema.Liga;
+import edu.unlam.paradigmas.sistema.SistemaHeroesVillanos;
 
 public class SistemaHeroesVillanosTests {
 
 	private Map<Competidor, Integer> competidores = new HashMap<Competidor, Integer>();
 	private Map<Integer, Liga> ligas = new HashMap<>();
 	private boolean archivoPersonajeExiste = false;
+	private SistemaHeroesVillanos sistema;
 	
 	@Before
-	public void setUp() throws Exception {
-		
-		//competidores INICIALIZAR
-		//ligas
-	}
-
-	@Test
-	public void queBusqueCompetidorPorNombre() {
-
+	public void setUp() throws Exception {		
+		sistema.cargarArchivoLigas();
 	}
 	
 	@Test
@@ -36,7 +31,7 @@ public class SistemaHeroesVillanosTests {
 	
 	@Test
 	public void queCreePersonajes() {
-
+		
 	}
 	
 	@Test

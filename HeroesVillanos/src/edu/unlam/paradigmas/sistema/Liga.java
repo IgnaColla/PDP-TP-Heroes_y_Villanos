@@ -15,11 +15,11 @@ public class Liga extends UnidadCompetidor {
 
 	// Constructores
 	public Liga() throws CaracteristicaExcepcion {
-		super(null, new Caracteristica(0,0,0,0));
+		super(null, new Caracteristica(0, 0, 0, 0));
 	}
 
 	public Liga(Bandos bando, UnidadCompetidor competidores) throws CaracteristicaExcepcion {
-		super(bando, new Caracteristica(0,0,0,0));
+		super(bando, new Caracteristica(0, 0, 0, 0));
 		this.competidores.add(competidores);
 	}
 
@@ -31,18 +31,18 @@ public class Liga extends UnidadCompetidor {
 	public void agregarALiga(UnidadCompetidor unidad) {
 		this.competidores.add(unidad);
 	}
-	
+
 	@Override
 	protected boolean mismoUnidadCompetidor(UnidadCompetidor unidad) {
-		for(UnidadCompetidor unidadInterna : competidores) {
-			if(unidadInterna.mismoUnidadCompetidor(unidad))
+		for (UnidadCompetidor unidadInterna : competidores) {
+			if (unidadInterna.mismoUnidadCompetidor(unidad))
 				return true;
 		}
 		return false;
 	}
 
 	@Override
-	protected List<Integer> getCaracteristicas() {
+	public List<Integer> getCaracteristicas() {
 		List<Integer> caracteristicas = new ArrayList<Integer>();
 		int velocidad = 0, fuerza = 0, resistencia = 0, destreza = 0;
 
@@ -55,7 +55,7 @@ public class Liga extends UnidadCompetidor {
 
 		caracteristicas.add(velocidad);
 		caracteristicas.add(fuerza);
-		caracteristicas.add(resistencia); 
+		caracteristicas.add(resistencia);
 		caracteristicas.add(destreza);
 
 		return caracteristicas;
@@ -68,16 +68,16 @@ public class Liga extends UnidadCompetidor {
 		this.caracteristicas.setResistencia(caracteristicas.get(2));
 		this.caracteristicas.setDestreza(caracteristicas.get(3));
 	}
-	
-	protected int contarIntegrantes() {
+
+	public int contarIntegrantes() {
 		int total = 0;
-		for(UnidadCompetidor unidad : competidores) {
+		for (UnidadCompetidor unidad : competidores) {
 			total += unidad.contarIntegrantes();
 		}
-		
+
 		return total;
 	}
-	
+
 	public Set<UnidadCompetidor> getCompetidores() {
 		return this.competidores;
 	}
@@ -90,7 +90,7 @@ public class Liga extends UnidadCompetidor {
 	public String toString() {
 		return this.bando + ", " + this.getCaracteristicaToString();
 	}
-	
+
 	public String toStringFile(String linea) {
 		return this.bando + " - " + linea;
 	}
@@ -98,11 +98,11 @@ public class Liga extends UnidadCompetidor {
 	@Override
 	public String getNombrePersonaje() {
 		String linea = "";
-		for(UnidadCompetidor unidad: this.competidores) {
+		for (UnidadCompetidor unidad : this.competidores) {
 			linea += unidad.getNombrePersonaje() + ", ";
 		}
 		linea = linea.substring(0, linea.length() - 2);
 		return linea;
 	}
-	
+
 }

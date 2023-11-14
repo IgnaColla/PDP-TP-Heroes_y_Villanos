@@ -36,7 +36,7 @@ public class SistemaHeroesVillanos {
 		return competidores;
 	}
 
-	private Competidor buscarCompetidorPorNombre(Map<Competidor, Integer> competidores, String nombre) {
+	private Competidor buscarCompetidorPorNombrePersonaje(Map<Competidor, Integer> competidores, String nombre) {
 		for (Competidor competidor : competidores.keySet()) {
 			if (competidor.getNombrePersonaje().equals(nombre)) {
 				return competidor;
@@ -61,7 +61,7 @@ public class SistemaHeroesVillanos {
 
 		if (this.competidores.isEmpty()) {
 			this.competidores = personajesFile.leer();
-		} else if(this.archivoPersonajeExiste = false){
+		} else if (this.archivoPersonajeExiste = false) {
 			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
 
 			// Obtener el último valor asignado a los competidores existentes
@@ -80,7 +80,7 @@ public class SistemaHeroesVillanos {
 			}
 			this.archivoPersonajeExiste = true;
 			System.out.println("\n¡Los personajes se han cargado correctamente!\n");
-		}else {
+		} else {
 			System.out.println("\n¡Archivo cargado anteriormente, se aborta la acción!\n");
 
 		}
@@ -249,7 +249,7 @@ public class SistemaHeroesVillanos {
 			destrezaLiga = 0;
 
 			for (String personaje : linea) {
-				competidor = buscarCompetidorPorNombre(competidores, personaje);
+				competidor = buscarCompetidorPorNombrePersonaje(competidores, personaje);
 				if (competidor == null) {
 					continue;
 				}
@@ -657,7 +657,7 @@ public class SistemaHeroesVillanos {
 		return caracteristica;
 	}
 
-	public void listarPersonajes(TipoCaracteristica caracteristicaOrden) throws FileNotFoundException {
+	private void listarPersonajes(TipoCaracteristica caracteristicaOrden) throws FileNotFoundException {
 
 		if (this.competidores.isEmpty()) {
 			ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");

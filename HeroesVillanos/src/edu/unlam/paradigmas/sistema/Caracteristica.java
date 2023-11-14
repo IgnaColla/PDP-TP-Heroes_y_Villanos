@@ -8,15 +8,15 @@ public class Caracteristica {
 	private int fuerza;
 	private int resistencia;
 	private int destreza;
-	
+
 	public enum TipoCaracteristica {
 		VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA;
-		
-		 private static final TipoCaracteristica[] vals = values();
-	    
-	    public TipoCaracteristica getNext() {
-	        return vals[(this.ordinal() + 1) % vals.length];
-	    }
+
+		private static final TipoCaracteristica[] vals = values();
+
+		public TipoCaracteristica getNext() {
+			return vals[(this.ordinal() + 1) % vals.length];
+		}
 	}
 
 	public Caracteristica(int velocidad, int fuerza, int resistencia, int destreza) throws CaracteristicaExcepcion {
@@ -49,7 +49,7 @@ public class Caracteristica {
 	public int getDestreza() {
 		return this.destreza;
 	}
-	
+
 	public void setVelocidad(int valor) {
 		this.velocidad = valor;
 	}
@@ -65,15 +65,9 @@ public class Caracteristica {
 	public void setDestreza(int valor) {
 		this.destreza = valor;
 	}
-	public void aumentarPoder(Caracteristica caracteristicas) {
-		this.velocidad += caracteristicas.getVelocidad();
-		this.fuerza += caracteristicas.getFuerza();
-		this.resistencia += caracteristicas.getResistencia();
-		this.destreza += caracteristicas.getDestreza();
-	}
 
 	@Override
 	public String toString() {
-		return velocidad+", "+fuerza+", "+resistencia+", "+destreza;
+		return velocidad + ", " + fuerza + ", " + resistencia + ", " + destreza;
 	}
 }
