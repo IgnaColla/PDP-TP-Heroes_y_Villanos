@@ -38,12 +38,12 @@ public class Competidor extends UnidadCompetidor {
 	protected boolean mismoUnidadCompetidor(UnidadCompetidor unidad) {
 		return this.equals(unidad);
 	}
-
-	@Override
-//	public String toString() {
-//		return this.nombrePersonaje;
-//	}
 	
+	protected int contarIntegrantes() {
+		return 1;
+	}
+	
+	@Override
 	public String toString() {
 		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaToString();
 	}

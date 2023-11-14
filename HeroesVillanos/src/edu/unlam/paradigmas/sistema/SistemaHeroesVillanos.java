@@ -312,6 +312,7 @@ public class SistemaHeroesVillanos {
 						}
 					}
 					
+					liga.setBando(bando);
 					liga.recalcularCaracteristicas();
 					this.ligas.put(nroLiga, liga);
 					System.out.println("\n¡Liga creada correctamente!\n");

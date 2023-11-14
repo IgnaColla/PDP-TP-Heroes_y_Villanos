@@ -69,6 +69,15 @@ public class Liga extends UnidadCompetidor {
 		this.caracteristicas.setDestreza(caracteristicas.get(3));
 	}
 	
+	protected int contarIntegrantes() {
+		int total = 0;
+		for(UnidadCompetidor unidad : competidores) {
+			total += unidad.contarIntegrantes();
+		}
+		
+		return total;
+	}
+	
 	public Set<UnidadCompetidor> getCompetidores() {
 		return this.competidores;
 	}

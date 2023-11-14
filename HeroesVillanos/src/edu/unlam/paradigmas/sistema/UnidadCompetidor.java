@@ -17,6 +17,11 @@ public abstract class UnidadCompetidor {
 
     protected abstract List<Integer> getCaracteristicas();
     protected abstract boolean mismoUnidadCompetidor(UnidadCompetidor unidad);
+    protected abstract int contarIntegrantes();
+    
+    protected void setBando(Bandos bando) {
+    	this.bando = bando;
+    }
 
     public String getCaracteristicaToString() {
         return this.caracteristicas.toString();

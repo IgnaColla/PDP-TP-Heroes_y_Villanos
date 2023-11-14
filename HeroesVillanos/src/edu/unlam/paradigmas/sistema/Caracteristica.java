@@ -49,15 +49,15 @@ public class Caracteristica {
 	}
 
 	public void setFuerza(int valor) {
-		this.velocidad = valor;
+		this.fuerza = valor;
 	}
 
 	public void setResistencia(int valor) {
-		this.velocidad = valor;
+		this.resistencia = valor;
 	}
 
 	public void setDestreza(int valor) {
-		this.velocidad = valor;
+		this.destreza = valor;
 	}
 	public void aumentarPoder(Caracteristica caracteristicas) {
 		this.velocidad += caracteristicas.getVelocidad();
