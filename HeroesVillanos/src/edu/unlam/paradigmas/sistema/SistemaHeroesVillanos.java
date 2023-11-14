@@ -13,6 +13,7 @@ import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
 import edu.unlam.paradigmas.comparadores.ComparadorPorCaracteristica;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+import edu.unlam.paradigmas.excepciones.SistemaExcepcion;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class SistemaHeroesVillanos {
@@ -226,42 +227,30 @@ public class SistemaHeroesVillanos {
 		System.out.println("\n¡Las Ligas se han cargado correctamente!\n");
 	}
 
-	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion {
+	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
 
-		System.out.println("\n[Crear Liga]\n"
-				+ "Ingrese nombre de la Liga: ");
-		String nombreLiga = scanner.nextLine();
+		System.out.println("\n[Crear Liga]\n");
 
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
 		Bandos bando = seleccionarBando(scanner);
-		
+		if(!puedeCrearLiga(bando)) {
+			throw new SistemaExcepcion("No posee personajes del bando seleccionado.");
+		}
 		int opcionLigaPersonaje = validarObtencionNumero(scanner, "+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
 
 		if (opcionLigaPersonaje == 1) {
 			System.out.println("[Selección de liga]\n");
-			List<Integer> listaLigas = new ArrayList<>(); 
-			listarLigas(bando, listaLigas);
-			int seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n"
-					+ "----- Ingrese 0 para finalizar -----");
+			List<Integer> listaLigas = new ArrayList<>();
+			int seleccionLiga;
 			
-			while(seleccionLiga != 0 && !validarSeleccionLigas(bando, listaLigas)) {
-				
+			do {
 				listarLigas(bando, listaLigas);
-				seleccionLiga = validarObtencionNumero(scanner, "");
-			}
+				System.out.println("\n0. Finalizar");
+				seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
+				listaLigas.add(seleccionLiga);
+				System.out.println("La liga ha sido agregada correctamente.");
+			} while (seleccionLiga != 0 && validarSeleccionLigas(bando, listaLigas));
 			
-			
-			
-//			//System.out.println("\nEsta a punto de incluir a ... a la liga...  ¿Desea continuar?\n1.Si\n2.No");
-//			
-//			for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
-//				int numeroLiga = entry.getKey();
-//				
-//				if (numeroLiga == seleccionLiga) {
-//					Liga liga = entry.getValue();
-//					ligaNueva
-//				}
-//			}
 			
 		} else {
 			System.out.println("[Selección de personajes]\n");
@@ -312,15 +301,23 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
-	private boolean validarSeleccionLigas(Bandos bando, List<Integer> listaLigas) {
-		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
-			Liga liga = entry.getValue();
-			if(liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
-				int numeroLiga = entry.getKey();
-				System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+	private boolean puedeCrearLiga(Bandos bando) {
+		for (Map.Entry<Competidor, Integer> competidor: competidores.entrySet()) {
+			if(competidor.getKey().getBando() == bando) {
+				return true;
 			}
 		}
-		
+		return false;
+	}
+	
+	private boolean validarSeleccionLigas(Bandos bando, List<Integer> listaLigas) {
+		Liga liga = new Liga();
+		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+			liga = entry.getValue();
+			if(liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
+				return true;
+			}
+		}
 		return false;
 	}
 

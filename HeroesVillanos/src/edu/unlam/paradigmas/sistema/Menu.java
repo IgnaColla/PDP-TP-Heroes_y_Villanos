@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+import edu.unlam.paradigmas.excepciones.SistemaExcepcion;
 
 public class Menu {
 
 	SistemaHeroesVillanos sistema = new SistemaHeroesVillanos();
 
-	public void menuPrincipal() throws FileNotFoundException, CaracteristicaExcepcion, IOException {
+	public void menuPrincipal() throws FileNotFoundException, CaracteristicaExcepcion, IOException, SistemaExcepcion {
 		Scanner scanner = new Scanner(System.in);
 		boolean continuar = true;
 
@@ -109,7 +110,7 @@ public class Menu {
 
 //****************************************************************************Administrar Ligas***************************************************************************/
 
-	private void opcionAdministrarLigas(Scanner scanner) throws CaracteristicaExcepcion, IOException {
+	private void opcionAdministrarLigas(Scanner scanner) throws CaracteristicaExcepcion, IOException, SistemaExcepcion {
 		boolean continuar = true;
 		while (continuar) {
 			System.out.println("Administracion de ligas:\n"
@@ -149,7 +150,7 @@ public class Menu {
 		sistema.cargarArchivoLigas();
 	}
 
-	private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion {
+	private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
 		sistema.crearLiga(scanner);
 	}
 
