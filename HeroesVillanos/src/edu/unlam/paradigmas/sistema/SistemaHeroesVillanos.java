@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
@@ -18,7 +19,7 @@ import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class SistemaHeroesVillanos {
 
-	private Map<Competidor, Integer> competidores = new HashMap<Competidor, Integer>();
+	private Map<Competidor, Integer> competidores = new TreeMap<>();
 	private Map<Integer, Liga> ligas = new HashMap<>();
 	private boolean archivoPersonajeExiste = false;
 
@@ -158,16 +159,25 @@ public class SistemaHeroesVillanos {
 	}
 	
 	public void listarPersonajes() {
-		List<Competidor> competidoresOrdenados = new ArrayList<>(competidores.keySet());
 		mensajeListadoPersonajes();
-
-		int nroPersonaje = 1;
-		for (Competidor competidor : competidoresOrdenados) {
-			System.out.println(nroPersonaje + ". " + competidor.toString());
-			nroPersonaje++;
+		for (Map.Entry<Competidor, Integer> entry : competidores.entrySet()) {
+			System.out.println(entry.getValue() + ". " + entry.getKey());
 		}
 
 		System.out.println();
+	}
+	
+	public void listarPersonajes(Bandos bando, List<Integer> listaPersonajes) {
+		mensajeListadoPersonajes();
+		Competidor competidor = new Competidor();
+		int valorEntrada;
+		for (Map.Entry<Competidor, Integer> entry : competidores.entrySet()) {
+			competidor = entry.getKey();
+			valorEntrada = entry.getValue();
+			if(competidor.getBando() == bando && !listaPersonajes.contains(valorEntrada)) {
+				System.out.println(valorEntrada + ". " + competidor);
+			}
+		}
 	}
 
 	public void guardarArchivoPersonaje() throws IOException {
@@ -230,12 +240,12 @@ public class SistemaHeroesVillanos {
 	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
 
 		System.out.println("\n[Crear Liga]\n");
-
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
 		Bandos bando = seleccionarBando(scanner);
 		if(!puedeCrearLiga(bando)) {
 			throw new SistemaExcepcion("No posee personajes del bando seleccionado.");
 		}
+		
 		int opcionLigaPersonaje = validarObtencionNumero(scanner, "+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
 
 		if (opcionLigaPersonaje == 1) {
@@ -254,50 +264,30 @@ public class SistemaHeroesVillanos {
 			
 		} else {
 			System.out.println("[Selección de personajes]\n");
-			listarPersonajes();
-			List<Competidor> listaPersonajes = new ArrayList<>();
-			int seleccionPersonaje = 1;
-			boolean continuar = true;
+			List<Integer> listaPersonajes = new ArrayList<>();
+			int seleccionPersonaje;
+			//listarPersonajes(); hay que sobrecargar como listarLiga
 			
-			while(continuar) {
-				System.out.println("Ingrese numero de personaje para integrar la liga: \n"
-						+ "Ingrese 0 para terminar la seleccion.");
-				seleccionPersonaje = scanner.nextInt();
-								
-				if(seleccionPersonaje == 0) {
-					System.out.println("Usted ha finalizado la seleccion de personajes. ¿Desea continuar?\n"
-							+ "1. Si\n"
-							+ "2. No\n");
-					seleccionPersonaje = scanner.nextInt();
-					
-//					if(seleccionPersonaje == 1) {
-//						
-//						Liga nuevaLiga = new Liga(nombreLiga, bando, caracteristicas, listaPersonajes);
-//						continuar = false;
-//					}
-//					else {
-//						for (Competidor competidor : competidoresOrdenados) {
-//							
-//							
-//							listaPersonajes.add(competidor);
-//							nroPersonaje++;
-//						}
-//					}
-					break;
-				}
-			}
+			do {
+				listarPersonajes(bando, listaPersonajes);
+				System.out.println("\n0. Finalizar");
+				seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
+				listaPersonajes.add(seleccionPersonaje);
+				System.out.println("La liga ha sido agregada correctamente.");
+			} while (seleccionPersonaje != 0 && validarSeleccionPersonaje(bando, listaPersonajes));
 			
-			Competidor personajeSeleccionado = new Competidor();
-			System.out.println("+ ¿Qué personaje quiere agregar?");
-//			int seleccionPersonaje = scanner.nextInt();
-			// competidorNuevo = competidores.getOrDefault(seleccionPersonaje,null);
-			System.out.println("\nEsta a punto de incluir a ... al personaje...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
-
-			int respuesta = scanner.nextInt();
-			if (respuesta == 1) {
-				competidores.put(personajeSeleccionado, null);
-				System.out.println("\n¡Liga creada y asignada correctamente!\n");
-			}
+			
+//			Competidor personajeSeleccionado = new Competidor();
+//			System.out.println("+ ¿Qué personaje quiere agregar?");
+////			int seleccionPersonaje = scanner.nextInt();
+//			// competidorNuevo = competidores.getOrDefault(seleccionPersonaje,null);
+//			System.out.println("\nEsta a punto de incluir a ... al personaje...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
+//
+//			int respuesta = scanner.nextInt();
+//			if (respuesta == 1) {
+//				competidores.put(personajeSeleccionado, null);
+//				System.out.println("\n¡Liga creada y asignada correctamente!\n");
+//			}
 		}
 	}
 
@@ -315,6 +305,17 @@ public class SistemaHeroesVillanos {
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			liga = entry.getValue();
 			if(liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean validarSeleccionPersonaje(Bandos bando, List<Integer> listaPersonaje) {
+		Competidor competidor = new Competidor();
+		for (Map.Entry<Competidor, Integer> entry : competidores.entrySet()) {
+			competidor = entry.getKey();
+			if(competidor.getBando() == bando && !listaPersonaje.contains(entry.getValue())) {
 				return true;
 			}
 		}

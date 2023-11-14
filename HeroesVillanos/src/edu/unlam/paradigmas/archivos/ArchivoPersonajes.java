@@ -5,12 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
-import edu.unlam.paradigmas.comparadores.ComparadorPorBando;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
@@ -49,12 +48,12 @@ public class ArchivoPersonajes {
 	 * return personajes; } }
 	 */
 
-	public TreeMap<Competidor, Integer> leer() throws FileNotFoundException {
+	public Map<Competidor, Integer> leer() throws FileNotFoundException {
 	    String path = "./archivos/in/" + this.nombre + ".in";
 	    File archivoEntrada = new File(path);
 
 	    try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
-	        TreeMap<Competidor, Integer> personajes = new TreeMap<>(new ComparadorPorBando());
+	        Map<Competidor, Integer> personajes = new HashMap<>();
 	        String[] linea;
 	        String tipoPersonaje;
 	        String nombreReal;
