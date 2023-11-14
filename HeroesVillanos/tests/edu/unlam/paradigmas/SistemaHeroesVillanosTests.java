@@ -2,6 +2,7 @@ package edu.unlam.paradigmas;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +26,8 @@ public class SistemaHeroesVillanosTests {
 	}
 	
 	@Test
-	public void queCargueElArchivoPersonajeCuandoSeQuiereTrabajarConPersonajes() {
-
+	public void queCargueElArchivoPersonajeCuandoSeQuiereTrabajarConPersonajes() throws FileNotFoundException {
+		sistema.cargarArchivoPersonaje();
 	}
 	
 	@Test

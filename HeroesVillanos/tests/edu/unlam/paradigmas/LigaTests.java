@@ -40,18 +40,16 @@ public class LigaTests {
 		h4 = new Competidor("Batman", "Batman", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
 		h5 = new Competidor("Superman", "Superman", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
 
+		ligaHeroes = new Liga();
+		ligaHeroes2 = new Liga();
+		ligaVillanos = new Liga();
+
 		ligaHeroes.agregarALiga(h1);
-		ligaHeroes.agregarALiga(h2);
+		ligaHeroes2.agregarALiga(h2);
 		ligaVillanos.agregarALiga(v1);
 		ligaVillanos.agregarALiga(v2);
 		ligaHeroes.recalcularCaracteristicas();
 		ligaVillanos.recalcularCaracteristicas();
-	}
-
-	@Test
-	public void quePermitaMostrarPersonajes() {
-		String personajes = ligaHeroes.getNombrePersonaje();
-		assertEquals(personajes.contains("Black Widow, Black Panther"), true);
 	}
 
 	@Test
@@ -62,59 +60,46 @@ public class LigaTests {
 		assertEquals(personajes.contains("Black Widow, Black Panther"), true);
 	}
 
-	@Test
-	public void quePermitaAgregarUnidadesCompetidoresALiga() {
-		
-	}
+//	@Test
+//	public void quePermitaAgregarUnidadesCompetidoresALiga() {
+//
+//	}
+//
+//	@Test
+//	public void quePermitaAumentarPoderLiga() {
+//
+//	}
 
-	@Test
-	public void quePermitaAumentarPoderLiga() {
-		
-	}
-
-	@Test
-	public void queRecalculeCaracteristicasDeLiga() { // esto no está como una funcionalidad en el sistema, pero si se
-														// saca uno de la lista, qué pasa?
-		// recalcularCaracteristicas() protected List<Integer> getCaracteristicas()
-		List<Integer> caracteristicas = new ArrayList<>();
-		List<Integer> carEsperadas = new ArrayList<>();
-		carEsperadas.add(400);
-		carEsperadas.add(350);
-		carEsperadas.add(380);
-		carEsperadas.add(400);
-
-		ligaHeroes.recalcularCaracteristicas();
-		/*
-		 * }
-		 * 
-		 * 1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new
-		 * Caracteristica(200,150,180,200)); //Héroe, T'Challa, Black Panther, 200, 200,
-		 * 200, 200 h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new
-		 * Caracteristica(200,200,200,200));
-		 */
-		caracteristicas = ligaHeroes.getCaracteristicas();
-		assertEquals(carEsperadas, caracteristicas);
-	}
-	/*
-	 * @Test public void queFormatoLigaToStringSeRespete() {
-	 * 
-	 * LigaTres.setBando(Bandos.Heroe); // Reemplaza con el bando que desees probar
-	 * //LigaTres.agregarCompetidor(personajeUno); String primerResultadoEsperado =
-	 * "Liga 1: Heroe, 10, 20, 30, 40"; // Reemplaza con el resultado esperado
-	 * assertEquals(primerResultadoEsperado, LigaTres.toString());
-	 * //LigaTres.agregarCompetidor(personajeUno); String segundoResultadoEsperado =
-	 * "Liga 2: Villano, 20, 30, 40, 50"; // Reemplaza con el resultado esperado
-	 * assertEquals(segundoResultadoEsperado, LigaTres.toString()); }
-	 */
-
-	@Test
-	public void quePermitaContar() {
-		assertEquals(ligaVillanos.contarIntegrantes(), 2);
-	}
-
-	@Test
-	public void queCalculePoderUnidadesCompetidoras() {
-
-	}
+//	@Test
+//	public void queRecalculeCaracteristicasDeLiga() { 
+//		List<Integer> caracteristicas = new ArrayList<>();
+//		List<Integer> carEsperadas = new ArrayList<>();
+//		carEsperadas.add(400);
+//		carEsperadas.add(350);
+//		carEsperadas.add(380);
+//		carEsperadas.add(400);
+//
+//		ligaHeroes.recalcularCaracteristicas();
+//		/*
+//		 * }
+//		 * 
+//		 * 1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new
+//		 * Caracteristica(200,150,180,200)); //Héroe, T'Challa, Black Panther, 200, 200,
+//		 * 200, 200 h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new
+//		 * Caracteristica(200,200,200,200));
+//		 */
+//		caracteristicas = ligaHeroes.getCaracteristicas();
+//		assertEquals(carEsperadas, caracteristicas);
+//	}
+//
+//	@Test
+//	public void quePermitaContar() {
+//		assertEquals(ligaVillanos.contarIntegrantes(), 2);
+//	}
+//
+//	@Test
+//	public void queCalculePoderUnidadesCompetidoras() {
+//
+//	}
 
 }

@@ -13,49 +13,49 @@ import edu.unlam.paradigmas.sistema.Liga;
 import edu.unlam.paradigmas.sistema.UnidadCompetidor;
 
 public class ArchivoLigas {
-    private String nombre;
+	private String nombre;
 
-    public ArchivoLigas(String nombre) {
-        this.nombre = nombre;
-    }
+	public ArchivoLigas(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public Map<Integer, String> leer() throws FileNotFoundException {
-        String path = "./archivos/in/" + this.nombre + ".in";
-        File archivoEntradaLigas = new File(path);
-        Map<Integer, String> ligasNumeradas = new HashMap<>();
+	public Map<Integer, String> leer() throws FileNotFoundException {
+		String path = "./archivos/in/" + this.nombre + ".in";
+		File archivoEntradaLigas = new File(path);
+		Map<Integer, String> ligasNumeradas = new HashMap<>();
 
-        try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8")) {
-            int numeroLiga = 1;
+		try (Scanner lector = new Scanner(archivoEntradaLigas, "utf-8")) {
+			int numeroLiga = 1;
 
-            while (lector.hasNextLine()) {
-                String linea = lector.nextLine();
-                ligasNumeradas.put(numeroLiga, linea);
-                numeroLiga++;
-            }
-        }
+			while (lector.hasNextLine()) {
+				String linea = lector.nextLine();
+				ligasNumeradas.put(numeroLiga, linea);
+				numeroLiga++;
+			}
+		}
 
-        return ligasNumeradas;
-    }
+		return ligasNumeradas;
+	}
 
 	public boolean escribir(Map<Integer, Liga> ligas) throws IOException {
-	    String path = "./archivos/out/" + this.nombre + ".out";
-	    try (FileWriter file = new FileWriter(path); PrintWriter printerWriter = new PrintWriter(file)) {
-	    	String linea = "";
-	    	for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+		String path = "./archivos/out/" + this.nombre + ".out";
+		try (FileWriter file = new FileWriter(path); PrintWriter printerWriter = new PrintWriter(file)) {
+			String linea = "";
+			for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 				Liga liga = entry.getValue();
 
 				for (UnidadCompetidor competidor : liga.getCompetidores()) {
-			        linea += competidor.getNombrePersonaje() + ", ";
-			    }
-				
+					linea += competidor.getNombrePersonaje() + ", ";
+				}
+
 				linea = linea.substring(0, linea.length() - 2);
 				printerWriter.println(liga.toStringFile(linea));
 				linea = "";
 			}
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false; // Devuelve false si hay una excepción al escribir
-	    }
-	    return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false; // Devuelve false si hay una excepción al escribir
+		}
+		return true;
 	}
 }
