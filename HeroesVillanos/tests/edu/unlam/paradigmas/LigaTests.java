@@ -60,46 +60,46 @@ public class LigaTests {
 		assertEquals(personajes.contains("Black Widow, Black Panther"), true);
 	}
 
-//	@Test
-//	public void quePermitaAgregarUnidadesCompetidoresALiga() {
-//
-//	}
-//
-//	@Test
-//	public void quePermitaAumentarPoderLiga() {
-//
-//	}
+	@Test
+	public void quePermitaAgregarUnidadesCompetidoresALiga() {
 
-//	@Test
-//	public void queRecalculeCaracteristicasDeLiga() { 
-//		List<Integer> caracteristicas = new ArrayList<>();
-//		List<Integer> carEsperadas = new ArrayList<>();
-//		carEsperadas.add(400);
-//		carEsperadas.add(350);
-//		carEsperadas.add(380);
-//		carEsperadas.add(400);
-//
-//		ligaHeroes.recalcularCaracteristicas();
-//		/*
-//		 * }
-//		 * 
-//		 * 1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new
-//		 * Caracteristica(200,150,180,200)); //Héroe, T'Challa, Black Panther, 200, 200,
-//		 * 200, 200 h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new
-//		 * Caracteristica(200,200,200,200));
-//		 */
-//		caracteristicas = ligaHeroes.getCaracteristicas();
-//		assertEquals(carEsperadas, caracteristicas);
-//	}
-//
-//	@Test
-//	public void quePermitaContar() {
-//		assertEquals(ligaVillanos.contarIntegrantes(), 2);
-//	}
-//
-//	@Test
-//	public void queCalculePoderUnidadesCompetidoras() {
-//
-//	}
+	}
+
+	@Test
+	public void quePermitaAumentarPoderLiga() {
+
+	}
+
+	@Test
+	public void queRecalculeCaracteristicasDeLiga() { 
+		List<Integer> caracteristicas = new ArrayList<>();
+		List<Integer> carEsperadas = new ArrayList<>();
+		carEsperadas.add(400);
+		carEsperadas.add(350);
+		carEsperadas.add(380);
+		carEsperadas.add(400);
+
+		ligaHeroes.recalcularCaracteristicas();
+		/*
+		 * }
+		 * 
+		 * 1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new
+		 * Caracteristica(200,150,180,200)); //Héroe, T'Challa, Black Panther, 200, 200,
+		 * 200, 200 h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new
+		 * Caracteristica(200,200,200,200));
+		 */
+		caracteristicas = ligaHeroes.getCaracteristicas();
+		assertEquals(carEsperadas, caracteristicas);
+	}
+
+	@Test
+	public void quePermitaContar() {
+		assertEquals(ligaVillanos.contarIntegrantes(), 2);
+	}
+
+	@Test
+	public void queCalculePoderUnidadesCompetidoras() {
+
+	}
 
 }
