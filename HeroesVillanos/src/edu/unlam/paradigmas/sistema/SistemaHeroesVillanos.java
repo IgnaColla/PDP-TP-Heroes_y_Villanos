@@ -274,26 +274,26 @@ public class SistemaHeroesVillanos {
 							+ "2. No\n");
 					seleccionPersonaje = scanner.nextInt();
 					
-					if(seleccionPersonaje == 1) {
-						
-						Liga nuevaLiga = new Liga(nombreLiga, bando, caracteristicas, listaPersonajes);
-						continuar = false;
-					}
-					else {
-						for (Competidor competidor : competidoresOrdenados) {
-							
-							
-							listaPersonajes.add(competidor);
-							nroPersonaje++;
-						}
-					}
+//					if(seleccionPersonaje == 1) {
+//						
+//						Liga nuevaLiga = new Liga(nombreLiga, bando, caracteristicas, listaPersonajes);
+//						continuar = false;
+//					}
+//					else {
+//						for (Competidor competidor : competidoresOrdenados) {
+//							
+//							
+//							listaPersonajes.add(competidor);
+//							nroPersonaje++;
+//						}
+//					}
 					break;
 				}
 			}
 			
 			Competidor personajeSeleccionado = new Competidor();
 			System.out.println("+ ¿Qué personaje quiere agregar?");
-			int seleccionPersonaje = scanner.nextInt();
+//			int seleccionPersonaje = scanner.nextInt();
 			// competidorNuevo = competidores.getOrDefault(seleccionPersonaje,null);
 			System.out.println("\nEsta a punto de incluir a ... al personaje...  ¿Desea continuar?\n1.Si\n2.No"); // continuar
 
