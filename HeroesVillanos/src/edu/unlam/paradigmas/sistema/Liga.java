@@ -22,19 +22,15 @@ public class Liga extends UnidadCompetidor {
 		super(bando, new Caracteristica(0,0,0,0));
 		this.competidores.add(competidores);
 	}
-	
 
-//	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion {
-//
-//		List<Integer> lc = competidor.getCaracteristicas();
-//		int velocidad = lc.get(0);
-//		int fuerza = lc.get(1);
-//		int resistencia = lc.get(2);
-//		int destreza = lc.get(3);
-//		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-//		//this.competidores.add(new Liga(competidor.getBando(), caracteristica, competidor));
-//
-//	}
+	public Liga(Bandos bando, Caracteristica caracteristicas, List<Competidor> miembros) {
+		super(bando, caracteristicas);
+		this.competidores.addAll(miembros);
+	}
+
+	public void agregarALiga(UnidadCompetidor unidad) {
+		this.competidores.add(unidad);
+	}
 
 //	public void agregarLigaALiga(Liga liga) throws CaracteristicaExcepcion {
 //		List<Integer> lc = liga.getCaracteristicas();
@@ -45,13 +41,6 @@ public class Liga extends UnidadCompetidor {
 //		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
 //		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
 //	}
-
-	
-
-	public Liga(Bandos bando, Caracteristica caracteristicas, List<Competidor> miembros) {
-		super(bando, caracteristicas);
-		this.competidores.addAll(miembros);
-	}
 
 	@Override
 	protected List<Integer> getCaracteristicas() {
