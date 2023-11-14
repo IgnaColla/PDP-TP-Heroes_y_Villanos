@@ -31,16 +31,15 @@ public class Liga extends UnidadCompetidor {
 	public void agregarALiga(UnidadCompetidor unidad) {
 		this.competidores.add(unidad);
 	}
-
-//	public void agregarLigaALiga(Liga liga) throws CaracteristicaExcepcion {
-//		List<Integer> lc = liga.getCaracteristicas();
-//		int velocidad = lc.get(0);
-//		int fuerza = lc.get(1);
-//		int resistencia = lc.get(2);
-//		int destreza = lc.get(3);
-//		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
-//		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
-//	}
+	
+	@Override
+	protected boolean mismoUnidadCompetidor(UnidadCompetidor unidad) {
+		for(UnidadCompetidor unidadInterna : competidores) {
+			if(unidadInterna.mismoUnidadCompetidor(unidad))
+				return true;
+		}
+		return false;
+	}
 
 	@Override
 	protected List<Integer> getCaracteristicas() {

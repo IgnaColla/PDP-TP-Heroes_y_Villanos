@@ -34,6 +34,10 @@ public class Competidor extends UnidadCompetidor {
 		caracteristicas.add(this.caracteristicas.getDestreza());
 		return caracteristicas;
 	}
+	
+	protected boolean mismoUnidadCompetidor(UnidadCompetidor unidad) {
+		return this.equals(unidad);
+	}
 
 	@Override
 //	public String toString() {

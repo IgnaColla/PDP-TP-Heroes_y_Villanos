@@ -282,7 +282,7 @@ public class SistemaHeroesVillanos {
 					} while (seleccionPersonaje != 0 && validarSeleccionPersonaje(bando, listaPersonajes));
 				}
 				opcionLigaPersonaje = validarObtencionNumero(scanner,
-						"+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje\n\n0. Volver menu anterior");
+						"+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje\n\n0. Finalizar");
 			}
 			
 			int sizePersonajes = listaPersonajes.size();
@@ -295,17 +295,19 @@ public class SistemaHeroesVillanos {
 					int nroLiga = ligas.size() + 1;
 					
 					Liga liga = new Liga();
-					if(sizePersonajes != 0) {
-						for(Competidor comp : competidores.keySet()) {
-							if(listaPersonajes.contains(competidores.get(comp))) {
-								liga.agregarALiga(comp);
-							}
-						}
-					}
 					if(sizeLigas != 0) {
 						for(Integer valor : ligas.keySet()) {
 							if(listaLigas.contains(valor)) {
-								liga.agregarALiga(ligas.get(valor));
+								if(!liga.mismoUnidadCompetidor(ligas.get(valor)))
+									liga.agregarALiga(ligas.get(valor));
+							}
+						}
+					}
+					if(sizePersonajes != 0) {
+						for(Competidor comp : competidores.keySet()) {
+							if(listaPersonajes.contains(competidores.get(comp))) {
+								if(!liga.mismoUnidadCompetidor(comp))
+									liga.agregarALiga(comp);
 							}
 						}
 					}
