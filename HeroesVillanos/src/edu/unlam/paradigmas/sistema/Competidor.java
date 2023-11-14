@@ -49,14 +49,14 @@ public class Competidor extends UnidadCompetidor {
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof Competidor) {
 			Competidor otro = (Competidor) obj;
-			return this.nombreReal.hashCode() == otro.nombreReal.hashCode();
+			return this.nombreReal == otro.nombreReal;
 		} else {
 			return false;
 		}
 	}
 
-	public int hashCode() {
+	/*public int hashCode() {
 		return this.nombreReal.hashCode();
-	}
+	}*/
 
 }

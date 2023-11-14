@@ -246,11 +246,13 @@ public class SistemaHeroesVillanos {
 			throw new SistemaExcepcion("No posee personajes del bando seleccionado.");
 		}
 		
+
+		List<Integer> listaPersonajes = new ArrayList<>();
+		List<Integer> listaLigas = new ArrayList<>();
 		int opcionLigaPersonaje = validarObtencionNumero(scanner, "+ ¿Quiere agregar a la liga otra liga o un personaje?:\n1. Liga\n2. Personaje");
 
 		if (opcionLigaPersonaje == 1) {
 			System.out.println("[Selección de liga]\n");
-			List<Integer> listaLigas = new ArrayList<>();
 			int seleccionLiga;
 			
 			do {
@@ -264,9 +266,7 @@ public class SistemaHeroesVillanos {
 			
 		} else {
 			System.out.println("[Selección de personajes]\n");
-			List<Integer> listaPersonajes = new ArrayList<>();
 			int seleccionPersonaje;
-			//listarPersonajes(); hay que sobrecargar como listarLiga
 			
 			do {
 				listarPersonajes(bando, listaPersonajes);
@@ -276,7 +276,7 @@ public class SistemaHeroesVillanos {
 				System.out.println("La liga ha sido agregada correctamente.");
 			} while (seleccionPersonaje != 0 && validarSeleccionPersonaje(bando, listaPersonajes));
 			
-			
+		}	
 //			Competidor personajeSeleccionado = new Competidor();
 //			System.out.println("+ ¿Qué personaje quiere agregar?");
 ////			int seleccionPersonaje = scanner.nextInt();
@@ -288,7 +288,7 @@ public class SistemaHeroesVillanos {
 //				competidores.put(personajeSeleccionado, null);
 //				System.out.println("\n¡Liga creada y asignada correctamente!\n");
 //			}
-		}
+		
 	}
 
 	private boolean puedeCrearLiga(Bandos bando) {
