@@ -54,8 +54,10 @@ public class SistemaHeroesVillanos {
 		return null; // No se encontró el competidor con el nombre especificado
 	}
 
-//------------------------------ 1. Administracion de Personajes ------------------------------
-
+	
+	
+//*********************** 1. Administracion de Personajes ***********************
+	
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 
@@ -138,7 +140,7 @@ public class SistemaHeroesVillanos {
 
 				if (!this.competidores.containsKey(nuevoCompetidor)) {
 
-					int nuevoValor = competidores.size() + 1; // competidores.getOrDefault(, 0) + 1;
+					int nuevoValor = competidores.size() + 1;
 
 					competidores.put(nuevoCompetidor, nuevoValor);
 
@@ -225,7 +227,9 @@ public class SistemaHeroesVillanos {
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
-//------------------------------ 2. Administracion de Ligas ------------------------------
+	
+	
+//*********************** 2. Administracion de Ligas ***********************
 
 	public void cargarArchivoLigas() throws FileNotFoundException, CaracteristicaExcepcion {
 		if (this.archivoPersonajeExiste == false) {
@@ -394,8 +398,6 @@ public class SistemaHeroesVillanos {
 			int numeroLiga = entry.getKey();
 			Liga liga = entry.getValue();
 			System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
-			// System.out.println(numeroLiga + ". " + liga.getNombrePersonaje() + " - " +
-			// liga);
 		}
 		System.out.println();
 	}
@@ -435,7 +437,9 @@ public class SistemaHeroesVillanos {
 		System.out.println("\n¡Las ligas se han guardado correctamente!\n");
 	}
 
-// ------------------------------ 3. Realizar combate ------------------------------
+	
+	
+//*********************** 3. Realizar combate ***********************
 
 	private String enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
 		String resultadoEnfrentamiento = "";
@@ -572,7 +576,9 @@ public class SistemaHeroesVillanos {
 		System.out.println(enfrentar(liga1, liga2, caracteristicaSeleccionada));
 	}
 
-//------------------------------ 4. Reportes ------------------------------
+	
+	
+//*********************** 4. Reportes ***********************
 
 	public void reportarVencedores(Scanner scanner) throws FileNotFoundException {
 
@@ -690,3 +696,5 @@ public class SistemaHeroesVillanos {
 	}
 
 }
+
+//***********************************************************

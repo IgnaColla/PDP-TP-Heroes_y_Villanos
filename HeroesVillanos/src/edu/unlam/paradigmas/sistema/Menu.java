@@ -54,7 +54,9 @@ public class Menu {
 		}
 	}
 
-//****************************************************************************Administrar Personajes***********************************************************************/
+
+	
+//*********************** Administrar Personajes ***********************
 
 	private void opcionAdministrarPersonajes(Scanner scanner) throws CaracteristicaExcepcion, IOException {
 		boolean continuar = true;
@@ -104,7 +106,9 @@ public class Menu {
 		sistema.guardarArchivoPersonaje();
 	}
 
-//****************************************************************************Administrar Ligas***************************************************************************/
+
+
+//*********************** Administrar Ligas ***********************
 
 	private void opcionAdministrarLigas(Scanner scanner) throws CaracteristicaExcepcion, IOException, SistemaExcepcion {
 		boolean continuar = true;
@@ -154,9 +158,10 @@ public class Menu {
 		sistema.guardarArchivoLigas();
 	}
 
-//*************************************************************************************************************************************************************************
 
-//****************************************************************************Realizar Combate*****************************************************************************/
+
+//*********************** Realizar Combate ***********************
+	
 	private void opcionRealizarCombate(Scanner scanner) throws CaracteristicaExcepcion {
 		boolean continuar = true;
 		while (continuar) {
@@ -199,9 +204,9 @@ public class Menu {
 		sistema.ligaVsLiga(scanner);
 	}
 
-//*************************************************************************************************************************************************************************
 
-//****************************************************************************Generar Reporte****************************************************************************/
+
+//*********************** Generar Reporte ***********************
 
 	private void opcionGenerarReporte(Scanner scanner) throws FileNotFoundException {
 		boolean continuar = true;
@@ -239,4 +244,6 @@ public class Menu {
 	}
 }
 
-//*************************************************************************************************************************************************************************
+
+
+//***************************************************************

@@ -7,8 +7,6 @@ import java.util.Set;
 
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
-// import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
-
 public class Liga extends UnidadCompetidor {
 
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
