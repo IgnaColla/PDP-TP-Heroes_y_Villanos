@@ -10,7 +10,13 @@ public class Caracteristica {
 	private int destreza;
 	
 	public enum TipoCaracteristica {
-		VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA
+		VELOCIDAD, FUERZA, RESISTENCIA, DESTREZA;
+		
+		 private static final TipoCaracteristica[] vals = values();
+	    
+	    public TipoCaracteristica getNext() {
+	        return vals[(this.ordinal() + 1) % vals.length];
+	    }
 	}
 
 	public Caracteristica(int velocidad, int fuerza, int resistencia, int destreza) throws CaracteristicaExcepcion {

@@ -165,7 +165,7 @@ public class Menu {
 //*************************************************************************************************************************************************************************
 
 //****************************************************************************Realizar Combate*****************************************************************************/
-	private void opcionRealizarCombate(Scanner scanner) {
+	private void opcionRealizarCombate(Scanner scanner) throws CaracteristicaExcepcion {
 		boolean continuar = true;
 		while (continuar) {
 			System.out.println("Realizar Combate:\n"
@@ -179,15 +179,15 @@ public class Menu {
 
 			switch (opcion) {
 			case 1:
-				subOpcionPersonajeVsPersonaje();
+				subOpcionPersonajeVsPersonaje(scanner);
 				break;
 			case 2:
 				// Logica de Personaje vs Personaje
-				subOpcionPersonajeVsLiga();
+				subOpcionPersonajeVsLiga(scanner);
 				break;
 			case 3:
 				// logica de Liga vs Liga
-				subOpcionLigaVsLiga();
+				subOpcionLigaVsLiga(scanner);
 				break;
 			case 4:
 				continuar = false;
@@ -199,20 +199,16 @@ public class Menu {
 		}
 	}
 
-	private static void subOpcionPersonajeVsPersonaje() {
-		
+	private void subOpcionPersonajeVsPersonaje(Scanner scanner) {
+		sistema.personajeVsPersonaje(scanner);
 	}
 	
-	private static void subOpcionPersonajeVsLiga() { // llamar método que invoca a la lucha en el sistema
-		/*
-		 * Seleccionar personaje Seleccionar bando Seleccionar Liga bandoRestando
-		 * !Bandos.elegido Seleccionar Caracteristica a enfrentar llamarmetodo(Unidad
-		 * Competidor Unidad1, Unidad Competidor Unidad2, Caracteristica)
-		 */
+	private void subOpcionPersonajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion  { 
+		sistema.personajeVsLiga(scanner);
 	}
 
-	private static void subOpcionLigaVsLiga() {
-
+	private void subOpcionLigaVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
+		sistema.ligaVsLiga(scanner);
 	}
 
 //*************************************************************************************************************************************************************************
@@ -247,8 +243,8 @@ public class Menu {
 		}
 	}
 
-	private static void subOpcionReportarVencedorAPersonaje() {
-
+	private void subOpcionReportarVencedorAPersonaje(Scanner scanner) {
+		sistema.reportarVencedores(scanner);
 	}
 
 	private void subOpcionOrdenarPersonajes(Scanner scanner) throws FileNotFoundException {

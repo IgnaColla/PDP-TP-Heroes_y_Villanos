@@ -2,6 +2,8 @@ package edu.unlam.paradigmas.sistema;
 
 import java.util.*;
 
+import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
+
 public abstract class UnidadCompetidor {
     protected Bandos bando;
     protected Caracteristica caracteristicas;
@@ -22,6 +24,25 @@ public abstract class UnidadCompetidor {
     protected void setBando(Bandos bando) {
     	this.bando = bando;
     }
+    
+    public int getValorCaracteristica(TipoCaracteristica opcion) {
+		int valor = 0;
+		switch (opcion) {
+		case VELOCIDAD:
+			valor = this.caracteristicas.getVelocidad();
+			break;
+		case FUERZA:
+			valor = this.caracteristicas.getFuerza();
+			break;
+		case RESISTENCIA:
+			valor = this.caracteristicas.getResistencia();
+			break;
+		case DESTREZA:
+			valor = this.caracteristicas.getDestreza();
+			break;
+		}
+		return valor;
+	}
 
     public String getCaracteristicaToString() {
         return this.caracteristicas.toString();

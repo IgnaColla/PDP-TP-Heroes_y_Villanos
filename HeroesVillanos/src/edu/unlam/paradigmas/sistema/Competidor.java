@@ -27,28 +27,6 @@ public class Competidor extends UnidadCompetidor {
 		return this.nombrePersonaje;
 	}
 	
-	public int getValorCaracteristica(TipoCaracteristica opcion) {
-		switch (opcion) {
-		case 1:
-			caracteristica = TipoCaracteristica.VELOCIDAD;
-			continuar = false;
-			break;
-		case 2:
-			caracteristica = TipoCaracteristica.FUERZA;
-			continuar = false;
-			break;
-		case 3:
-			caracteristica = TipoCaracteristica.RESISTENCIA;
-			continuar = false;
-			break;
-		case 4:
-			caracteristica = TipoCaracteristica.DESTREZA;
-			continuar = false;
-			break;
-		default:
-			System.out.println("Opcion no valida. Por favor, seleccione una característica valida.");
-	}
-	
 	@Override
 	protected List<Integer> getCaracteristicas() {
 		List<Integer> caracteristicas = new ArrayList<Integer>();

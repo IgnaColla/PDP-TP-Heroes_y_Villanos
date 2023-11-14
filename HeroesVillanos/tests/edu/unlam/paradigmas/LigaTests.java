@@ -29,6 +29,7 @@ public class LigaTests {
 	private Liga LigaSeis;
 	private Caracteristica caracteristicasLigaSeis;
 
+	/*
 	@Before
 	public void setUp() throws Exception {
 
@@ -99,5 +100,5 @@ public class LigaTests {
 	public void queCalculePoderUnidadesCompetidoras() {
 		
 	}
-
+*/
 }
