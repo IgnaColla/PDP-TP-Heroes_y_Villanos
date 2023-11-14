@@ -312,6 +312,7 @@ public class SistemaHeroesVillanos {
 						}
 					}
 					
+					liga.recalcularCaracteristicas();
 					this.ligas.put(nroLiga, liga);
 					System.out.println("\n¡Liga creada correctamente!\n");
 				} else {
@@ -334,7 +335,7 @@ public class SistemaHeroesVillanos {
 		return false;
 	}
 
-	private boolean validarSeleccionLigas(Bandos bando, List<Integer> listaLigas) {
+	private boolean validarSeleccionLigas(Bandos bando, List<Integer> listaLigas) throws CaracteristicaExcepcion {
 		Liga liga = new Liga();
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			liga = entry.getValue();
@@ -361,7 +362,8 @@ public class SistemaHeroesVillanos {
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			int numeroLiga = entry.getKey();
 			Liga liga = entry.getValue();
-			System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+			//System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+			System.out.println(numeroLiga + ". " + liga.getNombrePersonaje() + " - " + liga);
 		}
 		System.out.println();
 	}

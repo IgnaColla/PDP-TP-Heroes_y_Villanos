@@ -14,8 +14,8 @@ public class Liga extends UnidadCompetidor {
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
 
 	// Constructores
-	public Liga() {
-		super(null, null);
+	public Liga() throws CaracteristicaExcepcion {
+		super(null, new Caracteristica(0,0,0,0));
 	}
 
 	public Liga(Bandos bando, UnidadCompetidor competidores) throws CaracteristicaExcepcion {
@@ -55,12 +55,20 @@ public class Liga extends UnidadCompetidor {
 
 		caracteristicas.add(velocidad);
 		caracteristicas.add(fuerza);
-		caracteristicas.add(resistencia);
+		caracteristicas.add(resistencia); 
 		caracteristicas.add(destreza);
 
 		return caracteristicas;
 	}
 
+	public void recalcularCaracteristicas() {
+		List<Integer> caracteristicas = this.getCaracteristicas();
+		this.caracteristicas.setVelocidad(caracteristicas.get(0));
+		this.caracteristicas.setFuerza(caracteristicas.get(1));
+		this.caracteristicas.setResistencia(caracteristicas.get(2));
+		this.caracteristicas.setDestreza(caracteristicas.get(3));
+	}
+	
 	public Set<UnidadCompetidor> getCompetidores() {
 		return this.competidores;
 	}
