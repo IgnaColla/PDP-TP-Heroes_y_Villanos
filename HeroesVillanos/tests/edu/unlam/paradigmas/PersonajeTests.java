@@ -18,10 +18,13 @@ public class PersonajeTests {
 	private Caracteristica caracteristicasPersonajeDos;
 	private Competidor personajeTres;
 	private Caracteristica caracteristicasPersonajeTres;
+	@SuppressWarnings("unused")
 	private Competidor personajeCuatro;
 	private Caracteristica caracteristicasPersonajeCuatro;
+	@SuppressWarnings("unused")
 	private Competidor personajeCinco;
 	private Caracteristica caracteristicasPersonajeCinco;
+	@SuppressWarnings("unused")
 	private Competidor personajeSeis;
 	private Caracteristica caracteristicasPersonajeSeis;
 

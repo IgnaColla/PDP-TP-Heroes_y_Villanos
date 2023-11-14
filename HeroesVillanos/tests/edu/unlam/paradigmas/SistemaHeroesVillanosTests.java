@@ -1,20 +1,11 @@
 package edu.unlam.paradigmas;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.unlam.paradigmas.sistema.Competidor;
-import edu.unlam.paradigmas.sistema.Liga;
-
 public class SistemaHeroesVillanosTests {
-
-	private Map<Competidor, Integer> competidores = new HashMap<Competidor, Integer>();
-	private Map<Integer, Liga> ligas = new HashMap<>();
-	private boolean archivoPersonajeExiste = false;
 
 	@Before
 	public void setUp() throws Exception {

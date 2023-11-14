@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import edu.unlam.paradigmas.archivos.ArchivoLigas;
@@ -63,7 +62,7 @@ public class SistemaHeroesVillanos {
 
 		if (this.competidores.isEmpty()) {
 			this.competidores = personajesFile.leer();
-		} else if (this.archivoPersonajeExiste = false) {
+		} else if (this.archivoPersonajeExiste == false) {
 			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
 
 			// Obtener el último valor asignado a los competidores existentes
@@ -74,7 +73,7 @@ public class SistemaHeroesVillanos {
 				Competidor nuevoCompetidor = entry.getKey();
 
 				// Verificar si el competidor no existe
-				if (!this.competidores.containsKey(nuevoCompetidor.getNombreReal().hashCode())) {
+				if (!this.competidores.containsKey(nuevoCompetidor)) {
 					// Generar un nuevo valor para el número de personaje
 					ultimoValor++;
 					this.competidores.put(nuevoCompetidor, ultimoValor);
