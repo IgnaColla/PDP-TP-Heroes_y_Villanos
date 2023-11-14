@@ -44,6 +44,16 @@ public class SistemaHeroesVillanos {
 		}
 		return null; // No se encontró el competidor con el nombre especificado
 	}
+	
+	private Competidor buscarCompetidorPorNumero(Map<Competidor, Integer> competidores, int numero) {
+		for (Competidor competidor : competidores.keySet()) {
+			if (competidores.get(competidor) == numero) {
+				return competidor;
+			}
+		}
+		return null; // No se encontró el competidor con el nombre especificado
+	}
+
 
 //------------------------------ 1. Administracion de Personajes ------------------------------
 
@@ -170,6 +180,21 @@ public class SistemaHeroesVillanos {
 
 		System.out.println();
 	}
+	
+	public void listarPersonajes(Bandos bando) {
+		mensajeListadoPersonajes();
+		Map<Competidor, Integer> mapaOrdenado = competidores.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		Competidor competidor = new Competidor();
+		int valorEntrada;
+		for (Map.Entry<Competidor, Integer> entry : mapaOrdenado.entrySet()) {
+			competidor = entry.getKey();
+			valorEntrada = entry.getValue();
+			if (competidor.getBando() == bando) {
+				System.out.println(valorEntrada + ". " + competidor);
+			}
+		}
+	}
 
 	public void listarPersonajes(Bandos bando, List<Integer> listaPersonajes) {
 		mensajeListadoPersonajes();
@@ -274,7 +299,7 @@ public class SistemaHeroesVillanos {
 					do {
 						listarPersonajes(bando, listaPersonajes);
 						System.out.println("\n0. Volver menu anterior");
-						seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
+						seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
 						if (seleccionPersonaje != 0) {
 							listaPersonajes.add(seleccionPersonaje);
 							System.out.println("La liga ha sido agregada correctamente.");
@@ -395,13 +420,48 @@ public class SistemaHeroesVillanos {
 
 // ------------------------------ 3. Realizar combate ------------------------------
 
-	public void enfrentar(UnidadCompetidor u1, UnidadCompetidor u2) {
-
+	public String enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
+		int resultado u1.getValorCaracteristica(TipoCaracteristica) - u2.
 	}
 
 //	public boolean esMismoBando(UnidadCompetidor, UnidadCompetidor unidad) {
 //	return .equals(unidad.getBando());
 //}
+	
+	public void personajeVsPersonaje(Scanner scanner) {
+
+		int seleccionPersonaje;
+		Competidor competidor1 = new Competidor();
+		Competidor competidor2 = new Competidor();
+		System.out.println("\n[Seleccione Personaje:]\n");
+		listarPersonajes();
+		System.out.println("\n0. Volver menu anterior");
+		seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
+		if (seleccionPersonaje != 0) {
+			competidor1 = buscarCompetidorPorNumero(competidores, seleccionPersonaje);
+			System.out.println("El personaje ha sido seleccionado correctamente.");
+		}
+		
+		Bandos bando = Bandos.Heroe;
+		
+		if(competidor1.getBando() == Bandos.Heroe) {
+			bando = Bandos.Villano;
+		}
+		
+		System.out.println("\n[Seleccione Oponente:]\n");
+		listarPersonajes(bando);
+		System.out.println("\n0. Volver menu anterior");
+		seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
+		if (seleccionPersonaje != 0) {
+			competidor2 = buscarCompetidorPorNumero(competidores, seleccionPersonaje);
+			System.out.println("El personaje ha sido seleccionado correctamente.");
+		}
+		
+		System.out.println(
+				"+ Seleccione las caracteristicas para ordenar:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
+		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
+		
+	}
 
 //------------------------------ 4. Reportes ------------------------------
 
