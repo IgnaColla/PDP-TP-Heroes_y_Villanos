@@ -5,31 +5,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
+
 // import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 
 public class Liga extends UnidadCompetidor {
 
 	private Set<UnidadCompetidor> competidores = new HashSet<>();
-	private String nombreLiga;
 
 	// Constructores
 	public Liga() {
 		super(null, null);
-//		this.nombreLiga = "";
-//		this.competidores = null;
 	}
 
-	public Liga(String nombreLiga, Bandos bando, Caracteristica caracteristicas, List<UnidadCompetidor> competidores) {
-		super(bando, caracteristicas);
-		
-		this.nombreLiga = nombreLiga;
-		this.competidores.addAll(competidores);
+	public Liga(Bandos bando, UnidadCompetidor competidores) throws CaracteristicaExcepcion {
+		super(bando, new Caracteristica(0,0,0,0));
+		this.competidores.add(competidores);
 	}
 	
-	public Liga(Bandos bando, Caracteristica caracteristicas, Liga ligas) {
-		super(bando, caracteristicas);
-		this.competidores.addAll(competidores);
-	}
 
 //	public void agregarCompetidorALiga(Competidor competidor) throws CaracteristicaExcepcion {
 //
@@ -52,6 +45,13 @@ public class Liga extends UnidadCompetidor {
 //		Caracteristica caracteristica = new Caracteristica(velocidad, fuerza, resistencia, destreza);
 //		this.competidores.add(new Liga(liga.bando, caracteristica, liga));
 //	}
+
+	
+
+	public Liga(Bandos bando, Caracteristica caracteristicas, List<Competidor> miembros) {
+		super(bando, caracteristicas);
+		this.competidores.addAll(competidores);
+	}
 
 	@Override
 	protected List<Integer> getCaracteristicas() {
@@ -83,10 +83,20 @@ public class Liga extends UnidadCompetidor {
 
 	@Override
 	public String toString() {
-		return this.nombreLiga + ": " + this.bando + ", " + this.getCaracteristicaToString();
+		return this.bando + ", " + this.getCaracteristicaToString();
 	}
 	
 	public String toStringFile(String linea) {
-		return this.nombreLiga + ": " + this.bando + " - " + linea;
+		return this.bando + " - " + linea;
 	}
+
+	@Override
+	protected String getNombrePersonaje() {
+		String linea = "";
+		for(UnidadCompetidor unidad: this.competidores) {
+			linea += unidad.getNombrePersonaje();
+		}
+		return linea;
+	}
+	
 }

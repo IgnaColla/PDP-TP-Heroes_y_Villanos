@@ -185,7 +185,7 @@ public class SistemaHeroesVillanos {
 		ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 		Map<Integer, String> lineasLigas = ligasFile.leer();
 		String[] linea;
-		List<UnidadCompetidor> miembros = new ArrayList<>();
+		List<Competidor> miembros = new ArrayList<>();
 		Competidor competidor = new Competidor();
 		
 		int velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga, cantMiembros, numeroLiga = 1;
@@ -212,14 +212,10 @@ public class SistemaHeroesVillanos {
 				cantMiembros++;
 			}
 
-			Bandos bandoLiga = miembros.get(0).bando;
-			velocidadLiga /= cantMiembros;
-			fuerzaLiga /= cantMiembros;
-			resistenciaLiga /= cantMiembros;
-			destrezaLiga /= cantMiembros;
+			Bandos bando = miembros.get(0).bando;
 
 			Caracteristica caracteristicas = new Caracteristica(velocidadLiga, fuerzaLiga, resistenciaLiga, destrezaLiga);
-			Liga liga = new Liga("Liga " + numeroLiga, bandoLiga, caracteristicas, miembros);
+			Liga liga = new Liga(bando, caracteristicas, miembros);
 			this.ligas.put(numeroLiga, liga);
 
 			numeroLiga++;
