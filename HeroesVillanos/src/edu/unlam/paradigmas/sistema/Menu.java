@@ -131,7 +131,7 @@ public class Menu {
 				subOpcionCrearLiga(scanner);
 				break;
 			case 3:
-				subOcionListarLigas();
+				subOpcionListarLigas();
 				break;
 			case 4:
 				subOpcionGuardarEnArchivoLigas();
@@ -154,7 +154,7 @@ public class Menu {
 		sistema.crearLiga(scanner);
 	}
 
-	private void subOcionListarLigas() {
+	private void subOpcionListarLigas() {
 		sistema.listarLigas();
 	}
 
@@ -218,7 +218,7 @@ public class Menu {
 	private void opcionGenerarReporte(Scanner scanner) throws FileNotFoundException {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Generar reporte:"
+			System.out.println("Generar reporte:\n"
 					+ "1. Personaje o Liga que vence a un Personaje seleccionado por caracteristica\n"
 					+ "2. Listar Personajes por caracteristica\n"
 					+ "3. Volver al menu anterior\n"
@@ -228,7 +228,7 @@ public class Menu {
 
 			switch (opcion) {
 			case 1:
-				subOpcionReportarVencedorAPersonaje();
+				subOpcionReportarVencedorAPersonaje(scanner);
 				break;
 			case 2:
 				subOpcionOrdenarPersonajes(scanner);
@@ -243,7 +243,7 @@ public class Menu {
 		}
 	}
 
-	private void subOpcionReportarVencedorAPersonaje(Scanner scanner) {
+	private void subOpcionReportarVencedorAPersonaje(Scanner scanner) throws FileNotFoundException {
 		sistema.reportarVencedores(scanner);
 	}
 

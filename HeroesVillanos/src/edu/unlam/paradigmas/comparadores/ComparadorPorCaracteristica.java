@@ -28,7 +28,6 @@ public class ComparadorPorCaracteristica implements Comparator<Competidor> {
                 resultado = Integer.compare(c1.getCaracteristica().getDestreza(), c2.getCaracteristica().getDestreza());
                 break;
             default:
-                System.out.println(" asdasdasdas");
                 break;
         }
 

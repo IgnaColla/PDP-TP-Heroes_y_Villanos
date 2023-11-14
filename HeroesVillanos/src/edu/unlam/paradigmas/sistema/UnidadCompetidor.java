@@ -5,27 +5,29 @@ import java.util.*;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public abstract class UnidadCompetidor {
-    protected Bandos bando;
-    protected Caracteristica caracteristicas;
+	protected Bandos bando;
+	protected Caracteristica caracteristicas;
 
-    public UnidadCompetidor(Bandos bando, Caracteristica caracteristicas) {
-        this.bando = bando;
-        this.caracteristicas = caracteristicas;
-    }
+	public UnidadCompetidor(Bandos bando, Caracteristica caracteristicas) {
+		this.bando = bando;
+		this.caracteristicas = caracteristicas;
+	}
 
-    public Bandos getBando() {
-        return this.bando;
-    }
+	public Bandos getBando() {
+		return this.bando;
+	}
 
-    protected abstract List<Integer> getCaracteristicas();
-    protected abstract boolean mismoUnidadCompetidor(UnidadCompetidor unidad);
-    protected abstract int contarIntegrantes();
-    
-    protected void setBando(Bandos bando) {
-    	this.bando = bando;
-    }
-    
-    public int getValorCaracteristica(TipoCaracteristica opcion) {
+	protected abstract List<Integer> getCaracteristicas();
+
+	protected abstract boolean mismoUnidadCompetidor(UnidadCompetidor unidad);
+
+	protected abstract int contarIntegrantes();
+
+	protected void setBando(Bandos bando) {
+		this.bando = bando;
+	}
+
+	public int getValorCaracteristica(TipoCaracteristica opcion) {
 		int valor = 0;
 		switch (opcion) {
 		case VELOCIDAD:
@@ -44,13 +46,13 @@ public abstract class UnidadCompetidor {
 		return valor;
 	}
 
-    public String getCaracteristicaToString() {
-        return this.caracteristicas.toString();
-    }
+	public String getCaracteristicaToString() {
+		return this.caracteristicas.toString();
+	}
 
-    public Caracteristica getCaracteristica() {
-        return this.caracteristicas;
-    }
+	public Caracteristica getCaracteristica() {
+		return this.caracteristicas;
+	}
 
 	public abstract String getNombrePersonaje();
 }

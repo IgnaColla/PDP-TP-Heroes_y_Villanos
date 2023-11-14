@@ -45,6 +45,18 @@ public class Competidor extends UnidadCompetidor {
 		return 1;
 	}
 	
+	public boolean personajePierdeContraUnidad(UnidadCompetidor u2, TipoCaracteristica caracteristica) {
+
+		int resultado = this.getValorCaracteristica(caracteristica) / this.contarIntegrantes()
+				- u2.getValorCaracteristica(caracteristica) / u2.contarIntegrantes();
+
+		if (resultado < 0) {
+			return true;
+		}
+
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", " + this.getCaracteristicaToString();
