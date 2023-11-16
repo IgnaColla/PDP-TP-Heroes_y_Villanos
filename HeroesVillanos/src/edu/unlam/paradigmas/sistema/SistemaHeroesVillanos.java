@@ -480,8 +480,8 @@ public class SistemaHeroesVillanos {
 	
 //*********************** 3. Realizar combate ***********************
 
-	private String enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
-		String resultadoEnfrentamiento = "";
+	private int enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
+		int resultadoEnfrentamiento;
 		TipoCaracteristica nuevaCaracteristica = caracteristica;
 		int resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 				- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
@@ -506,13 +506,19 @@ public class SistemaHeroesVillanos {
 		}
 
 		if (resultado > 0) {
-			resultadoEnfrentamiento += "\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
+			System.out.println("\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: "
+					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
+			
+			resultadoEnfrentamiento = 1;
 		} else if (resultado < 0) {
-			resultadoEnfrentamiento += "\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
+			System.out.println("\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: "
+					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
+			
+			resultadoEnfrentamiento = -1;
 		} else {
-			resultadoEnfrentamiento += "\nSe produjo un empate entre los 2 competidores";
+			System.out.println("\nSe produjo un empate entre los 2 competidores");
+			
+			resultadoEnfrentamiento = 0;
 		}
 
 		return resultadoEnfrentamiento;
@@ -551,7 +557,7 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		System.out.println(enfrentar(competidor1, competidor2, caracteristicaSeleccionada));
+		enfrentar(competidor1, competidor2, caracteristicaSeleccionada);
 	}
 
 	public void personajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -587,7 +593,7 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		System.out.println(enfrentar(competidor, liga, caracteristicaSeleccionada));
+		enfrentar(competidor, liga, caracteristicaSeleccionada);
 	}
 
 	public void ligaVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -623,7 +629,7 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		System.out.println(enfrentar(liga1, liga2, caracteristicaSeleccionada));
+		enfrentar(liga1, liga2, caracteristicaSeleccionada);
 	}
 	
 	public static void imprimirCaracteristicas(UnidadCompetidor u1, UnidadCompetidor u2) {
