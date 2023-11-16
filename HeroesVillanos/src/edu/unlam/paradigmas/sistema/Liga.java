@@ -102,5 +102,19 @@ public class Liga extends UnidadCompetidor {
 		linea = linea.substring(0, linea.length() - 2);
 		return linea;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Competidor) {
+			Competidor otro = (Competidor) obj;
+			return this.getNombrePersonaje().hashCode() == otro.getNombrePersonaje().hashCode();
+		} else {
+			return false;
+		}
+	}
+
+	public int hashCode() {
+		return this.getNombrePersonaje().hashCode();
+	}
 
 }
