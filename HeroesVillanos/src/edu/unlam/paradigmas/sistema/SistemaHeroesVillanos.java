@@ -177,6 +177,12 @@ public class SistemaHeroesVillanos {
 		}
 	}
 
+	private void mensajeListadoPersonajes() {
+		System.out.println("\n+----- Listado de personajes -----+\n"
+				+ "  Bando\t\tNombre Real\t   Nombre Personaje\tVelocidad\tFuerza\t    Resistencia\t\tDestreza\n"
+				+ "----------------------------------------------------------------------------------------------------------------");
+	}
+	
 	public void listarPersonajes() {
 		mensajeListadoPersonajes();
 		Map<Competidor, Integer> mapaOrdenado = competidores.entrySet().stream().sorted(Map.Entry.comparingByValue())
@@ -397,7 +403,7 @@ public class SistemaHeroesVillanos {
 		for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
 			int numeroLiga = entry.getKey();
 			Liga liga = entry.getValue();
-			System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+			System.out.println(numeroLiga + ". " + liga.bando + "\t" + liga.getNombrePersonaje());
 		}
 		System.out.println();
 	}
@@ -408,7 +414,7 @@ public class SistemaHeroesVillanos {
 			Liga liga = entry.getValue();
 			if (liga.getBando() == bando) {
 				int numeroLiga = entry.getKey();
-				System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+				System.out.println(numeroLiga + ". " + liga.bando + "\t" + liga.getNombrePersonaje());
 			}
 		}
 	}
@@ -419,13 +425,14 @@ public class SistemaHeroesVillanos {
 			Liga liga = entry.getValue();
 			if (liga.getBando() == bando && !listaLigas.contains(entry.getKey())) {
 				int numeroLiga = entry.getKey();
-				System.out.println(numeroLiga + ". " + liga.getNombrePersonaje());
+				System.out.println(numeroLiga + ". " + liga.bando + "\t" + liga.getNombrePersonaje());
 			}
 		}
 	}
 
 	private void mensajeParaListarLigas() {
-		System.out.println("\nListado de Ligas\n" + "Nombre de Liga, Bando, Velocidad, Fuerza, Resistencia, Destreza\n"
+		System.out.println("\n+----- Listado de ligas -----+\n"
+				+ "   Bando\tIntegrantes\t\n"
 				+ "---------------------------------------------------------------------------------");
 	}
 
@@ -446,8 +453,12 @@ public class SistemaHeroesVillanos {
 		TipoCaracteristica nuevaCaracteristica = caracteristica;
 		int resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 				- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
+		
 		System.out.println("\n+----- COMBATE -----+\n");
-		System.out.println("["+ u1.getNombrePersonaje() +"] VS ["+ u2.getNombrePersonaje() +"]");
+		System.out.println("["+ u1.getNombrePersonaje() +"]\t\tVS \t["+ u2.getNombrePersonaje() +"]");
+		
+		imprimirCaracteristicas(u1, u2);
+		
 		System.out.println("\n+ Caracterisitica: " + nuevaCaracteristica);
 		System.out.println();
 		if (resultado == 0) {
@@ -455,7 +466,7 @@ public class SistemaHeroesVillanos {
 				System.out.println("¡Han empatado en " + nuevaCaracteristica + "!");
 				nuevaCaracteristica = nuevaCaracteristica.getNext();
 				if(nuevaCaracteristica != caracteristica) {
-					System.out.println("Ahora combatiran por: " + nuevaCaracteristica + "\n");
+					System.out.println("Ahora combatiran por: " + nuevaCaracteristica);
 					resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 							- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
 				}
@@ -582,8 +593,31 @@ public class SistemaHeroesVillanos {
 
 		System.out.println(enfrentar(liga1, liga2, caracteristicaSeleccionada));
 	}
-
 	
+	public static void imprimirCaracteristicas(UnidadCompetidor u1, UnidadCompetidor u2) {
+		int cantMiembros1 = u1.contarIntegrantes();
+		int cantMiembros2 = u2.contarIntegrantes();
+		
+		String velocidadStr = String.format("Velocidad:\t%-4s\t\tVelocidad:\t%-4s", 
+				u1.getCaracteristica().getVelocidad()/cantMiembros1, 
+				u2.getCaracteristica().getVelocidad()/cantMiembros2);
+		System.out.println(velocidadStr);
+		
+		String fuerzaStr = String.format("Fuerza:\t\t%-4s\t\tFuerza:\t\t%-4s", 
+				u1.getCaracteristica().getFuerza()/cantMiembros1, 
+				u2.getCaracteristica().getFuerza()/cantMiembros2);
+		System.out.println(fuerzaStr);
+		
+		String resistenciaStr = String.format("Resistencia:\t%-4s\t\tResistencia:\t%-4s", 
+				u1.getCaracteristica().getResistencia()/cantMiembros1, 
+				u2.getCaracteristica().getResistencia()/cantMiembros2);
+		System.out.println(resistenciaStr);
+		
+		String destrezaStr = String.format("Destreza:\t%-4s\t\tDestreza:\t%-4s", 
+				u1.getCaracteristica().getDestreza()/cantMiembros1, 
+				u2.getCaracteristica().getDestreza()/cantMiembros2);
+		System.out.println(destrezaStr);
+	}
 	
 //*********************** 4. Reportes ***********************
 
@@ -694,12 +728,6 @@ public class SistemaHeroesVillanos {
 
 		System.out.println();
 
-	}
-
-	private void mensajeListadoPersonajes() {
-		System.out.println("\n+----- Listado de personajes -----+\n"
-				+ "   Bando, Nombre Real, Nombre Personaje, Velocidad, Fuerza, Resistencia, Destreza\n"
-				+ "--------------------------------------------------------------------------------------------");
 	}
 
 }

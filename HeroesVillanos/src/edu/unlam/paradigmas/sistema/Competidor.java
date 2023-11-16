@@ -59,8 +59,11 @@ public class Competidor extends UnidadCompetidor {
 
 	@Override
 	public String toString() {
-		return this.bando + ", " + this.nombreReal + ", " + this.nombrePersonaje + ", "
-				+ this.getCaracteristicaToString();
+		return String.format("%-10s %-20s %-23s %s", 
+				getBando(), 
+				getNombreReal(), 
+				getNombrePersonaje(), 
+				this.caracteristicas);
 	}
 
 	// Sobreescribo equals y hashCode para que los Set los puedan filtrar

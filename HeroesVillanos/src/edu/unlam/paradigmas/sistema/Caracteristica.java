@@ -68,6 +68,10 @@ public class Caracteristica {
 
 	@Override
 	public String toString() {
-		return velocidad + ", " + fuerza + ", " + resistencia + ", " + destreza;
+		return String.format("%-14s %-13s %-18s %-14s",
+			   getVelocidad(),
+			   getFuerza(),
+			   getResistencia(),
+			   getDestreza());
 	}
 }
