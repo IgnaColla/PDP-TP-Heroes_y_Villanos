@@ -6,19 +6,22 @@
 
 package edu.unlam.paradigmas;
 
-import java.io.FileNotFoundException;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-import edu.unlam.paradigmas.sistema.*;
-import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
+import edu.unlam.paradigmas.sistema.Bandos;
+import edu.unlam.paradigmas.sistema.Caracteristica;
+import edu.unlam.paradigmas.sistema.Competidor;
+import edu.unlam.paradigmas.sistema.Liga;
+import edu.unlam.paradigmas.sistema.SistemaHeroesVillanos;
 
 public class SistemaHeroesVillanosTests {
-	Competidor v1, v2, v3, v4, v5, h1, h2, h3, h4, h5;
-	Liga ligaHeroes, ligaHeroes2, ligaVillanos, ligaVillanos2;
+	private Competidor v1, v2, v3, v4, v5, h1, h2, h3, h4, h5;
+	private Liga ligaHeroes, ligaHeroes2, ligaHeroes3, ligaVillanos, ligaVillanos2, ligaVillanos3;
+	private SistemaHeroesVillanos sistema;
+
 	
 	@Before
 	public void setUp() throws Exception {
@@ -70,10 +73,12 @@ public class SistemaHeroesVillanosTests {
 
 	@Test
 	public void HeroeGanaVillanoPorVelocidad() {
-		String esperado = "Ganador: Black Widow - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
+		//String esperado = "Ganador: Black Widow - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
 		//System.out.println(esperado);
 		//System.out.println(SistemaHeroesVillanos.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-		assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
+		
+		System.out.println(sistema.enfrentar(v1, h1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
+		assertEquals(1, sistema.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
 	}
 	@Test
 	public void heroeGanaVillanoPorFuerza() {
@@ -151,6 +156,23 @@ public class SistemaHeroesVillanosTests {
 		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v5, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado);
 	}
 	
+	@Test
+	public void ligaHeroeGanaLigaVillano()
+	{
+		
+	}
+	
+	@Test
+	public void ligaHeroeEmpataLigaVillano()
+	{
+		
+	}
+	
+	@Test
+	public void ligaHeroeLigaVillano()
+	{
+		
+	}
 	/*
 	
 	@Test
