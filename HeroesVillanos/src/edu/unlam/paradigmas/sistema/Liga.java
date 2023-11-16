@@ -28,6 +28,7 @@ public class Liga extends UnidadCompetidor {
 
 	public void agregarALiga(UnidadCompetidor unidad) {
 		this.competidores.add(unidad);
+		this.recalcularCaracteristicas();
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class Liga extends UnidadCompetidor {
 		return caracteristicas;
 	}
 
-	public void recalcularCaracteristicas() {
+	private void recalcularCaracteristicas() {
 		List<Integer> caracteristicas = this.getCaracteristicas();
 		this.caracteristicas.setVelocidad(caracteristicas.get(0));
 		this.caracteristicas.setFuerza(caracteristicas.get(1));

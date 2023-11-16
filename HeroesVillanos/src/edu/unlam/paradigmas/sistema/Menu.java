@@ -147,7 +147,7 @@ public class Menu {
 	}
 
 	private void subOpcionCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
-		sistema.crearLiga(scanner);
+		sistema.manuCrearLiga(scanner);
 	}
 
 	private void subOpcionListarLigas() {

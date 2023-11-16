@@ -24,9 +24,6 @@ public class SistemaHeroesVillanos {
 	private Map<Integer, Liga> ligas = new HashMap<>();
 	private boolean archivoPersonajeExiste = false;
 
-	public SistemaHeroesVillanos() {
-	}
-
 	public void setCompetidor(Competidor competidor, int valor) {
 		this.competidores.put(competidor, valor);
 	}
@@ -283,7 +280,7 @@ public class SistemaHeroesVillanos {
 		System.out.println("¡Las Ligas se han formado correctamente!\n");
 	}
 
-	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
+	public void manuCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
 
 		System.out.println("\n[Crear Liga]\n");
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
@@ -376,7 +373,6 @@ public class SistemaHeroesVillanos {
 					}
 
 					liga.setBando(bando);
-					liga.recalcularCaracteristicas();
 					boolean existeLigas = false;
 					for(Integer keyLigas : ligas.keySet()) {
 						if(ligas.get(keyLigas).equals(liga)) {
@@ -392,9 +388,12 @@ public class SistemaHeroesVillanos {
 				} else {
 					System.out.println("\nSe cancela la creación de Liga.\n");
 				}
+			}else {
+				System.out.println("No ha seleccionado personajes o ligas para la creacion de la nueva liga.");
 			}
 		} else {
 			System.out.println("\nNo posee personajes del tipo seleccionado para el armado de ligas.\n");
+			System.out.println("\nPor favor cargue el archivo correspondiente.\n");
 		}
 
 	}
@@ -480,8 +479,8 @@ public class SistemaHeroesVillanos {
 	
 //*********************** 3. Realizar combate ***********************
 
-	private int enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
-		int resultadoEnfrentamiento;
+	public Map<Integer, TipoCaracteristica> enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
+		Map<Integer, TipoCaracteristica> resultadoDevuelto = new HashMap<>();
 		TipoCaracteristica nuevaCaracteristica = caracteristica;
 		int resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 				- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
@@ -504,31 +503,38 @@ public class SistemaHeroesVillanos {
 				}
 			} while (resultado == 0 && nuevaCaracteristica != caracteristica);
 		}
-
+		
+		resultadoDevuelto.put(resultado, nuevaCaracteristica);
+		
+		return resultadoDevuelto;
+		
+	}
+	
+	private void mostrarResultadoEnfrentamiento(UnidadCompetidor u1, UnidadCompetidor u2, Map<Integer, TipoCaracteristica> mapa) {
+		Integer resultado = 0;
+		TipoCaracteristica caracteristica = TipoCaracteristica.VELOCIDAD;
+		
+		for(Map.Entry<Integer, TipoCaracteristica> entry : mapa.entrySet()) {
+			resultado = entry.getKey();
+			caracteristica = entry.getValue();
+		}
+		
 		if (resultado > 0) {
 			System.out.println("\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
-			
-			resultadoEnfrentamiento = 1;
+					+ caracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
 		} else if (resultado < 0) {
 			System.out.println("\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
-			
-			resultadoEnfrentamiento = -1;
+					+ caracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
 		} else {
 			System.out.println("\nSe produjo un empate entre los 2 competidores");
-			
-			resultadoEnfrentamiento = 0;
 		}
-
-		return resultadoEnfrentamiento;
 	}
 
 	public void personajeVsPersonaje(Scanner scanner) {
-
 		int seleccionPersonaje;
 		Competidor competidor1 = new Competidor();
 		Competidor competidor2 = new Competidor();
+		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Personaje:]\n");
 		listarPersonajes();
 		System.out.println("\n0. Volver menu anterior");
@@ -557,7 +563,9 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		enfrentar(competidor1, competidor2, caracteristicaSeleccionada);
+		mapaResultado = enfrentar(competidor1, competidor2, caracteristicaSeleccionada);
+		mostrarResultadoEnfrentamiento(competidor1, competidor2, mapaResultado);
+		
 	}
 
 	public void personajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -565,6 +573,7 @@ public class SistemaHeroesVillanos {
 		int seleccion;
 		Competidor competidor = new Competidor();
 		Liga liga = new Liga();
+		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Personaje:]\n");
 		listarPersonajes();
 		System.out.println("\n0. Volver menu anterior");
@@ -593,7 +602,8 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		enfrentar(competidor, liga, caracteristicaSeleccionada);
+		mapaResultado = enfrentar(competidor, liga, caracteristicaSeleccionada);
+		mostrarResultadoEnfrentamiento(competidor, liga, mapaResultado);
 	}
 
 	public void ligaVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -601,6 +611,7 @@ public class SistemaHeroesVillanos {
 		int seleccionLiga;
 		Liga liga1 = new Liga();
 		Liga liga2 = new Liga();
+		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Liga:]\n");
 		listarLigas();
 		System.out.println("\n0. Volver menu anterior");
@@ -629,7 +640,8 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		enfrentar(liga1, liga2, caracteristicaSeleccionada);
+		mapaResultado = enfrentar(liga1, liga2, caracteristicaSeleccionada);
+		mostrarResultadoEnfrentamiento(liga1, liga2, mapaResultado);
 	}
 	
 	public static void imprimirCaracteristicas(UnidadCompetidor u1, UnidadCompetidor u2) {
