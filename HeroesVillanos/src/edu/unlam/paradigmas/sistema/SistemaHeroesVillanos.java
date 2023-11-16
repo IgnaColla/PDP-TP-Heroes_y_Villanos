@@ -303,32 +303,44 @@ public class SistemaHeroesVillanos {
 						listarLigas(bando, listaLigas);
 						System.out.println("\n0. Volver menu anterior");
 						seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
-						
-						boolean encontroLiga = false;
-				
+
 						if (seleccionLiga != 0) {
-							
-							for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
-								Liga liga = entry.getValue();
-								if (liga.getBando() == bando) {
-									encontroLiga = true;
-									listaLigas.add(seleccionLiga);
-									System.out.println("La liga ha sido agregada correctamente a la liga.");
-								}
+
+							if (ligas.get(seleccionLiga).getBando() == bando && !listaLigas.contains(seleccionLiga)) {
+								listaLigas.add(seleccionLiga);
+								System.out.println(
+										"La liga seleccionada ha sido agregada correctamente a la nueva liga.");
+							} else {
+								System.out.println("Seleccione una liga válida.");
 							}
 						}
 					} while (seleccionLiga != 0 && validarSeleccionLigas(bando, listaLigas));
 				} else {
 					System.out.println("[Selección de personajes]\n");
 					int seleccionPersonaje;
+					boolean agregoPersonaje;
 
 					do {
 						listarPersonajes(bando, listaPersonajes);
 						System.out.println("\n0. Volver menu anterior");
 						seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
+						agregoPersonaje = false;
+						
 						if (seleccionPersonaje != 0) {
-							listaPersonajes.add(seleccionPersonaje);
-							System.out.println("El personaje ha sido agregado correctamente a la liga.");
+							for (Competidor comp : competidores.keySet()) {
+								if (competidores.get(comp) == seleccionPersonaje) {
+									if(comp.getBando() == bando && !listaPersonajes.contains(seleccionPersonaje)){
+										agregoPersonaje = true;
+									}
+								}
+							}
+							
+							if(agregoPersonaje) {
+								listaPersonajes.add(seleccionPersonaje);
+								System.out.println("El personaje ha sido agregado correctamente a la liga.");
+							}else {
+								System.out.println("Seleccione un personaje válido.");
+							}
 						}
 					} while (seleccionPersonaje != 0 && validarSeleccionPersonaje(bando, listaPersonajes));
 				}
