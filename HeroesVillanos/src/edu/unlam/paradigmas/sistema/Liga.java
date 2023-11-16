@@ -90,7 +90,7 @@ public class Liga extends UnidadCompetidor {
 	}
 
 	public String toStringFile(String linea) {
-		return this.bando + " - " + linea;
+		return linea;
 	}
 
 	@Override

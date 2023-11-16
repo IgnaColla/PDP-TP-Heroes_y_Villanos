@@ -59,33 +59,34 @@ public class SistemaHeroesVillanos {
 	
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
+		
+		if (!this.archivoPersonajeExiste) {
+			if(!this.competidores.isEmpty()) {
+				Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer().entrySet().stream().sorted(Map.Entry.comparingByValue())
+						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
-		if (this.competidores.isEmpty()) {
-			this.competidores = personajesFile.leer();
-		} else if (this.archivoPersonajeExiste == false) {
-			Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer();
+				// Obtener el último valor asignado a los competidores existentes
+				int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
 
-			// Obtener el último valor asignado a los competidores existentes
-			int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
+				// Agregar los nuevos personajes al mapa, generando nuevos valores
+				for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
+					Competidor nuevoCompetidor = entry.getKey();
 
-			// Agregar los nuevos personajes al mapa, generando nuevos valores
-			for (Map.Entry<Competidor, Integer> entry : nuevosPersonajes.entrySet()) {
-				Competidor nuevoCompetidor = entry.getKey();
-
-				// Verificar si el competidor no existe
-				if (!this.competidores.containsKey(nuevoCompetidor)) {
-					// Generar un nuevo valor para el número de personaje
-					ultimoValor++;
-					this.competidores.put(nuevoCompetidor, ultimoValor);
+					// Verificar si el competidor no existe
+					if (!this.competidores.containsKey(nuevoCompetidor)) {
+						// Generar un nuevo valor para el número de personaje
+						ultimoValor++;
+						this.competidores.put(nuevoCompetidor, ultimoValor);
+					}
 				}
+			}else {
+				this.competidores = personajesFile.leer();
 			}
 			this.archivoPersonajeExiste = true;
-			System.out.println("\n¡Los personajes se han cargado correctamente!\n");
+			System.out.println("¡Los personajes se han cargado correctamente!");
 		} else {
 			System.out.println("\n¡Archivo cargado anteriormente, se aborta la acción!\n");
-
 		}
-
 	}
 
 	private Bandos seleccionarBando(Scanner scanner) {
@@ -127,8 +128,8 @@ public class SistemaHeroesVillanos {
 
 			int velocidad = validarObtencionNumero(scanner, "+ Ingrese Velocidad: ");
 			int fuerza = validarObtencionNumero(scanner, "+ Ingrese Fuerza: ");
-			int destreza = validarObtencionNumero(scanner, "+ Ingrese Destreza: ");
 			int resistencia = validarObtencionNumero(scanner, "+ Ingrese Resistencia: ");
+			int destreza = validarObtencionNumero(scanner, "+ Ingrese Destreza: ");
 
 			System.out.println("\nEsta a punto de crear un nuevo personaje. ¿Desea continuar?\n1.Si\n2.No");
 			int respuesta = validarObtencionNumero(scanner, "Respuesta: ");
@@ -219,7 +220,7 @@ public class SistemaHeroesVillanos {
 	}
 
 	public void guardarArchivoPersonaje() throws IOException {
-		ArchivoPersonajes personajesFile = new ArchivoPersonajes("Personajes");
+		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
 		if (!personajesFile.escribir(this.competidores)) {
 			throw new RuntimeException("\nError al intentar guardar los personajes");
 		}
@@ -232,7 +233,7 @@ public class SistemaHeroesVillanos {
 
 	public void cargarArchivoLigas() throws FileNotFoundException, CaracteristicaExcepcion {
 		if (this.archivoPersonajeExiste == false) {
-			System.out.println("\nSe cargara primero el archivo correspondiente a los personajes.");
+			System.out.println("\nPara cargar las ligas, primero se debe cargar el archivo de personajes.\n");
 			this.cargarArchivoPersonaje();
 		}
 
@@ -273,7 +274,7 @@ public class SistemaHeroesVillanos {
 			numeroLiga++;
 		}
 
-		System.out.println("\n¡Las Ligas se han cargado correctamente!\n");
+		System.out.println("¡Las Ligas se han formado correctamente!\n");
 	}
 
 	public void crearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
@@ -298,7 +299,7 @@ public class SistemaHeroesVillanos {
 						seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
 						if (seleccionLiga != 0) {
 							listaLigas.add(seleccionLiga);
-							System.out.println("La liga ha sido agregada correctamente.");
+							System.out.println("La liga ha sido agregada correctamente a la liga.");
 						}
 					} while (seleccionLiga != 0 && validarSeleccionLigas(bando, listaLigas));
 				} else {
@@ -311,7 +312,7 @@ public class SistemaHeroesVillanos {
 						seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
 						if (seleccionPersonaje != 0) {
 							listaPersonajes.add(seleccionPersonaje);
-							System.out.println("La liga ha sido agregada correctamente.");
+							System.out.println("El personaje ha sido agregado correctamente a la liga.");
 						}
 					} while (seleccionPersonaje != 0 && validarSeleccionPersonaje(bando, listaPersonajes));
 				}
@@ -429,7 +430,7 @@ public class SistemaHeroesVillanos {
 	}
 
 	public void guardarArchivoLigas() throws IOException {
-		ArchivoLigas ligasFile = new ArchivoLigas("Ligas");
+		ArchivoLigas ligasFile = new ArchivoLigas("ligas");
 		if (!ligasFile.escribir(this.ligas)) {
 			throw new RuntimeException("\nError al intentar guardar las ligas.");
 		}
@@ -445,23 +446,30 @@ public class SistemaHeroesVillanos {
 		TipoCaracteristica nuevaCaracteristica = caracteristica;
 		int resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 				- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
-
+		System.out.println("\n+----- COMBATE -----+\n");
+		System.out.println("["+ u1.getNombrePersonaje() +"] VS ["+ u2.getNombrePersonaje() +"]");
+		System.out.println("\n+ Caracterisitica: " + nuevaCaracteristica);
+		System.out.println();
 		if (resultado == 0) {
 			do {
+				System.out.println("¡Han empatado en " + nuevaCaracteristica + "!");
 				nuevaCaracteristica = nuevaCaracteristica.getNext();
-				resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
-						- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
+				if(nuevaCaracteristica != caracteristica) {
+					System.out.println("Ahora combatiran por: " + nuevaCaracteristica + "\n");
+					resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
+							- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
+				}
 			} while (resultado == 0 && nuevaCaracteristica != caracteristica);
 		}
 
 		if (resultado > 0) {
-			resultadoEnfrentamiento += "Ganador: " + u1.getNombrePersonaje() + " - Caracteristica: "
+			resultadoEnfrentamiento += "\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: "
 					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
 		} else if (resultado < 0) {
-			resultadoEnfrentamiento += "Ganador: " + u2.getNombrePersonaje() + " - Caracteristica: "
+			resultadoEnfrentamiento += "\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: "
 					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
 		} else {
-			resultadoEnfrentamiento += "Se produjo un empate entre los 2 competidores";
+			resultadoEnfrentamiento += "\nSe produjo un empate entre los 2 competidores";
 		}
 
 		return resultadoEnfrentamiento;

@@ -6,9 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Bandos;
@@ -40,7 +42,7 @@ public class ArchivoPersonajes {
 			int nroPersonajeAsignado = 1;
 
 			while (lector.hasNextLine()) {
-				linea = lector.next().split("[,\n]");
+				linea = lector.nextLine().split("[,\n]");
 				tipoPersonaje = linea[0].trim();
 				nombreReal = linea[1].trim();
 				nombrePersonaje = linea[2].trim();
@@ -66,8 +68,10 @@ public class ArchivoPersonajes {
 	public boolean escribir(Map<Competidor, Integer> competidores) throws IOException {
 		String path = "./archivos/out/" + this.nombre + ".out";
 		try (FileWriter file = new FileWriter(path); PrintWriter printerWriter = new PrintWriter(file)) {
+			Map<Competidor, Integer> mapaOrdenado = competidores.entrySet().stream().sorted(Map.Entry.comparingByValue())
+					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
-			for (Map.Entry<Competidor, Integer> entry : competidores.entrySet()) {
+			for (Map.Entry<Competidor, Integer> entry : mapaOrdenado.entrySet()) {
 				Competidor competidor = entry.getKey();
 				printerWriter.println(competidor.toString());
 			}
