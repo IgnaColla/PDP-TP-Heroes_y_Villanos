@@ -105,8 +105,8 @@ public class Liga extends UnidadCompetidor {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof Competidor) {
-			Competidor otro = (Competidor) obj;
+		if (obj != null && obj instanceof Liga) {
+			Liga otro = (Liga) obj;
 			return this.getNombrePersonaje().hashCode() == otro.getNombrePersonaje().hashCode();
 		} else {
 			return false;

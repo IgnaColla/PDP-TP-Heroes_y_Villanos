@@ -377,8 +377,18 @@ public class SistemaHeroesVillanos {
 
 					liga.setBando(bando);
 					liga.recalcularCaracteristicas();
-					this.ligas.put(nroLiga, liga);
-					System.out.println("\n¡Liga creada correctamente!\n");
+					boolean existeLigas = false;
+					for(Integer keyLigas : ligas.keySet()) {
+						if(ligas.get(keyLigas).equals(liga)) {
+							existeLigas = true;
+						}
+					}
+					if(!existeLigas) {
+						this.ligas.put(nroLiga, liga);						
+						System.out.println("\n¡Liga creada correctamente!\n");
+					}else {
+						System.out.println("La liga que intenta crear ya existe. Intente nuevamente.");
+					}
 				} else {
 					System.out.println("\nSe cancela la creación de Liga.\n");
 				}
