@@ -297,9 +297,19 @@ public class SistemaHeroesVillanos {
 						listarLigas(bando, listaLigas);
 						System.out.println("\n0. Volver menu anterior");
 						seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
+						
+						boolean encontroLiga = false;
+				
 						if (seleccionLiga != 0) {
-							listaLigas.add(seleccionLiga);
-							System.out.println("La liga ha sido agregada correctamente a la liga.");
+							
+							for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {
+								Liga liga = entry.getValue();
+								if (liga.getBando() == bando) {
+									encontroLiga = true;
+									listaLigas.add(seleccionLiga);
+									System.out.println("La liga ha sido agregada correctamente a la liga.");
+								}
+							}
 						}
 					} while (seleccionLiga != 0 && validarSeleccionLigas(bando, listaLigas));
 				} else {
