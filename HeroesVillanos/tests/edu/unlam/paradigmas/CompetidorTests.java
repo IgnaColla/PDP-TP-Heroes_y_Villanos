@@ -9,24 +9,26 @@ import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
 import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
 import edu.unlam.paradigmas.sistema.Competidor;
+import edu.unlam.paradigmas.sistema.Liga;
+import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class CompetidorTests {
 
-	private Competidor personajeUno;
-	private Caracteristica caracteristicasPersonajeUno;
-	private Competidor personajeDos;
-	private Caracteristica caracteristicasPersonajeDos;
-	private Competidor personajeTres;
-	private Caracteristica caracteristicasPersonajeTres;
-	@SuppressWarnings("unused")
-	private Competidor personajeCuatro;
-	private Caracteristica caracteristicasPersonajeCuatro;
-	@SuppressWarnings("unused")
-	private Competidor personajeCinco;
-	private Caracteristica caracteristicasPersonajeCinco;
-	@SuppressWarnings("unused")
-	private Competidor personajeSeis;
-	private Caracteristica caracteristicasPersonajeSeis;
+	Competidor personajeUno;
+	Caracteristica caracteristicasPersonajeUno;
+	Competidor personajeDos;
+	Caracteristica caracteristicasPersonajeDos;
+	Competidor personajeTres;
+	Caracteristica caracteristicasPersonajeTres;
+	Competidor personajeCuatro;
+	Caracteristica caracteristicasPersonajeCuatro;
+	Competidor personajeCinco;
+	Caracteristica caracteristicasPersonajeCinco;
+	Competidor personajeSeis;
+	Caracteristica caracteristicasPersonajeSeis;
+	Competidor v1, v2, v3, v4, v5, h1, h2, h3, h4, h5;
+	Liga ligaHeroes, ligaHeroes2, ligaHeroes3, ligaVillanos, ligaVillanos2, ligaVillanos3;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,10 +38,30 @@ public class CompetidorTests {
 		caracteristicasPersonajeDos = new Caracteristica(20, 30, 40, 50);
 		personajeDos = new Competidor("Nombre real test p2", "Nombre personaje test p2", Bandos.Villano,
 				caracteristicasPersonajeDos);
-
+		
+		h1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new Caracteristica(200, 150, 180, 250));
+		h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new Caracteristica(200, 200, 200, 200));
+		h3 = new Competidor("Steve Rogers", "Captain America", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
+		h4 = new Competidor("Batman", "Batman", Bandos.Heroe, new Caracteristica(150, 200, 250, 200));
+		h5 = new Competidor("Superman", "Superman", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
+		
+		v1 = new Competidor("Ronan", "Ronan the Accuser", Bandos.Villano, new Caracteristica(150, 250, 180, 330));
+		v2 = new Competidor("Loki", "Loki", Bandos.Villano, new Caracteristica(150, 150, 150, 200));
+		v3 = new Competidor("Joker", "Joker", Bandos.Villano, new Caracteristica(100, 200, 250, 200));
+		v4 = new Competidor("Watchmen", "Watchmen", Bandos.Villano, new Caracteristica(100, 150, 130, 200));
+		v5 = new Competidor("Magneto", "Magneto", Bandos.Villano, new Caracteristica(200, 175, 190, 225));
+		
+		ligaHeroes = new Liga();
+		ligaHeroes2 = new Liga();
+		ligaVillanos = new Liga();
+				ligaHeroes.agregarALiga(h1);
+		ligaHeroes.agregarALiga(h2);
+		
+		ligaVillanos.agregarALiga(v1);
+		ligaVillanos.agregarALiga(v2);
 	}
 
-	// esto no se tendría que probar acá, se tendría que probar en sistema?
+
 	@Test(expected = CaracteristicaExcepcion.class)
 	public void quePersonajeNoSeGenereConCaracteristicasNegativas() throws CaracteristicaExcepcion {
 		caracteristicasPersonajeTres = new Caracteristica(-60, 70, 80, 90);
@@ -80,69 +102,64 @@ public class CompetidorTests {
 
 		personajeSeis = new Competidor("Nombre real test p6", "Nombre personaje test p6", Bandos.valueOf("PEPITO4"),
 				caracteristicasPersonajeSeis);
-	}
-
-	@Test
-	public void queFormatoLigaToStringSeRespete() {
-        String primerResultadoEsperado = "Heroe, Nombre real test p1, Nombre personaje test p1, 10, 20, 30, 40";
-        assertEquals(primerResultadoEsperado, personajeUno.toString());
-        String segundoResultadoEsperado = "Villano, Nombre real test p2, Nombre personaje test p2, 20, 30, 40, 50";
-        assertEquals(segundoResultadoEsperado, personajeDos.toString());
-	}
+	}	
+	
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAVelocidad() { 
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.VELOCIDAD), true);
 	}
+	
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAFuerza() { 
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.FUERZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAResistencia() { 
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.RESISTENCIA), true);
 		
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseADestreza() {
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.DESTREZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAVelocidad() {
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.VELOCIDAD), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAFuerza() {
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.FUERZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAResistencia() {
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.RESISTENCIA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseADestreza() {
-
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.DESTREZA), true);
 	}
 	
 	@Test
 	public void quePersonajeSeDistingaEnBaseAOtraUnidad() {
-
+		assertEquals(personajeUno.equals(personajeDos), false);
 	}
+	
 	
 	@Test
 	public void quePersonajeSeaIgualEnBaseAOtraUnidad() {
-
+		assertEquals(personajeUno.equals(personajeUno), true);	
 	}
 	
 	@Test
 	public void quePersonajeSepaContarse() {
-
-	}	
+		assertEquals(personajeUno.contarIntegrantes(), 1);
+	}
 }

@@ -18,9 +18,17 @@ public class ArchivoLigas {
 	public ArchivoLigas(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String getPathIn() {
+		return "./archivos/in/" + this.nombre + ".in";
+	}
 
+	public String getPathOut() {
+		return "./archivos/out/" + this.nombre + ".out";
+	}
+	
 	public Map<Integer, String> leer() throws FileNotFoundException {
-		String path = "./archivos/in/" + this.nombre + ".in";
+		String path = this.getPathIn();
 		File archivoEntradaLigas = new File(path);
 		Map<Integer, String> ligasNumeradas = new HashMap<>();
 
@@ -38,7 +46,7 @@ public class ArchivoLigas {
 	}
 
 	public boolean escribir(Map<Integer, Liga> ligas) throws IOException {
-		String path = "./archivos/out/" + this.nombre + ".out";
+		String path = this.getPathOut();
 		try (FileWriter file = new FileWriter(path); PrintWriter printerWriter = new PrintWriter(file)) {
 			String linea = "";
 			for (Map.Entry<Integer, Liga> entry : ligas.entrySet()) {

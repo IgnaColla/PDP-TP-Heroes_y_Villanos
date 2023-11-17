@@ -24,9 +24,17 @@ public class ArchivoPersonajes {
 	public ArchivoPersonajes(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String getPathIn() {
+		return "./archivos/in/" + this.nombre + ".in";
+	}
+	
+	public String getPathOut() {
+		return "./archivos/out/" + this.nombre + ".out";
+	}
 
 	public Map<Competidor, Integer> leer() throws FileNotFoundException {
-		String path = "./archivos/in/" + this.nombre + ".in";
+		String path = this.getPathIn();
 		File archivoEntrada = new File(path);
 
 		try (Scanner lector = new Scanner(archivoEntrada, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
@@ -66,7 +74,7 @@ public class ArchivoPersonajes {
 	}
 
 	public boolean escribir(Map<Competidor, Integer> competidores) throws IOException {
-		String path = "./archivos/out/" + this.nombre + ".out";
+		String path = this.getPathOut();
 		try (FileWriter file = new FileWriter(path); PrintWriter printerWriter = new PrintWriter(file)) {
 			Map<Competidor, Integer> mapaOrdenado = competidores.entrySet().stream().sorted(Map.Entry.comparingByValue())
 					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
