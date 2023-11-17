@@ -41,7 +41,7 @@ public class Competidor extends UnidadCompetidor {
 		return this.equals(unidad);
 	}
 
-	protected int contarIntegrantes() {
+	public int contarIntegrantes() {
 		return 1;
 	}
 

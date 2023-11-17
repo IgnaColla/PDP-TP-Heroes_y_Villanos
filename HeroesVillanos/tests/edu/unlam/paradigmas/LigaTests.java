@@ -34,9 +34,6 @@ public class LigaTests {
 	Liga ligaVillanos2;
 	Liga ligaVillanos3;
 	Liga ligaVillanos4;
-	
-	private Map<Competidor, Integer> competidores = new HashMap<>();
-	private Map<Integer, Liga> ligas = new HashMap<>();
 
 	@Before
 	public void setUp() throws Exception {

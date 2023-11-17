@@ -15,7 +15,6 @@ import edu.unlam.paradigmas.archivos.ArchivoLigas;
 import edu.unlam.paradigmas.archivos.ArchivoPersonajes;
 import edu.unlam.paradigmas.comparadores.ComparadorPorCaracteristica;
 import edu.unlam.paradigmas.excepciones.CaracteristicaExcepcion;
-import edu.unlam.paradigmas.excepciones.SistemaExcepcion;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class SistemaHeroesVillanos {
@@ -23,8 +22,9 @@ public class SistemaHeroesVillanos {
 	private Map<Competidor, Integer> competidores = new HashMap<>();
 	private Map<Integer, Liga> ligas = new HashMap<>();
 	private boolean archivoPersonajeExiste = false;
-	
-	public SistemaHeroesVillanos() {}
+
+	public SistemaHeroesVillanos() {
+	}
 
 	public void setCompetidor(Competidor competidor, int valor) {
 		this.competidores.put(competidor, valor);
@@ -311,7 +311,7 @@ public class SistemaHeroesVillanos {
 		return liga;
 	}
 
-	public void menuCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
+	public void menuCrearLiga(Scanner scanner) throws CaracteristicaExcepcion {
 
 		System.out.println("\n[Crear Liga]\n");
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
@@ -605,7 +605,7 @@ public class SistemaHeroesVillanos {
 			if (seleccion != 0) {
 				competidor = buscarCompetidorPorNumero(competidores, seleccion);
 				System.out.println("El personaje ha sido seleccionado correctamente.");
-				
+
 				Bandos bando = Bandos.Heroe;
 
 				if (competidor.getBando() == Bandos.Heroe) {
@@ -619,21 +619,21 @@ public class SistemaHeroesVillanos {
 					seleccion = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
 					liga = ligas.get(seleccion);
 					if (seleccion != 0 && competidor.getBando() == liga.getBando()) {
-						System.out.println("Seleccione un personaje válido.");
+						System.out.println("Seleccione una liga válida.");
 					}
-				}while(seleccion != 0 && competidor.getBando() == liga.getBando());
-				
-				if(seleccion != 0) {
+				} while (seleccion != 0 && competidor.getBando() == liga.getBando());
+
+				if (seleccion != 0) {
 					System.out.println("La liga ha sido seleccionado correctamente.");
 					System.out.println(
 							"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 					TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
 					enfrentar(competidor, liga, caracteristicaSeleccionada);
-				}else {
+				} else {
 					System.out.println("¡Volviendo al menu anterior...!");
 				}
-			}else {
+			} else {
 				System.out.println("¡Volviendo al menu anterior...!");
 			}
 		} else {
@@ -655,28 +655,37 @@ public class SistemaHeroesVillanos {
 			if (seleccionLiga != 0) {
 				liga1 = ligas.get(seleccionLiga);
 				System.out.println("La liga ha sido seleccionada correctamente.");
+
+				Bandos bando = Bandos.Heroe;
+
+				if (liga1.getBando() == Bandos.Heroe) {
+					bando = Bandos.Villano;
+				}
+
+				System.out.println("\n[Seleccione Liga Oponente:]\n");
+				do {
+					listarLigas(bando);
+					System.out.println("\n0. Volver menu anterior");
+					seleccionLiga = validarObtencionNumero(scanner, "¿Qué liga quiere agregar?\n");
+					liga2 = ligas.get(seleccionLiga);
+					if (seleccionLiga != 0 && liga1.getBando() == liga2.getBando()) {
+						System.out.println("Seleccione una liga válida.");
+					}
+				} while (seleccionLiga != 0 && liga1.getBando() == liga2.getBando());
+
+				if (seleccionLiga != 0) {
+					System.out.println("La liga ha sido seleccionada correctamente.");
+					System.out.println(
+							"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
+					TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
+
+					enfrentar(liga1, liga2, caracteristicaSeleccionada);
+				} else {
+					System.out.println("¡Volviendo al menu anterior...!");
+				}
+			} else {
+				System.out.println("¡Volviendo al menu anterior...!");
 			}
-
-			Bandos bando = Bandos.Heroe;
-
-			if (liga1.getBando() == Bandos.Heroe) {
-				bando = Bandos.Villano;
-			}
-
-			System.out.println("\n[Seleccione Liga Oponente:]\n");
-			listarLigas(bando);
-			System.out.println("\n0. Volver menu anterior");
-			seleccionLiga = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
-			if (seleccionLiga != 0) {
-				liga2 = ligas.get(seleccionLiga);
-				System.out.println("La liga ha sido seleccionada correctamente.");
-			}
-
-			System.out.println(
-					"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
-			TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
-
-			enfrentar(liga1, liga2, caracteristicaSeleccionada);
 		} else {
 			System.out.println("No existen ligas para realizar los enfrentamientos.");
 			System.out.println("Debe cargar previamente los archivos.");
@@ -711,7 +720,7 @@ public class SistemaHeroesVillanos {
 
 	public void reportarVencedores(Scanner scanner) throws FileNotFoundException {
 
-		if (this.competidores.size() != 0) {
+		if (existenPersonajes()) {
 
 			int seleccionPersonaje;
 			Competidor competidor = new Competidor();
@@ -751,12 +760,17 @@ public class SistemaHeroesVillanos {
 	}
 
 	public void ordenarPersonajesPorCaracteristica(Scanner scanner) throws FileNotFoundException {
-		System.out.println("\n[Ordenar personajes por caracteristicas]");
-		System.out.println(
-				"+ Seleccione las caracteristicas para ordenar:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
-		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
+		if(existenPersonajes()) {
+			System.out.println("\n[Ordenar personajes por caracteristicas]");
+			System.out.println(
+					"+ Seleccione las caracteristicas para ordenar:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
+			TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		listarPersonajes(caracteristicaSeleccionada);
+			listarPersonajes(caracteristicaSeleccionada);
+		}else {
+			System.out.println("\n[Por favor cargue personajes y listas para poder utilizar esta funcionalidad]\n");
+		}
+		
 	}
 
 	private TipoCaracteristica seleccionarCaracteristica(Scanner scanner) {
