@@ -3,7 +3,6 @@
  * Aun asi seguramente el codigo pedira otros cambios de visiblidad 
  * */
 
-
 package edu.unlam.paradigmas;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +21,6 @@ public class SistemaHeroesVillanosTests {
 	private Liga ligaHeroes, ligaHeroes2, ligaHeroes3, ligaVillanos, ligaVillanos2, ligaVillanos3;
 	private SistemaHeroesVillanos sistema;
 
-	
 	@Before
 	public void setUp() throws Exception {
 		v1 = new Competidor("Ronan", "Ronan the Accuser", Bandos.Villano, new Caracteristica(150, 250, 180, 330));
@@ -39,216 +37,179 @@ public class SistemaHeroesVillanosTests {
 		h3 = new Competidor("Steve Rogers", "Captain America", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
 		h4 = new Competidor("Batman", "Batman", Bandos.Heroe, new Caracteristica(150, 200, 250, 200));
 		h5 = new Competidor("Superman", "Superman", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
-		
-		
+
 		ligaHeroes = new Liga();
 		ligaHeroes2 = new Liga();
 		ligaVillanos = new Liga();
 
-		//agregarALiga
+		// agregarALiga
 		ligaHeroes.agregarALiga(h1);
 		ligaHeroes.agregarALiga(h2);
-		ligaHeroes.setBando(Bandos.valueOf("Heroe"));
-		ligaHeroes.recalcularCaracteristicas();
-		
-		//System.out.println(ligaHeroes);
+
 		ligaVillanos.agregarALiga(v1);
 		ligaVillanos.agregarALiga(v2);
-		
-		//liga.setBando(bando);
-		
-		
-		ligaVillanos.recalcularCaracteristicas();
+
 	}
-	
+
 	/*
-	 * resultadoEnfrentamiento += "Ganador: " + u1.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
-		} else if (resultado < 0) {
-			resultadoEnfrentamiento += "Ganador: " + u2.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
-		} else {
-			resultadoEnfrentamiento += "Se produjo un empate entre los 2 competidores";
-	 * */
-
-	@Test
-	public void HeroeGanaVillanoPorVelocidad() {
-		//String esperado = "Ganador: Black Widow - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
-		//System.out.println(esperado);
-		//System.out.println(SistemaHeroesVillanos.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-		
-		System.out.println(sistema.enfrentar(v1, h1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-		assertEquals(1, sistema.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-	}
-	@Test
-	public void heroeGanaVillanoPorFuerza() {
-		String esperado = "Ganador: Black Panther - Caracteristica: FUERZA Diferencia: 50 puntos.";
-		//System.out.println(esperado);
-		//System.out.println(SistemaHeroesVillanos.enfrentar(h2, v2, Caracteristica.TipoCaracteristica.valueOf("FUERZA")));
-		assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h2, v2, Caracteristica.TipoCaracteristica.valueOf("FUERZA")));
-	}
-	
-	
-	@Test
-	public void heroeGanaVillanoPorResistencia() {
-		String esperado = "Ganador: Captain America - Caracteristica: RESISTENCIA Diferencia: 70 puntos.";
-		//System.out.println(esperado);
-		//System.out.println(SistemaHeroesVillanos.enfrentar(h3, v1, Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")));
-		assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h3, v1, Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")));
-	}
-	
-	
-	
-	@Test
-	public void heroeGanaVillanoPorDestreza() {
-		String esperado = "Ganador: Black Widow - Caracteristica: DESTREZA Diferencia: 50 puntos.";
-		//System.out.println(esperado);
-		//System.out.println(SistemaHeroesVillanos.enfrentar(h1, v2, Caracteristica.TipoCaracteristica.valueOf("DESTREZA")));
-		assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h1, v2, Caracteristica.TipoCaracteristica.valueOf("DESTREZA")));
-	}
-	
-	
-	@Test
-	public void heroeEmpataConVillano() {
-		String esperado = "Se produjo un empate entre los 2 competidores";
-		assertEquals(SistemaHeroesVillanos.enfrentar(h5, v3, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado);
-	}
-	
-	@Test
-	public void heroeGanaVillanoYVuelvaAVelocidadRec() {
-		String esperado = "Ganador: Batman - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
-		assertEquals(SistemaHeroesVillanos.enfrentar(h4, v3, Caracteristica.TipoCaracteristica.valueOf("DESTREZA")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeGanaVillanoPorVelocidad() {
-		String esperado = "Ganador: Black Widow, Black Panther - Caracteristica: VELOCIDAD Diferencia: 100 puntos.";
-		//System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeGanaVillanoPorFuerza() {
-		String esperado = "Ganador: Black Widow, Black Panther - Caracteristica: FUERZA Diferencia: 25 puntos.";
-		//System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("FUERZA")));
-		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("FUERZA")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeGanaVillanoPorResistencia() {
-		String esperado = "Ganador: Black Widow, Black Panther - Caracteristica: RESISTENCIA Diferencia: 60 puntos.";
-		//System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")));
-		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeGanaVillanoPorDestreza() {
-		String esperado = "Ganador: Black Widow, Black Panther - Caracteristica: DESTREZA Diferencia: 25 puntos.";
-		//System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("DESTREZA")));
-		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4, Caracteristica.TipoCaracteristica.valueOf("DESTREZA")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeEmpataVillano()
-	{
-		String esperado = "Se produjo un empate entre los 2 competidores";
-		System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v5, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
-		assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v5, Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado);
-	}
-	
-	@Test
-	public void ligaHeroeGanaLigaVillano()
-	{
-		
-	}
-	
-	@Test
-	public void ligaHeroeEmpataLigaVillano()
-	{
-		
-	}
-	
-	@Test
-	public void ligaHeroeLigaVillano()
-	{
-		
-	}
-	/*
-	
-	@Test
-	public void queEnfrentePersonajeVsPersonajePorCaracteristica() {
-		String esperado = "Ganador: Loki - Caracteristica: Velocidad Diferencia 30 puntos.";
-		assertEquals(SistemaHeroesVillanos.enfrentar(h1, v1, Caracteristica.TipoCaracteristica.valueOf("fuerza")), esperado);
-	}
-
-	@Test
-	public void queEnfrenteLigasVsPersonajesPorCaracteristica() {
-
-	}
-	
-	@Test
-	public void queCargueElArchivoPersonajeCuandoSeQuiereTrabajarConPersonajes() throws FileNotFoundException {
-	}
-
-	@Test
-	public void queListePersonajesCorrectamente() {
-		
-	}
-
-	@Test
-	public void queGuardeArchivoPersonajesCorrectamente() {
-
-	}
-
-	@Test
-	public void queCargueElArchivoLigasCuandoSeQuiereTrabajarConUnidadesCompetidoras() {
-
-	}
-
-	@Test
-	public void queCreeLigas() {
-
-	}
-
-	@Test
-	public void queListeLigasCorrectamente() {
-
-	}
-
-	@Test
-	public void queGuardeArchivoLigasCorrectamente() {
-
-	}
-
-
-	@Test
-	public void queDetermineQuienEsElGanadorPorCaracteristica() {
-
-	}
-
-	@Test
-	public void queDetermineQuienEsElPerdedorPorCaracteristica() {
-
-	}
-
-	@Test
-	public void queDetermineQuienEmpataPorCaracteristica() {
-
-	}
-
-	@Test
-	public void queOrdenePersonajesPorCaracteristicas() {
-
-	}
-
-	@Test
-	public void queDetermineSiEsDeMismoBando() {
-
-	}
-
-	@Test
-	public void queDetermineSiNoEsDeMismoBando() {
-
-	}*/
+	 * @Test public void HeroeGanaVillanoPorVelocidad() { //String esperado =
+	 * "Ganador: Black Widow - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
+	 * //System.out.println(esperado);
+	 * //System.out.println(SistemaHeroesVillanos.enfrentar(h1, v1,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
+	 * 
+	 * System.out.println(sistema.enfrentar(v1, h1,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD"))); assertEquals(1,
+	 * sistema.enfrentar(h1, v1,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD"))); }
+	 * 
+	 * @Test public void heroeGanaVillanoPorFuerza() { String esperado =
+	 * "Ganador: Black Panther - Caracteristica: FUERZA Diferencia: 50 puntos.";
+	 * //System.out.println(esperado);
+	 * //System.out.println(SistemaHeroesVillanos.enfrentar(h2, v2,
+	 * Caracteristica.TipoCaracteristica.valueOf("FUERZA"))); assertEquals(esperado,
+	 * SistemaHeroesVillanos.enfrentar(h2, v2,
+	 * Caracteristica.TipoCaracteristica.valueOf("FUERZA"))); }
+	 * 
+	 * 
+	 * @Test public void heroeGanaVillanoPorResistencia() { String esperado =
+	 * "Ganador: Captain America - Caracteristica: RESISTENCIA Diferencia: 70 puntos."
+	 * ; //System.out.println(esperado);
+	 * //System.out.println(SistemaHeroesVillanos.enfrentar(h3, v1,
+	 * Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")));
+	 * assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h3, v1,
+	 * Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA"))); }
+	 * 
+	 * 
+	 * 
+	 * @Test public void heroeGanaVillanoPorDestreza() { String esperado =
+	 * "Ganador: Black Widow - Caracteristica: DESTREZA Diferencia: 50 puntos.";
+	 * //System.out.println(esperado);
+	 * //System.out.println(SistemaHeroesVillanos.enfrentar(h1, v2,
+	 * Caracteristica.TipoCaracteristica.valueOf("DESTREZA")));
+	 * assertEquals(esperado, SistemaHeroesVillanos.enfrentar(h1, v2,
+	 * Caracteristica.TipoCaracteristica.valueOf("DESTREZA"))); }
+	 * 
+	 * 
+	 * @Test public void heroeEmpataConVillano() { String esperado =
+	 * "Se produjo un empate entre los 2 competidores";
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(h5, v3,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado); }
+	 * 
+	 * @Test public void heroeGanaVillanoYVuelvaAVelocidadRec() { String esperado =
+	 * "Ganador: Batman - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(h4, v3,
+	 * Caracteristica.TipoCaracteristica.valueOf("DESTREZA")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeGanaVillanoPorVelocidad() { String esperado =
+	 * "Ganador: Black Widow, Black Panther - Caracteristica: VELOCIDAD Diferencia: 100 puntos."
+	 * ; //System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeGanaVillanoPorFuerza() { String esperado =
+	 * "Ganador: Black Widow, Black Panther - Caracteristica: FUERZA Diferencia: 25 puntos."
+	 * ; //System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("FUERZA")));
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("FUERZA")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeGanaVillanoPorResistencia() { String esperado =
+	 * "Ganador: Black Widow, Black Panther - Caracteristica: RESISTENCIA Diferencia: 60 puntos."
+	 * ; //System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")));
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("RESISTENCIA")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeGanaVillanoPorDestreza() { String esperado =
+	 * "Ganador: Black Widow, Black Panther - Caracteristica: DESTREZA Diferencia: 25 puntos."
+	 * ; //System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("DESTREZA")));
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v4,
+	 * Caracteristica.TipoCaracteristica.valueOf("DESTREZA")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeEmpataVillano() { String esperado =
+	 * "Se produjo un empate entre los 2 competidores";
+	 * System.out.println(SistemaHeroesVillanos.enfrentar(ligaHeroes, v5,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")));
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(ligaHeroes, v5,
+	 * Caracteristica.TipoCaracteristica.valueOf("VELOCIDAD")), esperado); }
+	 * 
+	 * @Test public void ligaHeroeGanaLigaVillano() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void ligaHeroeEmpataLigaVillano() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void ligaHeroeLigaVillano() {
+	 * 
+	 * } /*
+	 * 
+	 * @Test public void queEnfrentePersonajeVsPersonajePorCaracteristica() { String
+	 * esperado = "Ganador: Loki - Caracteristica: Velocidad Diferencia 30 puntos.";
+	 * assertEquals(SistemaHeroesVillanos.enfrentar(h1, v1,
+	 * Caracteristica.TipoCaracteristica.valueOf("fuerza")), esperado); }
+	 * 
+	 * @Test public void queEnfrenteLigasVsPersonajesPorCaracteristica() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void
+	 * queCargueElArchivoPersonajeCuandoSeQuiereTrabajarConPersonajes() throws
+	 * FileNotFoundException { }
+	 * 
+	 * @Test public void queListePersonajesCorrectamente() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queGuardeArchivoPersonajesCorrectamente() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void
+	 * queCargueElArchivoLigasCuandoSeQuiereTrabajarConUnidadesCompetidoras() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queCreeLigas() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queListeLigasCorrectamente() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queGuardeArchivoLigasCorrectamente() {
+	 * 
+	 * }
+	 * 
+	 * 
+	 * @Test public void queDetermineQuienEsElGanadorPorCaracteristica() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queDetermineQuienEsElPerdedorPorCaracteristica() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queDetermineQuienEmpataPorCaracteristica() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queOrdenePersonajesPorCaracteristicas() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queDetermineSiEsDeMismoBando() {
+	 * 
+	 * }
+	 * 
+	 * @Test public void queDetermineSiNoEsDeMismoBando() {
+	 * 
+	 * }
+	 */
 
 }

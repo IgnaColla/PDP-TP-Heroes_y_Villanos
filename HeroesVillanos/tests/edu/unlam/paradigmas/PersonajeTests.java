@@ -91,8 +91,103 @@ public class PersonajeTests {
 	}
 	
 	@Test
-	public void queSeObtenganLasCaracteristicasDeCadaPersonaje() { // ??? esto habría que probarlo?
+	public void quePersonajePierdaContraOtroPersonajeEnBaseAVelocidad() { 
 
 	}
+	
+	@Test
+	public void quePersonajePierdaContraOtroPersonajeEnBaseAFuerza() { 
 
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtroPersonajeEnBaseAResistencia() { 
+
+		
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtroPersonajeEnBaseADestreza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtraLigaEnBaseAVelocidad() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtraLigaEnBaseAFuerza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtraLigaEnBaseAResistencia() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraOtraLigaEnBaseADestreza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariasLigasEnBaseAVelocidad() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariasLigasEnBaseAFuerza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariasLigasEnBaseAResistencia() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariasLigasEnBaseADestreza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariosPersonajeEnBaseAVelocidad() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariosPersonajeEnBaseAFuerza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariosPersonajeEnBaseAResistencia() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariosPersonajeEnBaseADestreza() {
+
+	}
+	
+	@Test
+	public void quePersonajePierdaContraVariasPersonajeEnBaseADestreza() {
+
+	}
+	
+	@Test
+	public void quePersonajeSeDistingaEnBaseAOtraUnidad() {
+
+	}
+	
+	@Test
+	public void quePersonajeSeaIgualEnBaseAOtraUnidad() {
+
+	}
+	
+	@Test
+	public void quePersonajeSepaContarse() {
+
+	}	
 }
