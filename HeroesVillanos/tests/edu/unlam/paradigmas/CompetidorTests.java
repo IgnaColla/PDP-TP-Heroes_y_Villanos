@@ -10,7 +10,7 @@ import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
 import edu.unlam.paradigmas.sistema.Competidor;
 
-public class PersonajeTests {
+public class CompetidorTests {
 
 	private Competidor personajeUno;
 	private Caracteristica caracteristicasPersonajeUno;
@@ -128,51 +128,6 @@ public class PersonajeTests {
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseADestreza() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariasLigasEnBaseAVelocidad() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariasLigasEnBaseAFuerza() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariasLigasEnBaseAResistencia() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariasLigasEnBaseADestreza() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariosPersonajeEnBaseAVelocidad() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariosPersonajeEnBaseAFuerza() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariosPersonajeEnBaseAResistencia() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariosPersonajeEnBaseADestreza() {
-
-	}
-	
-	@Test
-	public void quePersonajePierdaContraVariasPersonajeEnBaseADestreza() {
 
 	}
 	

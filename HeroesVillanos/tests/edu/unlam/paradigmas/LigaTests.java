@@ -1,8 +1,8 @@
 package edu.unlam.paradigmas;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +21,11 @@ public class LigaTests {
 	Competidor h2;
 	Competidor v1;
 	Competidor v2;
+	Competidor v3;
 	Competidor h3;
 	Competidor h4;
 	Competidor h5;
+	Competidor h6;
 	Liga ligaHeroes1;
 	Liga ligaHeroes2;
 	Liga ligaHeroes3;
@@ -40,7 +42,7 @@ public class LigaTests {
 	public void setUp() throws Exception {
 		v1 = new Competidor("Ronan", "Ronan the Accuser", Bandos.Villano, new Caracteristica(150, 250, 180, 330));
 		v2 = new Competidor("Loki", "Loki", Bandos.Villano, new Caracteristica(150, 150, 150, 200));
-	
+
 		h1 = new Competidor("Natasha Romanoff", "Black Widow", Bandos.Heroe, new Caracteristica(200, 150, 180, 200));
 		h2 = new Competidor("T'Challa", "Black Panther", Bandos.Heroe, new Caracteristica(200, 200, 200, 200));
 		h3 = new Competidor("Steve Rogers", "Captain America", Bandos.Heroe, new Caracteristica(100, 200, 250, 200));
@@ -63,7 +65,7 @@ public class LigaTests {
 		ligaVillanos1.agregarALiga(v1);
 		
 		ligaVillanos2 = new Liga();
-		ligaVillanos1.agregarALiga(v2);
+		ligaVillanos2.agregarALiga(v2);
 
 		ligaVillanos3 = new Liga();
 		ligaVillanos3.agregarALiga(ligaVillanos1);
@@ -141,80 +143,208 @@ public class LigaTests {
 		assertEquals(tamañoAnteriorHeroe+5,ligaHeroes4.contarIntegrantes());
 	}
 	
-	public void queSePuedaCrearLigaConUnSoloPersonaje() {
+	
+	@Test
+	public void queSePuedaAgregarLigaConDistintasUnidadesCompetidoras() {
+
 		int tamañoAnteriorHeroe = ligaHeroes4.contarIntegrantes();
 		int tamañoAnteriorVillanos = ligaVillanos4.contarIntegrantes();
 
-		ligaVillanos4.agregarALiga(v1);
-		ligaHeroes4.agregarALiga(h1);
-		
-		assertEquals(1,ligaVillanos4.contarIntegrantes());
-		assertEquals(1,ligaHeroes4.contarIntegrantes());
-	}
-	
-	public void queSePuedaCrearLigaConUnaSolaLiga() {
 		ligaVillanos4.agregarALiga(ligaVillanos2);
-		ligaHeroes4.agregarALiga(ligaHeroes2); 
-
-		assertEquals(1,ligaVillanos4.contarIntegrantes());
-		assertEquals(1,ligaHeroes4.contarIntegrantes());
+		ligaVillanos4.agregarALiga(ligaVillanos1);
+		ligaVillanos4.agregarALiga(v1);
+		ligaHeroes4.agregarALiga(ligaHeroes3);
+		ligaHeroes4.agregarALiga(ligaHeroes2);
+		ligaHeroes4.agregarALiga(h3);
+		ligaHeroes4.agregarALiga(h4);
+		ligaHeroes4.agregarALiga(h5);
+		
+		assertEquals(tamañoAnteriorVillanos+3,ligaVillanos4.contarIntegrantes());
+		assertEquals(tamañoAnteriorHeroe+6,ligaHeroes4.contarIntegrantes());
 	}
-	
-	
-	
-//	
-//	public void queSePuedaCrearLigaConVariasLigas() {
-//		Bandos bando = ;
-//		sistema.crearLiga(ligas,competidores,bando);
-//	}
-//	
-//	public void queSePuedaCrearLigaConVariosPersonajes() {
-//		Bandos bando = ;
-//		sistema.crearLiga(ligas,competidores,bando);
-//	}
-//	
-//	public void queSePuedaCrearLigaConDistintasUnidadesCompetidoras() {
-//		Bandos bando = ;
-//		sistema.crearLiga(ligas,competidores,bando);
-//	}
 
 	@Test
-	public void queCambiePoderLigaCuandoSeIngresaUnaNuevaUnidadCompetidora() {
+	public void queAumentePoderLigaCuandoSeIngresaUnaNuevaUnidadCompetidoraConDiferentesAtributos() {
+		
+		ligaVillanos4.agregarALiga(ligaVillanos1);
+
+		int velocidadAnteriorVillano = ligaVillanos2.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorVillano = ligaVillanos2.getCaracteristica().getFuerza();
+		int resistenciaAnteriorVillano = ligaVillanos2.getCaracteristica().getResistencia();
+		int destrezaAnteriorVillano = ligaVillanos2.getCaracteristica().getDestreza();
 	
+		ligaVillanos4.agregarALiga(v1);
+		
+		List<Integer> poderActualizadoVillano = ligaVillanos4.getCaracteristicas();
+		
+		int velocidadActualizadoVillano = poderActualizadoVillano.get(0);
+		int fuerzaActualizadoVillano = poderActualizadoVillano.get(1);
+		int resistenciaActualizadoVillano = poderActualizadoVillano.get(2);
+		int destrezaActualizadoVillano = poderActualizadoVillano.get(3);
+		
+		ligaHeroes4.agregarALiga(h1);
+
+		int velocidadAnteriorHeroe = h1.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorHeroe = h1.getCaracteristica().getFuerza();
+		int resistenciaAnteriorHeroe = h1.getCaracteristica().getResistencia();
+		int destrezaAnteriorHeroe = h1.getCaracteristica().getDestreza();
+
+		ligaHeroes4.agregarALiga(ligaHeroes1);		
+		
+		List<Integer> poderActualizadoHeroe = ligaHeroes4.getCaracteristicas();
+
+		int velocidadActualizadoHeroe = poderActualizadoHeroe.get(0);
+		int fuerzaActualizadoHeroe = poderActualizadoHeroe.get(1);
+		int resistenciaActualizadoHeroe = poderActualizadoHeroe.get(2);
+		int destrezaActualizadoHeroe = poderActualizadoHeroe.get(3);
+		
+		assertTrue(velocidadAnteriorVillano < velocidadActualizadoVillano);
+		assertTrue(fuerzaAnteriorVillano < fuerzaActualizadoVillano);
+		assertTrue(resistenciaAnteriorVillano < resistenciaActualizadoVillano);
+		assertTrue(destrezaAnteriorVillano < destrezaActualizadoVillano);
+		
+		assertTrue(velocidadAnteriorHeroe < velocidadActualizadoHeroe);
+		assertTrue(fuerzaAnteriorHeroe < fuerzaActualizadoHeroe);
+		assertTrue(resistenciaAnteriorHeroe < resistenciaActualizadoHeroe);
+		assertTrue(destrezaAnteriorHeroe < destrezaActualizadoHeroe);
+	}
+	
+	@Test 
+	public void queAumentePoderLigaCuandoSeIngresaUnaNuevaLiga() {
+		
+		ligaVillanos4.agregarALiga(ligaVillanos2);
+
+		int velocidadAnteriorVillano = ligaVillanos4.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorVillano = ligaVillanos4.getCaracteristica().getFuerza();
+		int resistenciaAnteriorVillano = ligaVillanos4.getCaracteristica().getResistencia();
+		int destrezaAnteriorVillano = ligaVillanos4.getCaracteristica().getDestreza();
+	
+		ligaVillanos4.agregarALiga(ligaVillanos1);
+		
+		
+		List<Integer> poderActualizadoVillano = ligaVillanos4.getCaracteristicas();
+		
+		int velocidadActualizadoVillano = poderActualizadoVillano.get(0);
+		int fuerzaActualizadoVillano = poderActualizadoVillano.get(1);
+		int resistenciaActualizadoVillano = poderActualizadoVillano.get(2);
+		int destrezaActualizadoVillano = poderActualizadoVillano.get(3);
+		
+		ligaHeroes4.agregarALiga(ligaHeroes2);
+
+		int velocidadAnteriorHeroe = ligaHeroes4.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorHeroe = ligaHeroes4.getCaracteristica().getFuerza();
+		int resistenciaAnteriorHeroe = ligaHeroes4.getCaracteristica().getResistencia();
+		int destrezaAnteriorHeroe = ligaHeroes4.getCaracteristica().getDestreza();
+
+		ligaHeroes4.agregarALiga(ligaHeroes1);		
+		
+		List<Integer> poderActualizadoHeroe = ligaHeroes4.getCaracteristicas();
+		
+		int velocidadActualizadoHeroe = poderActualizadoHeroe.get(0);
+		int fuerzaActualizadoHeroe = poderActualizadoHeroe.get(1);
+		int resistenciaActualizadoHeroe = poderActualizadoHeroe.get(2);
+		int destrezaActualizadoHeroe = poderActualizadoHeroe.get(3);
+		
+		assertTrue(velocidadAnteriorVillano < velocidadActualizadoVillano);
+		assertTrue(fuerzaAnteriorVillano < fuerzaActualizadoVillano);
+		assertTrue(resistenciaAnteriorVillano < resistenciaActualizadoVillano);
+		assertTrue(destrezaAnteriorVillano < destrezaActualizadoVillano);
+		
+		assertTrue(velocidadAnteriorHeroe < velocidadActualizadoHeroe);
+		assertTrue(fuerzaAnteriorHeroe < fuerzaActualizadoHeroe);
+		assertTrue(resistenciaAnteriorHeroe < resistenciaActualizadoHeroe);
+		assertTrue(destrezaAnteriorHeroe < destrezaActualizadoHeroe);
 	}
 	
 	@Test
-	public void queCambiePoderLigaCuandoSeIngresaUnaNuevaLiga() {
+	public void queAumentePoderLigaCuandoSeIngresaUnNuevoPersonaje() {
+		
+		ligaVillanos4.agregarALiga(v1);
 
+		int velocidadAnteriorVillano = ligaVillanos4.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorVillano = ligaVillanos4.getCaracteristica().getFuerza();
+		int resistenciaAnteriorVillano = ligaVillanos4.getCaracteristica().getResistencia();
+		int destrezaAnteriorVillano = ligaVillanos4.getCaracteristica().getDestreza();
+	
+		ligaVillanos4.agregarALiga(v2);
+		
+		List<Integer> poderActualizadoVillano = ligaVillanos4.getCaracteristicas();
+		
+		int velocidadActualizadoVillano = poderActualizadoVillano.get(0);
+		int fuerzaActualizadoVillano = poderActualizadoVillano.get(1);
+		int resistenciaActualizadoVillano = poderActualizadoVillano.get(2);
+		int destrezaActualizadoVillano = poderActualizadoVillano.get(3);
+		
+		ligaHeroes4.agregarALiga(h1);
+
+		int velocidadAnteriorHeroe = ligaHeroes4.getCaracteristica().getVelocidad();
+		int fuerzaAnteriorHeroe = ligaHeroes4.getCaracteristica().getFuerza();
+		int resistenciaAnteriorHeroe = ligaHeroes4.getCaracteristica().getResistencia();
+		int destrezaAnteriorHeroe = ligaHeroes4.getCaracteristica().getDestreza();
+
+		ligaHeroes4.agregarALiga(h2);		
+		
+		List<Integer> poderActualizadoHeroe = ligaHeroes4.getCaracteristicas();
+
+		int velocidadActualizadoHeroe = poderActualizadoHeroe.get(0);
+		int fuerzaActualizadoHeroe = poderActualizadoHeroe.get(1);
+		int resistenciaActualizadoHeroe = poderActualizadoHeroe.get(2);
+		int destrezaActualizadoHeroe = poderActualizadoHeroe.get(3);
+		
+		assertTrue(velocidadAnteriorVillano < velocidadActualizadoVillano);
+		assertTrue(fuerzaAnteriorVillano < fuerzaActualizadoVillano);
+		assertTrue(resistenciaAnteriorVillano < resistenciaActualizadoVillano);
+		assertTrue(destrezaAnteriorVillano < destrezaActualizadoVillano);
+		
+		assertTrue(velocidadAnteriorHeroe < velocidadActualizadoHeroe);
+		assertTrue(fuerzaAnteriorHeroe < fuerzaActualizadoHeroe);
+		assertTrue(resistenciaAnteriorHeroe < resistenciaActualizadoHeroe);
+		assertTrue(destrezaAnteriorHeroe < destrezaActualizadoHeroe);
 	}
 	
-	@Test
-	public void queCambiePoderLigaCuandoSeIngresaUnNuevoPersonaje() {
-
-	}
-	
-	@Test
-	public void mantienePoderPromedioLiga() {
-
-	}
-	
-	@Test
-	public void queCalculePoderUnidadesCompetidoras() {
-
-	}
 	
 	@Test
 	public void queSepaDevolverLaCantidadDePersonajesQueContiene() {
+		ligaVillanos4.agregarALiga(v1);
+		ligaVillanos4.agregarALiga(v2);
+		
+		ligaHeroes4.agregarALiga(h1);
+		ligaHeroes4.agregarALiga(h2);
+		ligaHeroes4.agregarALiga(h3);
 
+		assertEquals(2, ligaVillanos4.contarIntegrantes());
+		assertEquals(3, ligaHeroes4.contarIntegrantes());
 	}
 	
 	@Test
 	public void queSepaDevolverLaCantidadDeLigasQueContiene() {
+		ligaVillanos4.agregarALiga(ligaVillanos2);
+		ligaVillanos4.agregarALiga(ligaVillanos3);
+		
+		ligaHeroes4.agregarALiga(ligaHeroes1);
+		ligaHeroes4.agregarALiga(ligaHeroes2);
+		ligaHeroes4.agregarALiga(ligaHeroes3);
 
+		assertEquals(3, ligaVillanos4.contarIntegrantes());
+		assertEquals(4, ligaHeroes4.contarIntegrantes());
 	}
 	
 	@Test
 	public void queSepaDevolverLaCantidadDeUnidadesCompetidorasQueContiene() {
+		ligaVillanos4.agregarALiga(ligaVillanos3);
+		ligaVillanos4.agregarALiga(ligaVillanos2);
+		ligaVillanos4.agregarALiga(v1);
+		ligaVillanos4.agregarALiga(v2);
+		
+		ligaHeroes4.agregarALiga(ligaHeroes3);
+		ligaHeroes4.agregarALiga(ligaHeroes2);
+		ligaHeroes4.agregarALiga(ligaHeroes1);
 
+		ligaHeroes4.agregarALiga(h1);
+		ligaHeroes4.agregarALiga(h2);
+		ligaHeroes4.agregarALiga(h3);
+		
+		assertEquals(5, ligaVillanos4.contarIntegrantes());
+		assertEquals(7, ligaHeroes4.contarIntegrantes());
 	}
 }
