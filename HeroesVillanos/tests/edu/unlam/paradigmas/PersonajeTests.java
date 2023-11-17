@@ -2,9 +2,6 @@ package edu.unlam.paradigmas;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,15 +10,10 @@ import edu.unlam.paradigmas.sistema.Bandos;
 import edu.unlam.paradigmas.sistema.Caracteristica;
 import edu.unlam.paradigmas.sistema.Competidor;
 import edu.unlam.paradigmas.sistema.Liga;
-import edu.unlam.paradigmas.sistema.SistemaHeroesVillanos;
-import edu.unlam.paradigmas.sistema.UnidadCompetidor;
 import edu.unlam.paradigmas.sistema.Caracteristica.TipoCaracteristica;
 
 public class PersonajeTests {
 
-	TipoCaracteristica car;
-	
-	
 	Competidor personajeUno;
 	Caracteristica caracteristicasPersonajeUno;
 	Competidor personajeDos;
@@ -115,44 +107,44 @@ public class PersonajeTests {
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAVelocidad() { 
-		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, car.VELOCIDAD), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.VELOCIDAD), true);
 	}
 	
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAFuerza() { 
-		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, car.FUERZA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.FUERZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAResistencia() { 
-		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, car.RESISTENCIA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.RESISTENCIA), true);
 		
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseADestreza() {
-		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, car.DESTREZA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(personajeDos, TipoCaracteristica.DESTREZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAVelocidad() {
-		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, car.VELOCIDAD), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.VELOCIDAD), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAFuerza() {
-		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, car.FUERZA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.FUERZA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseAResistencia() {
-		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, car.RESISTENCIA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.RESISTENCIA), true);
 	}
 	
 	@Test
 	public void quePersonajePierdaContraOtraLigaEnBaseADestreza() {
-		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos,car.DESTREZA), true);
+		assertEquals(personajeUno.personajePierdeContraUnidad(ligaVillanos, TipoCaracteristica.DESTREZA), true);
 	}
 	
 	@Test
