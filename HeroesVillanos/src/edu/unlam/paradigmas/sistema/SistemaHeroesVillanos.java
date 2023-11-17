@@ -50,17 +50,16 @@ public class SistemaHeroesVillanos {
 		return null; // No se encontró el competidor con el nombre especificado
 	}
 
-	
-	
 //*********************** 1. Administracion de Personajes ***********************
-	
+
 	public void cargarArchivoPersonaje() throws FileNotFoundException {
 		ArchivoPersonajes personajesFile = new ArchivoPersonajes("personajes");
-		
+
 		if (!this.archivoPersonajeExiste) {
-			if(!this.competidores.isEmpty()) {
-				Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer().entrySet().stream().sorted(Map.Entry.comparingByValue())
-						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+			if (!this.competidores.isEmpty()) {
+				Map<Competidor, Integer> nuevosPersonajes = personajesFile.leer().entrySet().stream()
+						.sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey,
+								Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
 				// Obtener el último valor asignado a los competidores existentes
 				int ultimoValor = this.competidores.values().stream().max(Integer::compare).orElse(0);
@@ -76,7 +75,7 @@ public class SistemaHeroesVillanos {
 						this.competidores.put(nuevoCompetidor, ultimoValor);
 					}
 				}
-			}else {
+			} else {
 				this.competidores = personajesFile.leer();
 			}
 			this.archivoPersonajeExiste = true;
@@ -179,7 +178,7 @@ public class SistemaHeroesVillanos {
 				+ "  Bando\t\tNombre Real\t   Nombre Personaje\tVelocidad\tFuerza\t    Resistencia\t\tDestreza\n"
 				+ "----------------------------------------------------------------------------------------------------------------");
 	}
-	
+
 	public void listarPersonajes() {
 		mensajeListadoPersonajes();
 		Map<Competidor, Integer> mapaOrdenado = competidores.entrySet().stream().sorted(Map.Entry.comparingByValue())
@@ -230,8 +229,6 @@ public class SistemaHeroesVillanos {
 		System.out.println("\nLos personajes se han guardado correctamente!\n");
 	}
 
-	
-	
 //*********************** 2. Administracion de Ligas ***********************
 
 	public void cargarArchivoLigas() throws FileNotFoundException, CaracteristicaExcepcion {
@@ -280,7 +277,35 @@ public class SistemaHeroesVillanos {
 		System.out.println("¡Las Ligas se han formado correctamente!\n");
 	}
 
-	public void manuCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
+	public Liga crearLiga(List<Integer> listaPersonajes, List<Integer> listaLigas, Bandos bando)
+			throws CaracteristicaExcepcion {
+		int sizePersonajes = listaPersonajes.size();
+		int sizeLigas = listaLigas.size();
+
+		Liga liga = new Liga();
+		if (sizeLigas != 0) {
+			for (Integer valor : ligas.keySet()) {
+				if (listaLigas.contains(valor)) {
+					if (!liga.mismoUnidadCompetidor(ligas.get(valor)))
+						liga.agregarALiga(ligas.get(valor));
+				}
+			}
+		}
+		if (sizePersonajes != 0) {
+			for (Competidor comp : competidores.keySet()) {
+				if (listaPersonajes.contains(competidores.get(comp))) {
+					if (!liga.mismoUnidadCompetidor(comp))
+						liga.agregarALiga(comp);
+				}
+			}
+		}
+
+		liga.setBando(bando);
+
+		return liga;
+	}
+
+	public void menuCrearLiga(Scanner scanner) throws CaracteristicaExcepcion, SistemaExcepcion {
 
 		System.out.println("\n[Crear Liga]\n");
 		System.out.println("+ Seleccione bando:\n1. Heroe\n2. Villano");
@@ -322,20 +347,21 @@ public class SistemaHeroesVillanos {
 						System.out.println("\n0. Volver menu anterior");
 						seleccionPersonaje = validarObtencionNumero(scanner, "¿Qué personaje quiere agregar?\n");
 						agregoPersonaje = false;
-						
+
 						if (seleccionPersonaje != 0) {
 							for (Competidor comp : competidores.keySet()) {
 								if (competidores.get(comp) == seleccionPersonaje) {
-									if(comp.getBando() == bando && !listaPersonajes.contains(seleccionPersonaje)){
+									if (comp.getBando() == bando && !listaPersonajes.contains(seleccionPersonaje)) {
 										agregoPersonaje = true;
+										break;
 									}
 								}
 							}
-							
-							if(agregoPersonaje) {
+
+							if (agregoPersonaje) {
 								listaPersonajes.add(seleccionPersonaje);
 								System.out.println("El personaje ha sido agregado correctamente a la liga.");
-							}else {
+							} else {
 								System.out.println("Seleccione un personaje válido.");
 							}
 						}
@@ -354,41 +380,26 @@ public class SistemaHeroesVillanos {
 				if (respuesta == 1) {
 					int nroLiga = ligas.size() + 1;
 
-					Liga liga = new Liga();
-					if (sizeLigas != 0) {
-						for (Integer valor : ligas.keySet()) {
-							if (listaLigas.contains(valor)) {
-								if (!liga.mismoUnidadCompetidor(ligas.get(valor)))
-									liga.agregarALiga(ligas.get(valor));
-							}
-						}
-					}
-					if (sizePersonajes != 0) {
-						for (Competidor comp : competidores.keySet()) {
-							if (listaPersonajes.contains(competidores.get(comp))) {
-								if (!liga.mismoUnidadCompetidor(comp))
-									liga.agregarALiga(comp);
-							}
-						}
-					}
+					Liga liga = crearLiga(listaPersonajes, listaLigas, bando);
 
-					liga.setBando(bando);
+					// valido que no exista la liga que quiero agregar
 					boolean existeLigas = false;
-					for(Integer keyLigas : ligas.keySet()) {
-						if(ligas.get(keyLigas).equals(liga)) {
+					for (Integer keyLigas : ligas.keySet()) {
+						if (ligas.get(keyLigas).equals(liga)) {
 							existeLigas = true;
 						}
 					}
-					if(!existeLigas) {
-						this.ligas.put(nroLiga, liga);						
+
+					if (!existeLigas) {
+						this.ligas.put(nroLiga, liga);
 						System.out.println("\n¡Liga creada correctamente!\n");
-					}else {
+					} else {
 						System.out.println("La liga que intenta crear ya existe. Intente nuevamente.");
 					}
 				} else {
 					System.out.println("\nSe cancela la creación de Liga.\n");
 				}
-			}else {
+			} else {
 				System.out.println("No ha seleccionado personajes o ligas para la creacion de la nueva liga.");
 			}
 		} else {
@@ -462,8 +473,7 @@ public class SistemaHeroesVillanos {
 	}
 
 	private void mensajeParaListarLigas() {
-		System.out.println("\n+----- Listado de ligas -----+\n"
-				+ "   Bando\tIntegrantes\t\n"
+		System.out.println("\n+----- Listado de ligas -----+\n" + "   Bando\tIntegrantes\t\n"
 				+ "---------------------------------------------------------------------------------");
 	}
 
@@ -475,66 +485,62 @@ public class SistemaHeroesVillanos {
 		System.out.println("\n¡Las ligas se han guardado correctamente!\n");
 	}
 
-	
-	
 //*********************** 3. Realizar combate ***********************
 
-	public Map<Integer, TipoCaracteristica> enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
-		Map<Integer, TipoCaracteristica> resultadoDevuelto = new HashMap<>();
+	private void mostrarResultadoEnfrentamiento(UnidadCompetidor u1, UnidadCompetidor u2, int resultado,
+			TipoCaracteristica caracteristica) {
+		if (resultado > 0) {
+			System.out.println("\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: " + caracteristica
+					+ " Diferencia: " + Math.abs(resultado) + " puntos.");
+		} else if (resultado < 0) {
+			System.out.println("\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: " + caracteristica
+					+ " Diferencia: " + Math.abs(resultado) + " puntos.");
+		} else {
+			System.out.println("\nSe produjo un empate entre los 2 competidores");
+		}
+	}
+
+	public int enfrentar(UnidadCompetidor u1, UnidadCompetidor u2, TipoCaracteristica caracteristica) {
+		int resultadoFinal = 0;
 		TipoCaracteristica nuevaCaracteristica = caracteristica;
 		int resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 				- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
-		
+
 		System.out.println("\n+----- COMBATE -----+\n");
-		System.out.println("["+ u1.getNombrePersonaje() +"]\t\tVS \t["+ u2.getNombrePersonaje() +"]");
-		
+		System.out.println("[" + u1.getNombrePersonaje() + "]\t\tVS \t[" + u2.getNombrePersonaje() + "]");
+
 		imprimirCaracteristicas(u1, u2);
-		
+
 		System.out.println("\n+ Caracterisitica: " + nuevaCaracteristica);
 		System.out.println();
 		if (resultado == 0) {
 			do {
 				System.out.println("¡Han empatado en " + nuevaCaracteristica + "!");
 				nuevaCaracteristica = nuevaCaracteristica.getNext();
-				if(nuevaCaracteristica != caracteristica) {
+				if (nuevaCaracteristica != caracteristica) {
 					System.out.println("Ahora combatiran por: " + nuevaCaracteristica);
 					resultado = u1.getValorCaracteristica(nuevaCaracteristica) / u1.contarIntegrantes()
 							- u2.getValorCaracteristica(nuevaCaracteristica) / u2.contarIntegrantes();
 				}
 			} while (resultado == 0 && nuevaCaracteristica != caracteristica);
 		}
-		
-		resultadoDevuelto.put(resultado, nuevaCaracteristica);
-		
-		return resultadoDevuelto;
-		
-	}
-	
-	private void mostrarResultadoEnfrentamiento(UnidadCompetidor u1, UnidadCompetidor u2, Map<Integer, TipoCaracteristica> mapa) {
-		Integer resultado = 0;
-		TipoCaracteristica caracteristica = TipoCaracteristica.VELOCIDAD;
-		
-		for(Map.Entry<Integer, TipoCaracteristica> entry : mapa.entrySet()) {
-			resultado = entry.getKey();
-			caracteristica = entry.getValue();
-		}
-		
+
+		mostrarResultadoEnfrentamiento(u1, u2, resultado, nuevaCaracteristica);
+
 		if (resultado > 0) {
-			System.out.println("\nGanador: " + u1.getNombrePersonaje() + " - Caracteristica: "
-					+ caracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
+			resultadoFinal = 1;
 		} else if (resultado < 0) {
-			System.out.println("\nGanador: " + u2.getNombrePersonaje() + " - Caracteristica: "
-					+ caracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.");
-		} else {
-			System.out.println("\nSe produjo un empate entre los 2 competidores");
+			resultadoFinal = -1;
 		}
+
+		return resultadoFinal;
+
 	}
 
 	public void personajeVsPersonaje(Scanner scanner) {
 		int seleccionPersonaje;
 		Competidor competidor1 = new Competidor();
 		Competidor competidor2 = new Competidor();
-		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Personaje:]\n");
 		listarPersonajes();
 		System.out.println("\n0. Volver menu anterior");
@@ -563,9 +569,8 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		mapaResultado = enfrentar(competidor1, competidor2, caracteristicaSeleccionada);
-		mostrarResultadoEnfrentamiento(competidor1, competidor2, mapaResultado);
-		
+		enfrentar(competidor1, competidor2, caracteristicaSeleccionada);
+
 	}
 
 	public void personajeVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -573,7 +578,6 @@ public class SistemaHeroesVillanos {
 		int seleccion;
 		Competidor competidor = new Competidor();
 		Liga liga = new Liga();
-		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Personaje:]\n");
 		listarPersonajes();
 		System.out.println("\n0. Volver menu anterior");
@@ -602,8 +606,7 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		mapaResultado = enfrentar(competidor, liga, caracteristicaSeleccionada);
-		mostrarResultadoEnfrentamiento(competidor, liga, mapaResultado);
+		enfrentar(competidor, liga, caracteristicaSeleccionada);
 	}
 
 	public void ligaVsLiga(Scanner scanner) throws CaracteristicaExcepcion {
@@ -611,7 +614,6 @@ public class SistemaHeroesVillanos {
 		int seleccionLiga;
 		Liga liga1 = new Liga();
 		Liga liga2 = new Liga();
-		Map<Integer, TipoCaracteristica> mapaResultado = new HashMap<>(); 
 		System.out.println("\n[Seleccione Liga:]\n");
 		listarLigas();
 		System.out.println("\n0. Volver menu anterior");
@@ -640,35 +642,33 @@ public class SistemaHeroesVillanos {
 				"+ Seleccione las caracteristicas para enfrentarse:\n1. Velocidad\n2. Fuerza\n3. Resistencia\n4. Destreza");
 		TipoCaracteristica caracteristicaSeleccionada = seleccionarCaracteristica(scanner);
 
-		mapaResultado = enfrentar(liga1, liga2, caracteristicaSeleccionada);
-		mostrarResultadoEnfrentamiento(liga1, liga2, mapaResultado);
+		enfrentar(liga1, liga2, caracteristicaSeleccionada);
 	}
-	
+
 	public static void imprimirCaracteristicas(UnidadCompetidor u1, UnidadCompetidor u2) {
 		int cantMiembros1 = u1.contarIntegrantes();
 		int cantMiembros2 = u2.contarIntegrantes();
-		
-		String velocidadStr = String.format("Velocidad:\t%-4s\t\tVelocidad:\t%-4s", 
-				u1.getCaracteristica().getVelocidad()/cantMiembros1, 
-				u2.getCaracteristica().getVelocidad()/cantMiembros2);
+
+		String velocidadStr = String.format("Velocidad:\t%-4s\t\tVelocidad:\t%-4s",
+				u1.getCaracteristica().getVelocidad() / cantMiembros1,
+				u2.getCaracteristica().getVelocidad() / cantMiembros2);
 		System.out.println(velocidadStr);
-		
-		String fuerzaStr = String.format("Fuerza:\t\t%-4s\t\tFuerza:\t\t%-4s", 
-				u1.getCaracteristica().getFuerza()/cantMiembros1, 
-				u2.getCaracteristica().getFuerza()/cantMiembros2);
+
+		String fuerzaStr = String.format("Fuerza:\t\t%-4s\t\tFuerza:\t\t%-4s",
+				u1.getCaracteristica().getFuerza() / cantMiembros1, u2.getCaracteristica().getFuerza() / cantMiembros2);
 		System.out.println(fuerzaStr);
-		
-		String resistenciaStr = String.format("Resistencia:\t%-4s\t\tResistencia:\t%-4s", 
-				u1.getCaracteristica().getResistencia()/cantMiembros1, 
-				u2.getCaracteristica().getResistencia()/cantMiembros2);
+
+		String resistenciaStr = String.format("Resistencia:\t%-4s\t\tResistencia:\t%-4s",
+				u1.getCaracteristica().getResistencia() / cantMiembros1,
+				u2.getCaracteristica().getResistencia() / cantMiembros2);
 		System.out.println(resistenciaStr);
-		
-		String destrezaStr = String.format("Destreza:\t%-4s\t\tDestreza:\t%-4s", 
-				u1.getCaracteristica().getDestreza()/cantMiembros1, 
-				u2.getCaracteristica().getDestreza()/cantMiembros2);
+
+		String destrezaStr = String.format("Destreza:\t%-4s\t\tDestreza:\t%-4s",
+				u1.getCaracteristica().getDestreza() / cantMiembros1,
+				u2.getCaracteristica().getDestreza() / cantMiembros2);
 		System.out.println(destrezaStr);
 	}
-	
+
 //*********************** 4. Reportes ***********************
 
 	public void reportarVencedores(Scanner scanner) throws FileNotFoundException {
