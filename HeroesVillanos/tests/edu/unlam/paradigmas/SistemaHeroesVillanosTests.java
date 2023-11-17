@@ -61,16 +61,6 @@ public class SistemaHeroesVillanosTests {
 		ligaVillanos.recalcularCaracteristicas();
 	}
 	
-	/*
-	 * resultadoEnfrentamiento += "Ganador: " + u1.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
-		} else if (resultado < 0) {
-			resultadoEnfrentamiento += "Ganador: " + u2.getNombrePersonaje() + " - Caracteristica: "
-					+ nuevaCaracteristica + " Diferencia: " + Math.abs(resultado) + " puntos.";
-		} else {
-			resultadoEnfrentamiento += "Se produjo un empate entre los 2 competidores";
-	 * */
-
 	@Test
 	public void HeroeGanaVillanoPorVelocidad() {
 		//String esperado = "Ganador: Black Widow - Caracteristica: VELOCIDAD Diferencia: 50 puntos.";
