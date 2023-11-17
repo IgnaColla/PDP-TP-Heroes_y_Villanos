@@ -103,6 +103,7 @@ public class PersonajeTests {
 	@Test
 	public void quePersonajePierdaContraOtroPersonajeEnBaseAResistencia() { 
 
+		
 	}
 	
 	@Test

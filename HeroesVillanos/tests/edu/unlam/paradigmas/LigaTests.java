@@ -109,6 +109,7 @@ public class LigaTests {
 
 		assertEquals(tamañoAnteriorVillanos+resLigaVillano,ligaVillanos4.contarIntegrantes());
 		assertEquals(tamañoAnteriorHeroe+resLigaHeroe,ligaHeroes4.contarIntegrantes());
+		
 	}
 	
 	@Test
